@@ -11,5 +11,6 @@ public class JSideScroller {
 
     window.switchGameScreen(screen);
     window.setVisible(true);
+    screen.startGameLoop();
   }
 }

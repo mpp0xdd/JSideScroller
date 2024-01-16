@@ -1,3 +1,3 @@
 package jsidescroller.common;
 
-public interface Player extends Chip {}
+public interface Player extends Chip, Accelerable, Movable {}

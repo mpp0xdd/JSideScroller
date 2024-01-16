@@ -1,3 +1,3 @@
 package jsidescroller.common;
 
-public interface SideScrollerComponent extends Drawable, Rectangular {}
+public interface SideScrollerComponent extends Drawable, Rectangular, Locatable {}
