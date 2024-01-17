@@ -15,6 +15,7 @@ public class MainScreen extends GameScreen implements KeyListener {
   private final Player player = new DefaultPlayer();
   private Keystroke aKey = Keystroke.NOT_PRESSED;
   private Keystroke dKey = Keystroke.NOT_PRESSED;
+  private Keystroke spaceKey = Keystroke.NOT_PRESSED;
 
   public MainScreen() {
     setBackground(Color.BLACK);
@@ -38,6 +39,10 @@ public class MainScreen extends GameScreen implements KeyListener {
       player.stop();
     }
 
+    if (spaceKey.isPressed()) {
+      player.jump();
+    }
+
     player.move();
 
     repaint();
@@ -53,6 +58,7 @@ public class MainScreen extends GameScreen implements KeyListener {
     switch (e.getKeyCode()) {
       case KeyEvent.VK_A -> aKey = Keystroke.PRESSED;
       case KeyEvent.VK_D -> dKey = Keystroke.PRESSED;
+      case KeyEvent.VK_SPACE -> spaceKey = Keystroke.PRESSED;
     }
   }
 
@@ -61,6 +67,7 @@ public class MainScreen extends GameScreen implements KeyListener {
     switch (e.getKeyCode()) {
       case KeyEvent.VK_A -> aKey = Keystroke.NOT_PRESSED;
       case KeyEvent.VK_D -> dKey = Keystroke.NOT_PRESSED;
+      case KeyEvent.VK_SPACE -> spaceKey = Keystroke.NOT_PRESSED;
     }
   }
 }

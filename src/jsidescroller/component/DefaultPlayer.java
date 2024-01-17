@@ -12,6 +12,7 @@ public class DefaultPlayer implements Player {
 
   private final Point location = new Point(255, 255);
   private Velocity velocity = Velocity.ZERO;
+  private boolean isJumpable = true;
 
   @Override
   public void draw(Graphics g) {
@@ -55,7 +56,25 @@ public class DefaultPlayer implements Player {
 
   @Override
   public void stop() {
-    velocity = Velocity.ZERO;
+    velocity = Velocity.of(0, velocity.y());
+  }
+
+  @Override
+  public int jumpSpeed() {
+    return 12;
+  }
+
+  @Override
+  public void jump() {
+    if (isJumpable()) {
+      velocity = Velocity.of(velocity.x(), -jumpSpeed());
+      isJumpable = false;
+    }
+  }
+
+  @Override
+  public boolean isJumpable() {
+    return isJumpable;
   }
 
   @Override
