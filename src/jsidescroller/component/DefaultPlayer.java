@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import jsidescroller.common.Direction;
+import jsidescroller.common.GravitationalField;
 import jsidescroller.common.Player;
 import jsidescroller.common.Velocity;
 
@@ -80,5 +81,11 @@ public class DefaultPlayer implements Player {
   @Override
   public void move() {
     location.translate(velocity().x(), velocity().y());
+  }
+
+  @Override
+  public void accept(GravitationalField field) {
+    if (isJumpable()) return;
+    velocity = Velocity.of(velocity.x(), velocity.y() + field.gravity());
   }
 }

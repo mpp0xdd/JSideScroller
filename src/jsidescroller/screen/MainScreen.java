@@ -8,11 +8,14 @@ import jglib.component.GameScreen;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Keystroke;
 import jsidescroller.common.Player;
+import jsidescroller.common.Stage;
 import jsidescroller.component.DefaultPlayer;
+import jsidescroller.component.DefaultStage;
 
 public class MainScreen extends GameScreen implements KeyListener {
 
   private final Player player = new DefaultPlayer();
+  private final Stage stage = new DefaultStage(player);
   private Keystroke aKey = Keystroke.NOT_PRESSED;
   private Keystroke dKey = Keystroke.NOT_PRESSED;
   private Keystroke spaceKey = Keystroke.NOT_PRESSED;
@@ -44,6 +47,8 @@ public class MainScreen extends GameScreen implements KeyListener {
     }
 
     player.move();
+
+    stage.provideGravity();
 
     repaint();
   }
