@@ -63,18 +63,18 @@ public class DefaultStage extends Stage {
     final int chipSize = ColorChip.SIZE;
 
     Map<Stage.Point, Chip> stage = new HashMap<>();
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < columns; j++) {
-        java.awt.Point location = new java.awt.Point(j * chipSize, i * chipSize);
+    for (int y = 0; y < rows; y++) {
+      for (int x = 0; x < columns; x++) {
+        java.awt.Point location = new java.awt.Point(x * chipSize, y * chipSize);
 
         Chip chip =
-            switch (data[i][j]) {
+            switch (data[y][x]) {
               case 0 -> new ColorChip(this, location, Color.BLACK, ChipType.VOID);
               case 1 -> new ColorChip(this, location, Color.GRAY, ChipType.BLOCK);
-              default -> throw new IllegalArgumentException("Unexpected value: " + data[j][i]);
+              default -> throw new IllegalArgumentException("Unexpected value: " + data[x][y]);
             };
 
-        stage.put(Stage.Point.of(j, i), chip);
+        stage.put(Stage.Point.of(x, y), chip);
       }
     }
 
