@@ -4,4 +4,9 @@ public abstract class Player extends Chip implements Accelerable, Jumpable, Mova
   public Player(int size) {
     super(size);
   }
+
+  @Override
+  public final ChipType chipType() {
+    return ChipType.PLAYER;
+  }
 }

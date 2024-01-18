@@ -17,4 +17,6 @@ public abstract class Chip implements SideScrollerComponent {
   public final int height() {
     return size;
   }
+
+  public abstract ChipType chipType();
 }

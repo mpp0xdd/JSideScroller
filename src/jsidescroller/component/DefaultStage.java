@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jsidescroller.common.Chip;
+import jsidescroller.common.ChipType;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 
@@ -48,7 +49,7 @@ public class DefaultStage extends Stage {
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
         Point location = new Point(j * chipSize, i * chipSize);
-        Chip chip = new ColorChip(this, location, Color.BLACK);
+        Chip chip = new ColorChip(this, location, Color.BLACK, ChipType.VOID);
         stage.add(chip);
       }
     }
