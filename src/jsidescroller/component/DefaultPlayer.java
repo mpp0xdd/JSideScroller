@@ -4,16 +4,28 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.Objects;
 import jsidescroller.common.Direction;
 import jsidescroller.common.GravitationalField;
 import jsidescroller.common.Player;
+import jsidescroller.common.Stage;
 import jsidescroller.common.Velocity;
 
 public class DefaultPlayer implements Player {
 
+  private final Stage stage;
   private final Point location = new Point(255, 255);
   private Velocity velocity = Velocity.ZERO;
   private boolean isJumpable = true;
+
+  public DefaultPlayer(Stage stage) {
+    this.stage = Objects.requireNonNull(stage);
+  }
+
+  @Override
+  public Stage getStage() {
+    return stage;
+  }
 
   @Override
   public void draw(Graphics g) {

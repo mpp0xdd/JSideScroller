@@ -49,6 +49,6 @@ public class DefaultStage extends Stage {
 
   @Override
   protected Player newPlayer() {
-    return new DefaultPlayer();
+    return new DefaultPlayer(this);
   }
 }
