@@ -15,4 +15,8 @@ public interface Rectangular {
   default Rectangle asRectangle() {
     return new Rectangle(x(), y(), width(), height());
   }
+
+  default boolean contains(Rectangular other) {
+    return this.asRectangle().contains(other.asRectangle());
+  }
 }
