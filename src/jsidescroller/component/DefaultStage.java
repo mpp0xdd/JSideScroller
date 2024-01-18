@@ -2,10 +2,9 @@ package jsidescroller.component;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import jsidescroller.common.Chip;
 import jsidescroller.common.ChipType;
 import jsidescroller.common.Player;
@@ -15,7 +14,7 @@ public class DefaultStage extends Stage {
 
   @Override
   public void draw(Graphics g) {
-    stage().forEach(chip -> chip.draw(g));
+    stage().values().forEach(chip -> chip.draw(g));
     player().draw(g);
   }
 
@@ -40,7 +39,7 @@ public class DefaultStage extends Stage {
   }
 
   @Override
-  protected List<Chip> newStage() {
+  protected Map<Stage.Point, Chip> newStage() {
     final int[][] data = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -63,10 +62,10 @@ public class DefaultStage extends Stage {
     final int columns = data[0].length;
     final int chipSize = ColorChip.SIZE;
 
-    List<Chip> stage = new ArrayList<>();
+    Map<Stage.Point, Chip> stage = new HashMap<>();
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < columns; j++) {
-        Point location = new Point(j * chipSize, i * chipSize);
+        java.awt.Point location = new java.awt.Point(j * chipSize, i * chipSize);
 
         Chip chip =
             switch (data[i][j]) {
@@ -75,11 +74,11 @@ public class DefaultStage extends Stage {
               default -> throw new IllegalArgumentException("Unexpected value: " + data[j][i]);
             };
 
-        stage.add(chip);
+        stage.put(Stage.Point.of(j, i), chip);
       }
     }
 
-    return Collections.unmodifiableList(stage);
+    return Collections.unmodifiableMap(stage);
   }
 
   @Override
