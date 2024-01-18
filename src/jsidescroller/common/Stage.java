@@ -1,12 +1,15 @@
 package jsidescroller.common;
 
 import java.awt.Point;
+import java.util.List;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
+  private final List<Chip> stage;
   private final Player player;
 
   public Stage() {
+    this.stage = newStage();
     this.player = newPlayer();
   }
 
@@ -28,6 +31,12 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   public Player player() {
     return player;
   }
+
+  protected List<Chip> stage() {
+    return stage;
+  }
+
+  protected abstract List<Chip> newStage();
 
   protected abstract Player newPlayer();
 }

@@ -1,6 +1,5 @@
 package jsidescroller.screen;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -19,7 +18,6 @@ public class MainScreen extends GameScreen implements KeyListener {
 
   public MainScreen() {
     setScreenSize(stage.width(), stage.height());
-    setBackground(Color.BLACK);
     setFocusable(true);
     addKeyListener(this);
   }
