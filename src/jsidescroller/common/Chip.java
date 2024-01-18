@@ -1,14 +1,20 @@
 package jsidescroller.common;
 
-public interface Chip extends SideScrollerComponent {
+public abstract class Chip implements SideScrollerComponent {
 
-  @Override
-  default int width() {
-    return 32;
+  private final int size;
+
+  public Chip(int size) {
+    this.size = size;
   }
 
   @Override
-  default int height() {
-    return 32;
+  public final int width() {
+    return size;
+  }
+
+  @Override
+  public final int height() {
+    return size;
   }
 }

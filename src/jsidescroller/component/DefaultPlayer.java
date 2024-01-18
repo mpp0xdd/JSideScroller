@@ -11,7 +11,7 @@ import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.common.Velocity;
 
-public class DefaultPlayer implements Player {
+public class DefaultPlayer extends Player {
 
   private final Stage stage;
   private final Point location = new Point(255, 255);
@@ -19,6 +19,7 @@ public class DefaultPlayer implements Player {
   private boolean isJumpable = true;
 
   public DefaultPlayer(Stage stage) {
+    super(32);
     this.stage = Objects.requireNonNull(stage);
   }
 
