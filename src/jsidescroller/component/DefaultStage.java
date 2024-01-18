@@ -7,10 +7,6 @@ import jsidescroller.common.Stage;
 
 public class DefaultStage extends Stage {
 
-  public DefaultStage(Player player) {
-    super(player);
-  }
-
   @Override
   public void draw(Graphics g) {
     player().draw(g);
@@ -49,5 +45,10 @@ public class DefaultStage extends Stage {
   @Override
   public void provideGravity() {
     player().accept(this);
+  }
+
+  @Override
+  protected Player newPlayer() {
+    return new DefaultPlayer();
   }
 }
