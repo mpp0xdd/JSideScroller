@@ -7,15 +7,13 @@ import java.awt.event.KeyListener;
 import jglib.component.GameScreen;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Keystroke;
-import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.component.DefaultPlayer;
 import jsidescroller.component.DefaultStage;
 
 public class MainScreen extends GameScreen implements KeyListener {
 
-  private final Player player = new DefaultPlayer();
-  private final Stage stage = new DefaultStage(player);
+  private final Stage stage = new DefaultStage(new DefaultPlayer());
   private Keystroke aKey = Keystroke.NOT_PRESSED;
   private Keystroke dKey = Keystroke.NOT_PRESSED;
   private Keystroke spaceKey = Keystroke.NOT_PRESSED;
@@ -29,24 +27,24 @@ public class MainScreen extends GameScreen implements KeyListener {
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    player.draw(g);
+    stage.draw(g);
   }
 
   @Override
   protected void runGameLoop() {
     if (aKey.isPressed()) {
-      player.accelerate(Direction.LEFT);
+      stage.player().accelerate(Direction.LEFT);
     } else if (dKey.isPressed()) {
-      player.accelerate(Direction.RIGHT);
+      stage.player().accelerate(Direction.RIGHT);
     } else {
-      player.stop();
+      stage.player().stop();
     }
 
     if (spaceKey.isPressed()) {
-      player.jump();
+      stage.player().jump();
     }
 
-    player.move();
+    stage.player().move();
 
     stage.provideGravity();
 
