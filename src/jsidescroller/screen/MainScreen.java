@@ -18,6 +18,7 @@ public class MainScreen extends GameScreen implements KeyListener {
   private Keystroke spaceKey = Keystroke.NOT_PRESSED;
 
   public MainScreen() {
+    setScreenSize(stage.width(), stage.height());
     setBackground(Color.BLACK);
     setFocusable(true);
     addKeyListener(this);
