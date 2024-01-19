@@ -5,10 +5,16 @@ import java.util.Objects;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
-  public static final class Point {
+  public final class Point {
 
-    public static Point of(int x, int y) {
-      return new Point(x, y);
+    public static Point of(Stage stage, int x, int y) {
+      if (x < 0 || x >= stage.columns()) {
+        throw new IllegalArgumentException("x:" + x);
+      }
+      if (y < 0 || y >= stage.rows()) {
+        throw new IllegalArgumentException("y:" + y);
+      }
+      return stage.new Point(x, y);
     }
 
     private final int x;

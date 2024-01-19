@@ -84,7 +84,7 @@ public class DefaultStage extends Stage {
               default -> throw new IllegalArgumentException("Unexpected value: " + data[x][y]);
             };
 
-        stage.put(Stage.Point.of(x, y), chip);
+        stage.put(Stage.Point.of(this, x, y), chip);
       }
     }
 
