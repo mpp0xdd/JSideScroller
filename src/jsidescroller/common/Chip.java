@@ -2,6 +2,12 @@ package jsidescroller.common;
 
 public abstract class Chip implements SideScrollerComponent {
 
+  public enum Type {
+    PLAYER,
+    BLOCK,
+    VOID,
+  }
+
   private final int size;
 
   public Chip(int size) {
@@ -18,5 +24,5 @@ public abstract class Chip implements SideScrollerComponent {
     return size;
   }
 
-  public abstract ChipType chipType();
+  public abstract Type type();
 }

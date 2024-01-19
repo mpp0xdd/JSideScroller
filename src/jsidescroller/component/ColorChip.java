@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Chip;
-import jsidescroller.common.ChipType;
 import jsidescroller.common.Stage;
 
 public class ColorChip extends Chip {
@@ -13,19 +12,19 @@ public class ColorChip extends Chip {
   private final Stage stage;
   private final Point location;
   private final Color color;
-  private final ChipType chipType;
+  private final Chip.Type type;
 
-  public ColorChip(int size, Stage stage, Point location, Color color, ChipType chipType) {
+  public ColorChip(int size, Stage stage, Point location, Color color, Chip.Type type) {
     super(size);
     this.stage = Objects.requireNonNull(stage);
     this.location = Objects.requireNonNull(location);
     this.color = Objects.requireNonNull(color);
-    this.chipType = Objects.requireNonNull(chipType);
+    this.type = Objects.requireNonNull(type);
   }
 
   @Override
-  public ChipType chipType() {
-    return chipType;
+  public Chip.Type type() {
+    return type;
   }
 
   @Override

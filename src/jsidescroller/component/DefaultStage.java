@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jsidescroller.common.Chip;
-import jsidescroller.common.ChipType;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 
@@ -80,8 +79,8 @@ public class DefaultStage extends Stage {
 
         Chip chip =
             switch (data[y][x]) {
-              case 0 -> new ColorChip(chipSize(), this, location, Color.BLACK, ChipType.VOID);
-              case 1 -> new ColorChip(chipSize(), this, location, Color.GRAY, ChipType.BLOCK);
+              case 0 -> new ColorChip(chipSize(), this, location, Color.BLACK, Chip.Type.VOID);
+              case 1 -> new ColorChip(chipSize(), this, location, Color.GRAY, Chip.Type.BLOCK);
               default -> throw new IllegalArgumentException("Unexpected value: " + data[x][y]);
             };
 
