@@ -7,7 +7,7 @@ import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Stage;
 
-public class ColorChip extends Chip {
+class ColorChip extends Chip {
 
   private final Stage stage;
   private final Point location;

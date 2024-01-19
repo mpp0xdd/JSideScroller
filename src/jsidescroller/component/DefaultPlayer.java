@@ -11,7 +11,7 @@ import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.common.Velocity;
 
-public class DefaultPlayer extends Player {
+class DefaultPlayer extends Player {
 
   private final Stage stage;
   private final Point location = new Point(255, 255);
