@@ -50,6 +50,12 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     this.player = newPlayer();
   }
 
+  public abstract int rows();
+
+  public abstract int columns();
+
+  public abstract int chipSize();
+
   @Override
   public final int x() {
     return 0;

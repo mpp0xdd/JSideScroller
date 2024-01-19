@@ -13,6 +13,21 @@ import jsidescroller.common.Stage;
 public class DefaultStage extends Stage {
 
   @Override
+  public int rows() {
+    return 15;
+  }
+
+  @Override
+  public int columns() {
+    return 20;
+  }
+
+  @Override
+  public int chipSize() {
+    return 32;
+  }
+
+  @Override
   public void draw(Graphics g) {
     stage().values().forEach(chip -> chip.draw(g));
     player().draw(g);
@@ -58,14 +73,10 @@ public class DefaultStage extends Stage {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
-    final int rows = data.length;
-    final int columns = data[0].length;
-    final int chipSize = ColorChip.SIZE;
-
     Map<Stage.Point, Chip> stage = new HashMap<>();
-    for (int y = 0; y < rows; y++) {
-      for (int x = 0; x < columns; x++) {
-        java.awt.Point location = new java.awt.Point(x * chipSize, y * chipSize);
+    for (int y = 0; y < rows(); y++) {
+      for (int x = 0; x < columns(); x++) {
+        java.awt.Point location = new java.awt.Point(x * chipSize(), y * chipSize());
 
         Chip chip =
             switch (data[y][x]) {
