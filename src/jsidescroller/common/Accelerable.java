@@ -1,6 +1,7 @@
 package jsidescroller.common;
 
 public interface Accelerable {
+
   int speed();
 
   Velocity velocity();

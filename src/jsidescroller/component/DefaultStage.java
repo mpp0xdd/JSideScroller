@@ -27,12 +27,6 @@ public class DefaultStage extends Stage {
   }
 
   @Override
-  public void draw(Graphics g) {
-    stage().values().forEach(chip -> chip.draw(g));
-    player().draw(g);
-  }
-
-  @Override
   public int width() {
     return 640;
   }
@@ -50,6 +44,12 @@ public class DefaultStage extends Stage {
   @Override
   public void provideGravity() {
     player().accept(this);
+  }
+
+  @Override
+  public void draw(Graphics g) {
+    stage().values().forEach(chip -> chip.draw(g));
+    player().draw(g);
   }
 
   @Override
