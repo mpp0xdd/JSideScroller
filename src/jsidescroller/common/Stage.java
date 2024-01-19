@@ -1,5 +1,6 @@
 package jsidescroller.common;
 
+import java.awt.Graphics;
 import java.util.Map;
 import java.util.Objects;
 
@@ -75,6 +76,17 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   @Override
   public final java.awt.Point getLocation() {
     return new java.awt.Point(x(), y());
+  }
+
+  @Override
+  public void provideGravity() {
+    player().accept(this);
+  }
+
+  @Override
+  public void draw(Graphics g) {
+    stage().values().forEach(chip -> chip.draw(g));
+    player().draw(g);
   }
 
   public Player player() {

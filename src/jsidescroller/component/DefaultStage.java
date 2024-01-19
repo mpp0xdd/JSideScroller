@@ -1,7 +1,6 @@
 package jsidescroller.component;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,17 +38,6 @@ public class DefaultStage extends Stage {
   @Override
   public int gravity() {
     return 1;
-  }
-
-  @Override
-  public void provideGravity() {
-    player().accept(this);
-  }
-
-  @Override
-  public void draw(Graphics g) {
-    stage().values().forEach(chip -> chip.draw(g));
-    player().draw(g);
   }
 
   @Override
