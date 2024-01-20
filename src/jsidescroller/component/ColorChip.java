@@ -1,6 +1,7 @@
 package jsidescroller.component;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Objects;
@@ -34,8 +35,9 @@ class ColorChip extends Chip {
 
   @Override
   public void draw(Graphics g) {
+    Dimension offset = getStage().calculateOffset(getStage().player());
     g.setColor(color);
-    g.fill3DRect(x(), y(), width(), height(), true);
+    g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
   }
 
   @Override

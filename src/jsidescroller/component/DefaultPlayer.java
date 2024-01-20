@@ -1,8 +1,8 @@
 package jsidescroller.component;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Direction;
@@ -30,9 +30,9 @@ class DefaultPlayer extends Player {
 
   @Override
   public void draw(Graphics g) {
-    Graphics2D g2 = (Graphics2D) g;
-    g2.setColor(Color.RED);
-    g2.fill(asRectangle());
+    Dimension offset = getStage().calculateOffset(this);
+    g.setColor(Color.RED);
+    g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
   }
 
   @Override

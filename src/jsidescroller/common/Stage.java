@@ -1,5 +1,6 @@
 package jsidescroller.common;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Map;
 import java.util.Objects;
@@ -8,6 +9,7 @@ import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
 import jsidescroller.common.interfaces.Locatable;
 import jsidescroller.common.interfaces.Rectangular;
+import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
@@ -95,6 +97,20 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     chipLocation.translate(0, chip.height());
     result = existsBlockadeChip(chipLocation);
     return result;
+  }
+
+  public Dimension calculateOffset(SideScrollerComponent component) {
+    int offsetWidth = width() / 2 - component.x();
+    offsetWidth = Math.min(offsetWidth, 0);
+    offsetWidth = Math.max(offsetWidth, width() - columns() * chipSize());
+    offsetWidth = Math.abs(offsetWidth);
+
+    int offsetHeight = height() / 2 - component.y();
+    offsetHeight = Math.min(offsetHeight, 0);
+    offsetHeight = Math.max(offsetHeight, height() - rows() * chipSize());
+    offsetHeight = Math.abs(offsetHeight);
+
+    return new Dimension(offsetWidth, offsetHeight);
   }
 
   @Override
