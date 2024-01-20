@@ -63,14 +63,14 @@ class DefaultPlayer extends Player {
   @Override
   public void accelerate(Direction direction) {
     switch (direction) {
-      case LEFT -> velocity = Velocity.of(-speed(), velocity.y());
-      case RIGHT -> velocity = Velocity.of(speed(), velocity.y());
+      case LEFT -> velocity = velocity.editor().x(-speed()).edit();
+      case RIGHT -> velocity = velocity.editor().x(speed()).edit();
     }
   }
 
   @Override
   public void stop() {
-    velocity = Velocity.of(0, velocity.y());
+    velocity = velocity.editor().x(0).edit();
   }
 
   @Override
@@ -81,7 +81,7 @@ class DefaultPlayer extends Player {
   @Override
   public void jump() {
     if (isJumpable()) {
-      velocity = Velocity.of(velocity.x(), -jumpSpeed());
+      velocity = velocity.editor().y(-jumpSpeed()).edit();
       isOnGround = false;
     }
   }
@@ -121,7 +121,7 @@ class DefaultPlayer extends Player {
                 location.y = chip.y() - this.height() - 1;
                 isOnGround = true;
               }
-              velocity = Velocity.of(velocity.x(), 0);
+              velocity = velocity.editor().y(0).edit();
             },
             () -> isOnGround = false);
   }
@@ -129,6 +129,6 @@ class DefaultPlayer extends Player {
   @Override
   public void accept(GravitationalField field) {
     if (isJumpable()) return;
-    velocity = Velocity.of(velocity.x(), velocity.y() + field.gravity());
+    velocity = velocity.editor().addY(field.gravity()).edit();
   }
 }

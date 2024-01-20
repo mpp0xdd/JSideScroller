@@ -59,4 +59,38 @@ public final class Velocity {
     Velocity other = (Velocity) obj;
     return x == other.x && y == other.y;
   }
+
+  public Editor editor() {
+    return this.new Editor();
+  }
+
+  public final class Editor {
+
+    private int x;
+    private int y;
+
+    private Editor() {
+      this.x = Velocity.this.x();
+      this.y = Velocity.this.y();
+    }
+
+    public Editor x(int x) {
+      this.x = x;
+      return this;
+    }
+
+    public Editor y(int y) {
+      this.y = y;
+      return this;
+    }
+
+    public Editor addY(int y) {
+      this.y += y;
+      return this;
+    }
+
+    public Velocity edit() {
+      return Velocity.of(x, y);
+    }
+  }
 }
