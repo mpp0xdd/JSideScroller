@@ -72,28 +72,28 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     java.awt.Point chipLocation = chip.getLocation();
 
     // upper left corner
-    Optional<Chip> result = existsBlockChip(chipLocation);
+    Optional<Chip> result = existsBlockadeChip(chipLocation);
     if (result.isPresent()) {
       return result;
     }
 
     // lower left corner
     chipLocation.translate(0, chip.height());
-    result = existsBlockChip(chipLocation);
+    result = existsBlockadeChip(chipLocation);
     if (result.isPresent()) {
       return result;
     }
 
     // upper right corner
     chipLocation.translate(chip.width(), -chip.height());
-    result = existsBlockChip(chipLocation);
+    result = existsBlockadeChip(chipLocation);
     if (result.isPresent()) {
       return result;
     }
 
     // lower right corner
     chipLocation.translate(0, chip.height());
-    result = existsBlockChip(chipLocation);
+    result = existsBlockadeChip(chipLocation);
     return result;
   }
 
@@ -131,6 +131,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return stage;
   }
 
+  protected boolean isBlockadeChip(Chip chip) {
+    return chip.isBlock();
+  }
+
   protected abstract Map<Stage.Point, Chip> newStage();
 
   protected abstract Player newPlayer();
@@ -145,7 +149,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     }
   }
 
-  private Optional<Chip> existsBlockChip(java.awt.Point location) {
-    return toStagePoint(location).map(stage()::get).filter(Chip::isBlock);
+  private Optional<Chip> existsBlockadeChip(java.awt.Point location) {
+    return toStagePoint(location).map(stage()::get).filter(this::isBlockadeChip);
   }
 }
