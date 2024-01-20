@@ -132,7 +132,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   }
 
   protected boolean isBlockadeChip(Chip chip) {
-    return chip.isBlock();
+    return switch (chip.type()) {
+      case BLOCK -> true;
+      default -> false;
+    };
   }
 
   protected abstract Map<Stage.Point, Chip> newStage();
