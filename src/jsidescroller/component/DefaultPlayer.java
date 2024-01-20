@@ -93,6 +93,10 @@ class DefaultPlayer extends Player {
 
   @Override
   public void move() {
+    if (velocity().isZero()) {
+      return;
+    }
+
     location.translate(velocity().x(), 0);
     getStage()
         .blockadeChip(this)

@@ -42,6 +42,10 @@ public final class Velocity {
     return y > 0;
   }
 
+  public boolean isZero() {
+    return this.equals(ZERO);
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(x, y);
