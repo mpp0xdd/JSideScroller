@@ -2,7 +2,7 @@ package jsidescroller.common;
 
 import java.util.Objects;
 
-public final class Velocity implements Editable<Velocity> {
+public final class Velocity implements Immutable, Editable<Velocity> {
 
   public static final Velocity ZERO = of(0, 0);
 
