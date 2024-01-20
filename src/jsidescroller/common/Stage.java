@@ -4,6 +4,10 @@ import java.awt.Graphics;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import jsidescroller.common.interfaces.Drawable;
+import jsidescroller.common.interfaces.GravitationalField;
+import jsidescroller.common.interfaces.Locatable;
+import jsidescroller.common.interfaces.Rectangular;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 

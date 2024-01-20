@@ -1,5 +1,7 @@
 package jsidescroller.common;
 
+import jsidescroller.common.interfaces.SideScrollerComponent;
+
 public abstract class Chip implements SideScrollerComponent {
 
   public enum Type {

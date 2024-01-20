@@ -1,4 +1,4 @@
-package jsidescroller.common;
+package jsidescroller.common.interfaces;
 
 import java.awt.Point;
 

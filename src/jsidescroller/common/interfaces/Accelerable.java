@@ -1,4 +1,7 @@
-package jsidescroller.common;
+package jsidescroller.common.interfaces;
+
+import jsidescroller.common.Direction;
+import jsidescroller.common.Velocity;
 
 public interface Accelerable {
 

@@ -1,4 +1,4 @@
-package jsidescroller.common;
+package jsidescroller.common.interfaces;
 
 public interface GravitationalField {
 

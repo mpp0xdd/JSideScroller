@@ -1,6 +1,9 @@
 package jsidescroller.common;
 
 import java.util.Objects;
+import jsidescroller.common.interfaces.Editable;
+import jsidescroller.common.interfaces.Editor;
+import jsidescroller.common.interfaces.Immutable;
 
 public final class Velocity implements Immutable, Editable<Velocity> {
 

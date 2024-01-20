@@ -6,10 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Direction;
-import jsidescroller.common.GravitationalField;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.common.Velocity;
+import jsidescroller.common.interfaces.GravitationalField;
 
 class DefaultPlayer extends Player {
 
