@@ -16,7 +16,7 @@ class DefaultPlayer extends Player {
   private final Stage stage;
   private final Point location = new Point(255, 255);
   private Velocity velocity = Velocity.ZERO;
-  private boolean isJumpable = true;
+  private boolean isOnGround = true;
 
   public DefaultPlayer(Stage stage) {
     super(32);
@@ -82,18 +82,43 @@ class DefaultPlayer extends Player {
   public void jump() {
     if (isJumpable()) {
       velocity = Velocity.of(velocity.x(), -jumpSpeed());
-      isJumpable = false;
+      isOnGround = false;
     }
   }
 
   @Override
   public boolean isJumpable() {
-    return isJumpable;
+    return isOnGround;
   }
 
   @Override
   public void move() {
-    location.translate(velocity().x(), velocity().y());
+    location.translate(velocity().x(), 0);
+    getStage()
+        .blockadeChip(this)
+        .ifPresent(
+            chip -> {
+              if (velocity().isLeftward()) {
+                location.x = chip.x() + chip.width() + 1;
+              } else if (velocity().isRightward()) {
+                location.x = chip.x() - this.width() - 1;
+              }
+              velocity = Velocity.of(0, velocity.y());
+            });
+
+    location.translate(0, velocity.y());
+    getStage()
+        .blockadeChip(this)
+        .ifPresent(
+            chip -> {
+              if (velocity().isUpward()) {
+                location.y = chip.y() + chip.height() + 1;
+              } else if (velocity().isDownward()) {
+                location.y = chip.y() - this.height() - 1;
+                isOnGround = true;
+              }
+              velocity = Velocity.of(velocity.x(), 0);
+            });
   }
 
   @Override

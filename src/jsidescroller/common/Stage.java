@@ -3,6 +3,7 @@ package jsidescroller.common;
 import java.awt.Graphics;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
@@ -63,6 +64,35 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public abstract int chipSize();
 
+  public Optional<Chip> blockadeChip(Chip chip) {
+    java.awt.Point chipLocation = chip.getLocation();
+
+    // upper left corner
+    Optional<Chip> result = existsBlockChip(chipLocation);
+    if (result.isPresent()) {
+      return result;
+    }
+
+    // lower left corner
+    chipLocation.translate(0, chip.height());
+    result = existsBlockChip(chipLocation);
+    if (result.isPresent()) {
+      return result;
+    }
+
+    // upper right corner
+    chipLocation.translate(chip.width(), -chip.height());
+    result = existsBlockChip(chipLocation);
+    if (result.isPresent()) {
+      return result;
+    }
+
+    // lower right corner
+    chipLocation.translate(0, chip.height());
+    result = existsBlockChip(chipLocation);
+    return result;
+  }
+
   @Override
   public final int x() {
     return 0;
@@ -100,4 +130,18 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   protected abstract Map<Stage.Point, Chip> newStage();
 
   protected abstract Player newPlayer();
+
+  private Optional<Stage.Point> toStagePoint(java.awt.Point location) {
+    try {
+      int sx = location.x / chipSize();
+      int sy = location.y / chipSize();
+      return Optional.of(Stage.Point.of(this, sx, sy));
+    } catch (Exception e) {
+      return Optional.empty();
+    }
+  }
+
+  private Optional<Chip> existsBlockChip(java.awt.Point location) {
+    return toStagePoint(location).map(stage()::get).filter(Chip::isBlock);
+  }
 }

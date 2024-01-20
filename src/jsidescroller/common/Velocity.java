@@ -26,6 +26,22 @@ public final class Velocity {
     return y;
   }
 
+  public boolean isLeftward() {
+    return x < 0;
+  }
+
+  public boolean isRightward() {
+    return x > 0;
+  }
+
+  public boolean isUpward() {
+    return y < 0;
+  }
+
+  public boolean isDownward() {
+    return y > 0;
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(x, y);

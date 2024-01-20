@@ -24,5 +24,9 @@ public abstract class Chip implements SideScrollerComponent {
     return size;
   }
 
+  public boolean isBlock() {
+    return this.type().equals(Type.BLOCK);
+  }
+
   public abstract Type type();
 }
