@@ -75,7 +75,7 @@ class DefaultPlayer extends Player {
 
   @Override
   public int jumpSpeed() {
-    return 12;
+    return 18;
   }
 
   @Override
