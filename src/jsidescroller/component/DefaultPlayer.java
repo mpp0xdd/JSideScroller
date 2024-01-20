@@ -109,7 +109,7 @@ class DefaultPlayer extends Player {
     location.translate(0, velocity.y());
     getStage()
         .blockadeChip(this)
-        .ifPresent(
+        .ifPresentOrElse(
             chip -> {
               if (velocity().isUpward()) {
                 location.y = chip.y() + chip.height() + 1;
@@ -118,7 +118,8 @@ class DefaultPlayer extends Player {
                 isOnGround = true;
               }
               velocity = Velocity.of(velocity.x(), 0);
-            });
+            },
+            () -> isOnGround = false);
   }
 
   @Override
