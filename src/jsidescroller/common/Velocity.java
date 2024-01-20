@@ -2,7 +2,7 @@ package jsidescroller.common;
 
 import java.util.Objects;
 
-public final class Velocity {
+public final class Velocity implements Editable<Velocity> {
 
   public static final Velocity ZERO = of(0, 0);
 
@@ -60,35 +60,37 @@ public final class Velocity {
     return x == other.x && y == other.y;
   }
 
-  public Editor editor() {
-    return this.new Editor();
+  @Override
+  public VelocityEditor editor() {
+    return this.new VelocityEditor();
   }
 
-  public final class Editor {
+  public final class VelocityEditor implements Editor<Velocity> {
 
     private int x;
     private int y;
 
-    private Editor() {
+    private VelocityEditor() {
       this.x = Velocity.this.x();
       this.y = Velocity.this.y();
     }
 
-    public Editor x(int x) {
+    public VelocityEditor x(int x) {
       this.x = x;
       return this;
     }
 
-    public Editor y(int y) {
+    public VelocityEditor y(int y) {
       this.y = y;
       return this;
     }
 
-    public Editor addY(int y) {
+    public VelocityEditor addY(int y) {
       this.y += y;
       return this;
     }
 
+    @Override
     public Velocity edit() {
       return Velocity.of(x, y);
     }
