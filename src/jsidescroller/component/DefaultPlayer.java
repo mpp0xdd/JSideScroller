@@ -103,7 +103,7 @@ class DefaultPlayer extends Player {
               } else if (velocity().isRightward()) {
                 location.x = chip.x() - this.width() - 1;
               }
-              velocity = Velocity.of(0, velocity.y());
+              stop();
             });
 
     location.translate(0, velocity.y());
