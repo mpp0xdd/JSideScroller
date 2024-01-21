@@ -7,13 +7,14 @@ import java.util.Objects;
 import java.util.Optional;
 import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
+import jsidescroller.common.interfaces.Immutable;
 import jsidescroller.common.interfaces.Locatable;
 import jsidescroller.common.interfaces.Rectangular;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
-  public final class Point {
+  public final class Point implements Immutable {
 
     public static Point of(Stage stage, int x, int y) {
       if (x < 0 || x >= stage.columns()) {
