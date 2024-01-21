@@ -18,7 +18,7 @@ class ColorChip extends Chip {
   public ColorChip(int size, Stage stage, Point location, Color color, Chip.Type type) {
     super(size);
     this.stage = Objects.requireNonNull(stage);
-    this.location = Objects.requireNonNull(location);
+    this.location = Objects.requireNonNull(location).getLocation();
     this.color = Objects.requireNonNull(color);
     this.type = Objects.requireNonNull(type);
   }
