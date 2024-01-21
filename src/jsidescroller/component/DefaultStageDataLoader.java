@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class StageDataLoader {
+class DefaultStageDataLoader {
 
-  private StageDataLoader() {
+  private DefaultStageDataLoader() {
     // restrict instantiation
   }
 
   public static int[][] loadStageData() {
-    final Class<StageDataLoader> thisClass = StageDataLoader.class;
+    final Class<DefaultStageDataLoader> thisClass = DefaultStageDataLoader.class;
     final String name = "stage.dat";
     final Charset charset = StandardCharsets.UTF_8;
 
@@ -27,7 +27,7 @@ class StageDataLoader {
         BufferedReader file = new BufferedReader(reader)) {
       List<int[]> stageData =
           file.lines()
-              .map(StageDataLoader::toIntArray)
+              .map(DefaultStageDataLoader::toIntArray)
               .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
       return checkStageData(stageData.toArray(new int[stageData.size()][]));
     } catch (IOException ioe) {
@@ -49,6 +49,6 @@ class StageDataLoader {
   }
 
   private static int[] toIntArray(String line) {
-    return line.chars().map(StageDataLoader::toDigit).toArray();
+    return line.chars().map(DefaultStageDataLoader::toDigit).toArray();
   }
 }

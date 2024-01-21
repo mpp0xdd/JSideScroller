@@ -45,7 +45,7 @@ public class DefaultStage extends Stage {
 
   @Override
   protected Map<Stage.Point, Chip> newStage() {
-    final int[][] data = StageDataLoader.loadStageData();
+    final int[][] data = DefaultStageDataLoader.loadStageData();
     this.rows = data.length;
     this.columns = data[0].length;
 
