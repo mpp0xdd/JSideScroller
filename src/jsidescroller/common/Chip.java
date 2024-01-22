@@ -16,6 +16,9 @@ public abstract class Chip implements SideScrollerComponent {
 
   public Chip(Stage stage, int size) {
     this.stage = Objects.requireNonNull(stage);
+    if (size <= 0) {
+      throw new IllegalArgumentException("size:" + size);
+    }
     this.size = size;
   }
 
