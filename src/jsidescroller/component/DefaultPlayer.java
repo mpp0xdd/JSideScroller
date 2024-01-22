@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.Objects;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
@@ -13,19 +12,12 @@ import jsidescroller.common.interfaces.GravitationalField;
 
 class DefaultPlayer extends Player {
 
-  private final Stage stage;
   private final Point location = new Point(255, 255);
   private Velocity velocity = Velocity.ZERO;
   private boolean isOnGround = false;
 
   public DefaultPlayer(Stage stage) {
-    super(32);
-    this.stage = Objects.requireNonNull(stage);
-  }
-
-  @Override
-  public Stage getStage() {
-    return stage;
+    super(stage, 32);
   }
 
   @Override

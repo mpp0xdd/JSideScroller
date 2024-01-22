@@ -56,8 +56,8 @@ public class DefaultStage extends Stage {
 
         Chip chip =
             switch (data[y][x]) {
-              case 0 -> new ColorChip(chipSize(), this, location, Color.BLACK, Chip.Type.VOID);
-              case 1 -> new ColorChip(chipSize(), this, location, Color.GRAY, Chip.Type.BLOCK);
+              case 0 -> new ColorChip(this, chipSize(), location, Color.BLACK, Chip.Type.VOID);
+              case 1 -> new ColorChip(this, chipSize(), location, Color.GRAY, Chip.Type.BLOCK);
               default -> throw new IllegalArgumentException("Unexpected value: " + data[y][x]);
             };
 

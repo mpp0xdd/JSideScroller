@@ -10,14 +10,12 @@ import jsidescroller.common.Stage;
 
 class ColorChip extends Chip {
 
-  private final Stage stage;
   private final Point location;
   private final Color color;
   private final Chip.Type type;
 
-  public ColorChip(int size, Stage stage, Point location, Color color, Chip.Type type) {
-    super(size);
-    this.stage = Objects.requireNonNull(stage);
+  public ColorChip(Stage stage, int size, Point location, Color color, Chip.Type type) {
+    super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
     this.color = Objects.requireNonNull(color);
     this.type = Objects.requireNonNull(type);
@@ -26,11 +24,6 @@ class ColorChip extends Chip {
   @Override
   public Chip.Type type() {
     return type;
-  }
-
-  @Override
-  public Stage getStage() {
-    return stage;
   }
 
   @Override
