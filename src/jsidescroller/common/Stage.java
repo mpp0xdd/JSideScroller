@@ -71,32 +71,32 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public abstract int chipSize();
 
-  public Optional<Chip> blockadeChip(Chip chip) {
-    java.awt.Point chipLocation = chip.getLocation();
+  public Optional<Chip> blockadeChip(SideScrollerComponent component) {
+    java.awt.Point componentLocation = component.getLocation();
 
     // upper left corner
-    Optional<Chip> result = existsBlockadeChip(chipLocation);
+    Optional<Chip> result = existsBlockadeChip(componentLocation);
     if (result.isPresent()) {
       return result;
     }
 
     // lower left corner
-    chipLocation.translate(0, chip.height());
-    result = existsBlockadeChip(chipLocation);
+    componentLocation.translate(0, component.height());
+    result = existsBlockadeChip(componentLocation);
     if (result.isPresent()) {
       return result;
     }
 
     // upper right corner
-    chipLocation.translate(chip.width(), -chip.height());
-    result = existsBlockadeChip(chipLocation);
+    componentLocation.translate(component.width(), -component.height());
+    result = existsBlockadeChip(componentLocation);
     if (result.isPresent()) {
       return result;
     }
 
     // lower right corner
-    chipLocation.translate(0, chip.height());
-    result = existsBlockadeChip(chipLocation);
+    componentLocation.translate(0, component.height());
+    result = existsBlockadeChip(componentLocation);
     return result;
   }
 
