@@ -120,7 +120,7 @@ class DefaultPlayer extends Player {
 
   @Override
   public void accept(GravitationalField field) {
-    if (isJumpable()) return;
+    if (isOnGround) return;
     velocity = velocity.editor().addY(field.gravity()).edit();
   }
 }
