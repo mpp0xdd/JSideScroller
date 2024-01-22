@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import jsidescroller.common.Chip;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
@@ -90,37 +91,36 @@ class DefaultPlayer extends Player {
     }
 
     location.translate(velocity().x(), 0);
-    getStage()
-        .blockadeChip(this)
-        .ifPresent(
-            chip -> {
-              if (velocity().isLeftward()) {
-                location.x = chip.x() + chip.width() + 1;
-              } else if (velocity().isRightward()) {
-                location.x = chip.x() - this.width() - 1;
-              }
-              stop();
-            });
+    getStage().blockadeChip(this).ifPresent(this::handleHorizontalMovement);
 
     location.translate(0, velocity.y());
     getStage()
         .blockadeChip(this)
-        .ifPresentOrElse(
-            chip -> {
-              if (velocity().isUpward()) {
-                location.y = chip.y() + chip.height() + 1;
-              } else if (velocity().isDownward()) {
-                location.y = chip.y() - this.height() - 1;
-                isOnGround = true;
-              }
-              velocity = velocity.editor().y(0).edit();
-            },
-            () -> isOnGround = false);
+        .ifPresentOrElse(this::handleVerticalMovement, () -> isOnGround = false);
   }
 
   @Override
   public void accept(GravitationalField field) {
     if (isOnGround) return;
     velocity = velocity.editor().addY(field.gravity()).edit();
+  }
+
+  private void handleHorizontalMovement(Chip collidedChip) {
+    if (velocity().isLeftward()) {
+      location.x = collidedChip.x() + collidedChip.width() + 1;
+    } else if (velocity().isRightward()) {
+      location.x = collidedChip.x() - this.width() - 1;
+    }
+    stop();
+  }
+
+  private void handleVerticalMovement(Chip collidedChip) {
+    if (velocity().isUpward()) {
+      location.y = collidedChip.y() + collidedChip.height() + 1;
+    } else if (velocity().isDownward()) {
+      location.y = collidedChip.y() - this.height() - 1;
+      isOnGround = true;
+    }
+    velocity = velocity.editor().y(0).edit();
   }
 }
