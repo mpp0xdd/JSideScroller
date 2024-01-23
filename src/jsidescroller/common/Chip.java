@@ -8,6 +8,7 @@ public abstract class Chip implements SideScrollerComponent {
   public enum Type {
     PLAYER,
     BLOCK,
+    COIN,
     VOID,
   }
 
