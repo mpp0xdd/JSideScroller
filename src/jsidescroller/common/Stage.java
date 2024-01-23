@@ -1,5 +1,6 @@
 package jsidescroller.common;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Map;
@@ -136,6 +137,9 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   @Override
   public void draw(Graphics g) {
+    g.setColor(this.backgroundColor());
+    g.fillRect(x(), y(), width(), height());
+
     Dimension offset = calculateOffset(player());
     java.awt.Point cursor = new java.awt.Point(offset.width, offset.height);
     Stage.Point start = toStagePoint(cursor).orElseThrow();
@@ -166,6 +170,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
       default -> false;
     };
   }
+
+  protected abstract Color backgroundColor();
 
   protected abstract Map<Stage.Point, Chip> newStage();
 
