@@ -9,8 +9,8 @@ public final class Velocity implements Immutable, Editable<Velocity> {
 
   public static final Velocity ZERO = of(0, 0);
 
-  public static Velocity of(int vx, int vy) {
-    return new Velocity(vx, vy);
+  public static Velocity of(int x, int y) {
+    return new Velocity(x, y);
   }
 
   private final int x;
