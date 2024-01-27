@@ -19,6 +19,8 @@ class DefaultCoin extends Coin {
 
   @Override
   public void draw(Graphics g) {
+    if (isTaken()) return;
+
     Dimension offset = getStage().calculateOffset(getStage().player());
     g.setColor(Color.YELLOW);
     g.fillOval(x() - offset.width, y() - offset.height, width(), height());
