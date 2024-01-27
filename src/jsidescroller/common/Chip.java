@@ -8,6 +8,7 @@ public abstract class Chip implements SideScrollerComponent {
   public enum Type {
     PLAYER,
     BLOCK,
+    ITEM_BLOCK,
     COIN,
     VOID,
   }
@@ -44,6 +45,10 @@ public abstract class Chip implements SideScrollerComponent {
 
   public final boolean isBlock() {
     return type().equals(Type.BLOCK);
+  }
+
+  public final boolean isItemBlock() {
+    return type().equals(Type.ITEM_BLOCK);
   }
 
   public final boolean isCoin() {
