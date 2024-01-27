@@ -150,21 +150,21 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     cursor.translate(width() - 1, height() - 1);
     Stage.Point end = toStagePoint(cursor).orElseThrow();
 
-    List<Coin> drawableCoins = new ArrayList<>();
+    List<Chip> layer2 = new ArrayList<>();
 
     for (int y = start.y(); y <= end.y(); y++) {
       for (int x = start.x(); x <= end.x(); x++) {
         Stage.Point sp = Stage.Point.of(this, x, y);
         Chip chip = stage().get(sp);
         if (chip.isCoin()) {
-          drawableCoins.add(Coin.class.cast(chip));
+          layer2.add(chip);
           continue;
         }
         stage().get(sp).draw(g);
       }
     }
 
-    drawableCoins.forEach(coin -> coin.draw(g));
+    layer2.forEach(c -> c.draw(g));
 
     player().draw(g);
   }
