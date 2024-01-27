@@ -15,4 +15,8 @@ public abstract class Player extends Chip implements Accelerable, Jumpable, Mova
   public final Type type() {
     return Type.PLAYER;
   }
+
+  public final void collectCoins() {
+    getStage().coins().stream().filter(this::intersects).forEach(Coin::take);
+  }
 }

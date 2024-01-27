@@ -3,6 +3,7 @@ package jsidescroller.common;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -59,10 +60,12 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   }
 
   private final Map<Stage.Point, Chip> stage;
+  private final List<Coin> coins;
   private final Player player;
 
   public Stage() {
     this.stage = newStage();
+    this.coins = this.stage.values().stream().filter(Chip::isCoin).map(Coin.class::cast).toList();
     this.player = newPlayer();
   }
 
@@ -162,6 +165,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   protected Map<Stage.Point, Chip> stage() {
     return stage;
+  }
+
+  protected List<Coin> coins() {
+    return coins;
   }
 
   protected boolean isBlockadeChip(Chip chip) {

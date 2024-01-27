@@ -10,4 +10,8 @@ public abstract class Coin extends Chip {
   public final Type type() {
     return Type.COIN;
   }
+
+  public void take() {
+    System.err.printf("Coins in position (%d, %d) were taken.%n", x(), y());
+  }
 }
