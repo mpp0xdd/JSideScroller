@@ -38,5 +38,21 @@ public abstract class Chip implements SideScrollerComponent {
     return size;
   }
 
+  public final boolean isPlayer() {
+    return type().equals(Type.PLAYER);
+  }
+
+  public final boolean isBlock() {
+    return type().equals(Type.BLOCK);
+  }
+
+  public final boolean isCoin() {
+    return type().equals(Type.COIN);
+  }
+
+  public final boolean isVoid() {
+    return type().equals(Type.VOID);
+  }
+
   public abstract Type type();
 }
