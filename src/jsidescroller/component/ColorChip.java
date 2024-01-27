@@ -30,7 +30,11 @@ class ColorChip extends Chip {
   public void draw(Graphics g) {
     Dimension offset = getStage().calculateOffset(getStage().player());
     g.setColor(color);
-    g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
+    if (isVoid()) {
+      g.fillRect(x() - offset.width, y() - offset.height, width(), height());
+    } else {
+      g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
+    }
   }
 
   @Override
