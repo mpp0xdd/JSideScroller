@@ -24,8 +24,6 @@ public abstract class Coin extends Chip {
 
   public void take() {
     if (isTaken()) return;
-
-    System.err.printf("Coins in position (%d, %d) were taken.%n", x(), y());
     this.isTaken = true;
   }
 }
