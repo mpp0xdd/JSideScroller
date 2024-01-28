@@ -14,18 +14,28 @@ class DefaultItemBlock extends ItemBlock {
 
   private final Point location;
 
+  private final Color BLOCK_COLOR;
+  private final Color QUESTION_COLOR;
+  private final Font QUESTION_FONT;
+
   public DefaultItemBlock(Stage stage, int size, Point location) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
+
+    this.BLOCK_COLOR = new Color(252, 152, 56);
+    this.QUESTION_COLOR = new Color(200, 76, 11);
+    this.QUESTION_FONT = new Font(Font.SANS_SERIF, Font.BOLD, height());
   }
 
   @Override
   public void draw(Graphics g) {
     Dimension offset = getStage().calculateOffset(getStage().player());
-    g.setColor(new Color(252, 152, 56));
+
+    g.setColor(BLOCK_COLOR);
     g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
-    g.setColor(new Color(200, 76, 11));
-    g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, height()));
+
+    g.setColor(QUESTION_COLOR);
+    g.setFont(QUESTION_FONT);
     GameUtilities.drawStringAfterCentering(
         g, x() - offset.width + width() / 2, y() - offset.height + height() / 2, "?");
   }
