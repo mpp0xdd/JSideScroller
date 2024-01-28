@@ -13,6 +13,7 @@ import jsidescroller.common.Stage;
 class DefaultItemBlock extends ItemBlock {
 
   private final Point location;
+  private boolean isHit;
 
   private final Color BLOCK_COLOR;
   private final Color QUESTION_COLOR;
@@ -21,6 +22,7 @@ class DefaultItemBlock extends ItemBlock {
   public DefaultItemBlock(Stage stage, int size, Point location) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
+    this.isHit = false;
 
     this.BLOCK_COLOR = new Color(252, 152, 56);
     this.QUESTION_COLOR = new Color(200, 76, 11);
@@ -31,13 +33,17 @@ class DefaultItemBlock extends ItemBlock {
   public void draw(Graphics g) {
     Dimension offset = getStage().calculateOffset(getStage().player());
 
-    g.setColor(BLOCK_COLOR);
+    final Color blockColor = isHit ? QUESTION_COLOR : BLOCK_COLOR;
+
+    g.setColor(blockColor);
     g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
 
-    g.setColor(QUESTION_COLOR);
-    g.setFont(QUESTION_FONT);
-    GameUtilities.drawStringAfterCentering(
-        g, x() - offset.width + width() / 2, y() - offset.height + height() / 2, "?");
+    if (!isHit) {
+      g.setColor(QUESTION_COLOR);
+      g.setFont(QUESTION_FONT);
+      GameUtilities.drawStringAfterCentering(
+          g, x() - offset.width + width() / 2, y() - offset.height + height() / 2, "?");
+    }
   }
 
   @Override
@@ -57,6 +63,7 @@ class DefaultItemBlock extends ItemBlock {
 
   @Override
   public void hit() {
-    // nop
+    if (isHit) return;
+    this.isHit = true;
   }
 }

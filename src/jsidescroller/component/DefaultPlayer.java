@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Direction;
+import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.common.Velocity;
@@ -117,6 +118,10 @@ class DefaultPlayer extends Player {
   private void handleVerticalMovement(Chip collidedChip) {
     if (velocity().isUpward()) {
       location.y = collidedChip.y() + collidedChip.height() + 1;
+      if (collidedChip.isItemBlock()) {
+        ItemBlock itemBlock = ItemBlock.class.cast(collidedChip);
+        itemBlock.hit();
+      }
     } else if (velocity().isDownward()) {
       location.y = collidedChip.y() - this.height() - 1;
       isOnGround = true;
