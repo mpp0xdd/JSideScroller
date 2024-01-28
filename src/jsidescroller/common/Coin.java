@@ -1,6 +1,8 @@
 package jsidescroller.common;
 
-public abstract class Coin extends Chip {
+import jsidescroller.common.interfaces.Takable;
+
+public abstract class Coin extends Chip implements Takable {
 
   private boolean isTaken;
 
@@ -14,14 +16,17 @@ public abstract class Coin extends Chip {
     return Type.COIN;
   }
 
+  @Override
   public boolean isTaken() {
     return isTaken;
   }
 
+  @Override
   public boolean isNotTaken() {
     return !isTaken;
   }
 
+  @Override
   public void take() {
     if (isTaken()) return;
     this.isTaken = true;
