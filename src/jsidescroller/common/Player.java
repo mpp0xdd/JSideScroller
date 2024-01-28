@@ -1,5 +1,6 @@
 package jsidescroller.common;
 
+import java.util.List;
 import jsidescroller.common.interfaces.Accelerable;
 import jsidescroller.common.interfaces.Jumpable;
 import jsidescroller.common.interfaces.Movable;
@@ -21,5 +22,16 @@ public abstract class Player extends Chip implements Accelerable, Jumpable, Mova
         .filter(this::intersects)
         .filter(Coin::isNotTaken)
         .forEach(Coin::take);
+  }
+
+  public final void collectItems() {
+    List<Item> items =
+        getStage().items().stream().filter(this::intersects).filter(Item::isNotTaken).toList();
+
+    items.forEach(
+        item -> {
+          item.take();
+          getStage().remove(item);
+        });
   }
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -62,11 +63,13 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   private final Map<Stage.Point, Chip> stage;
   private final List<Coin> coins;
+  private final List<Item> items;
   private final Player player;
 
   public Stage() {
     this.stage = newStage();
     this.coins = this.stage.values().stream().filter(Chip::isCoin).map(Coin.class::cast).toList();
+    this.items = new ArrayList<>();
     this.player = newPlayer();
   }
 
@@ -119,6 +122,14 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return new Dimension(offsetWidth, offsetHeight);
   }
 
+  public void add(Item item) {
+    items.add(item);
+  }
+
+  public void remove(Item item) {
+    items.remove(item);
+  }
+
   @Override
   public final int x() {
     return 0;
@@ -151,6 +162,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     Stage.Point end = toStagePoint(cursor).orElseThrow();
 
     List<Chip> layer2 = new ArrayList<>();
+    layer2.addAll(items);
 
     for (int y = start.y(); y <= end.y(); y++) {
       for (int x = start.x(); x <= end.x(); x++) {
@@ -179,6 +191,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   protected List<Coin> coins() {
     return coins;
+  }
+
+  protected List<Item> items() {
+    return Collections.unmodifiableList(items);
   }
 
   protected boolean isBlockadeChip(Chip chip) {

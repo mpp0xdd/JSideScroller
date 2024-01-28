@@ -44,6 +44,7 @@ public class MainScreen extends GameScreen implements KeyListener {
 
     stage.player().move();
     stage.player().collectCoins();
+    stage.player().collectItems();
 
     stage.provideGravity();
 

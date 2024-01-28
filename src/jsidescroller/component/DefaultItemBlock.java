@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Objects;
 import jglib.util.GameUtilities;
+import jsidescroller.common.Item;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Stage;
 
@@ -64,6 +65,11 @@ class DefaultItemBlock extends ItemBlock {
   @Override
   public void hit() {
     if (isHit) return;
+
+    Point itemLocation = this.getLocation();
+    itemLocation.translate(0, -this.height());
+    Item item = new DefaultItem(getStage(), getStage().chipSize(), itemLocation);
+    getStage().add(item);
     this.isHit = true;
   }
 }
