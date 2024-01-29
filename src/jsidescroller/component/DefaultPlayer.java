@@ -94,7 +94,7 @@ class DefaultPlayer extends Player {
     location.translate(velocity().x(), 0);
     getStage().blockadeChip(this).ifPresent(this::handleHorizontalMovement);
 
-    location.translate(0, velocity.y());
+    location.translate(0, velocity().y());
     getStage()
         .blockadeChip(this)
         .ifPresentOrElse(this::handleVerticalMovement, () -> isOnGround = false);
