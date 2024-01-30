@@ -34,9 +34,7 @@ class DefaultItemBlock extends ItemBlock {
   public void draw(Graphics g) {
     Dimension offset = getStage().calculateOffset(getStage().player());
 
-    final Color blockColor = isHit ? QUESTION_COLOR : BLOCK_COLOR;
-
-    g.setColor(blockColor);
+    g.setColor(isHit ? QUESTION_COLOR : BLOCK_COLOR);
     g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
 
     if (!isHit) {
