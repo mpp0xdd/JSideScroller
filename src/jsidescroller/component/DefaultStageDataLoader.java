@@ -17,7 +17,7 @@ class DefaultStageDataLoader {
     // restrict instantiation
   }
 
-  public static int[][] loadStageData() {
+  public static char[][] loadStageData() {
     final Class<DefaultStageDataLoader> thisClass = DefaultStageDataLoader.class;
     final String name = "stage.dat";
     final Charset charset = StandardCharsets.UTF_8;
@@ -25,30 +25,22 @@ class DefaultStageDataLoader {
     try (InputStream stream = thisClass.getResourceAsStream(name);
         InputStreamReader reader = new InputStreamReader(stream, charset);
         BufferedReader file = new BufferedReader(reader)) {
-      List<int[]> stageData =
+      List<char[]> stageData =
           file.lines()
-              .map(DefaultStageDataLoader::toIntArray)
+              .map(String::toCharArray)
               .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-      return checkStageData(stageData.toArray(new int[stageData.size()][]));
+      return checkStageData(stageData.toArray(new char[stageData.size()][]));
     } catch (IOException ioe) {
       throw new UncheckedIOException(ioe);
     }
   }
 
-  private static int[][] checkStageData(int[][] stageData) {
+  private static char[][] checkStageData(char[][] stageData) {
     for (int i = 1; i < stageData.length; i++) {
       if (stageData[i].length != stageData[0].length) {
         throw new IllegalArgumentException(Arrays.toString(stageData));
       }
     }
     return stageData;
-  }
-
-  private static int toDigit(int codePoint) {
-    return Character.digit(codePoint, 10);
-  }
-
-  private static int[] toIntArray(String line) {
-    return line.chars().map(DefaultStageDataLoader::toDigit).toArray();
   }
 }

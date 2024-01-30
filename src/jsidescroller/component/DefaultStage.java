@@ -50,7 +50,7 @@ public class DefaultStage extends Stage {
 
   @Override
   protected Map<Stage.Point, Chip> newStage() {
-    final int[][] data = DefaultStageDataLoader.loadStageData();
+    final char[][] data = DefaultStageDataLoader.loadStageData();
     this.rows = data.length;
     this.columns = data[0].length;
 
@@ -61,11 +61,11 @@ public class DefaultStage extends Stage {
 
         Chip chip =
             switch (data[y][x]) {
-              case 0 -> new ColorChip(
+              case '0' -> new ColorChip(
                   this, chipSize(), location, backgroundColor(), Chip.Type.VOID);
-              case 1 -> new ColorChip(this, chipSize(), location, Color.GRAY, Chip.Type.BLOCK);
-              case 2 -> new DefaultCoin(this, chipSize(), location);
-              case 3 -> new DefaultItemBlock(this, chipSize(), location);
+              case '1' -> new ColorChip(this, chipSize(), location, Color.GRAY, Chip.Type.BLOCK);
+              case '2' -> new DefaultCoin(this, chipSize(), location);
+              case '3' -> new DefaultItemBlock(this, chipSize(), location);
               default -> throw new IllegalArgumentException("Unexpected value: " + data[y][x]);
             };
 
