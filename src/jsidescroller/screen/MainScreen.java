@@ -3,6 +3,7 @@ package jsidescroller.screen;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 import jglib.component.GameScreen;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Keystroke;
@@ -16,7 +17,7 @@ public class MainScreen extends GameScreen implements KeyListener {
   private Keystroke spaceKey = Keystroke.NOT_PRESSED;
 
   public MainScreen(Stage stage) {
-    this.stage = stage;
+    this.stage = Objects.requireNonNull(stage);
     setScreenSize(stage.width(), stage.height());
     setFocusable(true);
     addKeyListener(this);
