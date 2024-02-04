@@ -66,6 +66,7 @@ public class DefaultStage extends Stage {
               case '1' -> new ColorChip(this, chipSize(), location, Color.GRAY, Chip.Type.BLOCK);
               case '2' -> new DefaultCoin(this, chipSize(), location);
               case '3' -> new DefaultItemBlock(this, chipSize(), location);
+              case '4' -> new DefaultEnemy(this, chipSize(), location);
               default -> throw new IllegalArgumentException("Unexpected value: " + data[y][x]);
             };
 

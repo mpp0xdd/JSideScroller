@@ -11,6 +11,7 @@ public abstract class Chip implements SideScrollerComponent {
     ITEM_BLOCK,
     ITEM,
     COIN,
+    ENEMY,
     VOID,
   }
 
@@ -58,6 +59,10 @@ public abstract class Chip implements SideScrollerComponent {
 
   public final boolean isCoin() {
     return type().equals(Type.COIN);
+  }
+
+  public final boolean isEnemy() {
+    return type().equals(Type.ENEMY);
   }
 
   public final boolean isVoid() {
