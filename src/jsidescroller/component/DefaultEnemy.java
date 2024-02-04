@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Enemy;
 import jsidescroller.common.Stage;
+import jsidescroller.common.Velocity;
 import jsidescroller.common.interfaces.GravitationalField;
 
 class DefaultEnemy extends Enemy {
@@ -16,6 +17,11 @@ class DefaultEnemy extends Enemy {
   public DefaultEnemy(Stage stage, int size, Point location) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
+  }
+
+  @Override
+  public Velocity velocity() {
+    return Velocity.ZERO;
   }
 
   @Override
