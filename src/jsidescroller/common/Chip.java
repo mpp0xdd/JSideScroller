@@ -31,6 +31,10 @@ public abstract class Chip implements SideScrollerComponent {
     return stage;
   }
 
+  public final int size() {
+    return size;
+  }
+
   @Override
   public final int width() {
     return size;
