@@ -93,6 +93,20 @@ public final class Velocity implements Immutable, Editable<Velocity> {
       return this;
     }
 
+    public VelocityEditor negateX() {
+      this.x = -this.x;
+      return this;
+    }
+
+    public VelocityEditor negateY() {
+      this.y = -this.y;
+      return this;
+    }
+
+    public VelocityEditor negate() {
+      return negateX().negateY();
+    }
+
     @Override
     public Velocity edit() {
       return Velocity.of(x, y);
