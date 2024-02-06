@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.util.Objects;
 import jglib.component.GameScreen;
 import jsidescroller.common.Direction;
+import jsidescroller.common.Enemy;
 import jsidescroller.common.Keystroke;
 import jsidescroller.common.Stage;
 
@@ -46,6 +47,8 @@ public class MainScreen extends GameScreen implements KeyListener {
     stage.player().move();
     stage.player().collectCoins();
     stage.player().collectItems();
+
+    stage.enemies().forEach(Enemy::move);
 
     stage.provideGravity();
 

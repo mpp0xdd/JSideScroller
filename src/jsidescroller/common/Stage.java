@@ -65,12 +65,15 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   private final List<Coin> coins;
   private final List<Item> items;
   private final Player player;
+  private final List<Enemy> enemies;
 
   public Stage() {
     this.stage = newStage();
     this.coins = this.stage.values().stream().filter(Chip::isCoin).map(Coin.class::cast).toList();
     this.items = new ArrayList<>();
     this.player = newPlayer();
+    this.enemies =
+        this.stage.values().stream().filter(Chip::isEnemy).map(Enemy.class::cast).toList();
   }
 
   public abstract int rows();
@@ -148,6 +151,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   @Override
   public void provideGravity() {
     player().accept(this);
+    enemies().forEach(e -> e.accept(this));
   }
 
   @Override
@@ -163,6 +167,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
     List<Chip> layer2 = new ArrayList<>();
     layer2.addAll(items);
+    layer2.addAll(enemies);
 
     for (int y = start.y(); y <= end.y(); y++) {
       for (int x = start.x(); x <= end.x(); x++) {
@@ -170,6 +175,9 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
         Chip chip = stage().get(sp);
         if (chip.isCoin()) {
           layer2.add(chip);
+          continue;
+        }
+        if (chip.isEnemy()) {
           continue;
         }
         stage().get(sp).draw(g);
@@ -183,6 +191,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public Player player() {
     return player;
+  }
+
+  public List<Enemy> enemies() {
+    return enemies;
   }
 
   protected Map<Stage.Point, Chip> stage() {
