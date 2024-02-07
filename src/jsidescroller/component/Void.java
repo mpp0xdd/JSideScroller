@@ -2,22 +2,20 @@ package jsidescroller.component;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Stage;
-import jsidescroller.common.interfaces.Rectangular;
 
 class Void extends Chip {
 
-  public static Void of(Stage stage, int size, Point location) {
-    return new Void(stage, size, location);
+  public static Void of(Stage stage, Point location) {
+    return new Void(stage, location);
   }
 
   private final Point location;
 
-  private Void(Stage stage, int size, Point location) {
-    super(stage, size);
+  private Void(Stage stage, Point location) {
+    super(stage, 0);
     this.location = Objects.requireNonNull(location).getLocation();
   }
 
@@ -44,15 +42,5 @@ class Void extends Chip {
   @Override
   public Type type() {
     return Type.VOID;
-  }
-
-  @Override
-  public Rectangle asRectangle() {
-    return new Rectangle(x(), y(), 0, 0);
-  }
-
-  @Override
-  public boolean intersects(Rectangular other) {
-    return false;
   }
 }
