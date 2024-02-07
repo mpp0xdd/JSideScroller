@@ -33,7 +33,7 @@ class DefaultPlayer extends Player {
   public void defeatEnemies() {
     if (velocity().isDownward()) {
       List<Enemy> enemies =
-          getStage().enemies().stream() //
+          getStage().enemies().stream()
               .filter(this::intersects)
               .filter(
                   enemy -> {
