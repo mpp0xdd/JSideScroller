@@ -5,10 +5,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Objects;
-import jsidescroller.common.Chip;
+import jsidescroller.common.Block;
 import jsidescroller.common.Stage;
 
-class ColorBlock extends Chip {
+class ColorBlock extends Block {
 
   private final Point location;
   private final Color color;
@@ -17,11 +17,6 @@ class ColorBlock extends Chip {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
     this.color = Objects.requireNonNull(color);
-  }
-
-  @Override
-  public Chip.Type type() {
-    return Type.BLOCK;
   }
 
   @Override
