@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.List;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Direction;
+import jsidescroller.common.Enemy;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
@@ -24,6 +27,28 @@ class DefaultPlayer extends Player {
 
   private DefaultPlayer(Stage stage) {
     super(stage, 32);
+  }
+
+  @Override
+  public void defeatEnemies() {
+    if (velocity().isDownward()) {
+      List<Enemy> enemies =
+          getStage().enemies().stream() //
+              .filter(this::intersects)
+              .filter(
+                  enemy -> {
+                    Rectangle enemyRect = enemy.asRectangle();
+                    int outcode1 = enemyRect.outcode(this.x(), this.y());
+                    int outcode2 = enemyRect.outcode(this.x() + this.width(), this.y());
+                    return outcode1 == Rectangle.OUT_TOP || outcode2 == Rectangle.OUT_TOP;
+                  })
+              .toList();
+
+      if (!enemies.isEmpty()) {
+        velocity = velocity.editor().y(-jumpSpeed() / 2).edit();
+        isOnGround = true;
+      }
+    }
   }
 
   @Override

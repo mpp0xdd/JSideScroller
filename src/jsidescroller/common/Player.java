@@ -44,4 +44,6 @@ public abstract class Player extends Chip implements Accelerable, Jumpable, Mova
           getStage().remove(item);
         });
   }
+
+  public abstract void defeatEnemies();
 }
