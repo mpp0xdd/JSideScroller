@@ -8,11 +8,11 @@ import jsidescroller.common.Chip;
 import jsidescroller.common.Stage;
 import jsidescroller.common.interfaces.Rectangular;
 
-class VoidChip extends Chip {
+class Void extends Chip {
 
   private final Point location;
 
-  public VoidChip(Stage stage, int size, Point location) {
+  public Void(Stage stage, int size, Point location) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
   }
