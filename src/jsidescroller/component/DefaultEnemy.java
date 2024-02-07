@@ -13,11 +13,15 @@ import jsidescroller.common.interfaces.GravitationalField;
 
 class DefaultEnemy extends Enemy {
 
+  public static DefaultEnemy of(Stage stage, int size, Point location) {
+    return new DefaultEnemy(stage, size, location);
+  }
+
   private final Point location;
   private Velocity velocity;
   private boolean isOnGround;
 
-  public DefaultEnemy(Stage stage, int size, Point location) {
+  private DefaultEnemy(Stage stage, int size, Point location) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
     this.velocity = Velocity.of(2, 0);

@@ -14,11 +14,15 @@ import jsidescroller.common.interfaces.GravitationalField;
 
 class DefaultPlayer extends Player {
 
+  public static DefaultPlayer of(Stage stage) {
+    return new DefaultPlayer(stage);
+  }
+
   private final Point location = new Point(255, 255);
   private Velocity velocity = Velocity.ZERO;
   private boolean isOnGround = false;
 
-  public DefaultPlayer(Stage stage) {
+  private DefaultPlayer(Stage stage) {
     super(stage, 32);
   }
 

@@ -61,16 +61,16 @@ public class DefaultStage extends Stage {
 
         Chip chip =
             switch (data[y][x]) {
-              case '0' -> new Void(this, chipSize(), location);
-              case '1' -> new ColorBlock(this, chipSize(), location, Color.GRAY);
+              case '0' -> Void.of(this, chipSize(), location);
+              case '1' -> ColorBlock.of(this, chipSize(), location, Color.GRAY);
               case '2' -> {
-                add(new DefaultCoin(this, chipSize(), location));
-                yield new Void(this, chipSize(), location);
+                add(DefaultCoin.of(this, chipSize(), location));
+                yield Void.of(this, chipSize(), location);
               }
-              case '3' -> new DefaultItemBlock(this, chipSize(), location);
+              case '3' -> DefaultItemBlock.of(this, chipSize(), location);
               case '4' -> {
-                add(new DefaultEnemy(this, chipSize(), location));
-                yield new Void(this, chipSize(), location);
+                add(DefaultEnemy.of(this, chipSize(), location));
+                yield Void.of(this, chipSize(), location);
               }
               default -> throw new IllegalArgumentException("Unexpected value: " + data[y][x]);
             };
@@ -84,6 +84,6 @@ public class DefaultStage extends Stage {
 
   @Override
   protected Player newPlayer() {
-    return new DefaultPlayer(this);
+    return DefaultPlayer.of(this);
   }
 }

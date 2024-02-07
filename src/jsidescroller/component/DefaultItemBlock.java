@@ -13,6 +13,10 @@ import jsidescroller.common.Stage;
 
 class DefaultItemBlock extends ItemBlock {
 
+  public static DefaultItemBlock of(Stage stage, int size, Point location) {
+    return new DefaultItemBlock(stage, size, location);
+  }
+
   private final Point location;
   private boolean isHit;
 
@@ -20,7 +24,7 @@ class DefaultItemBlock extends ItemBlock {
   private final Color QUESTION_COLOR;
   private final Font QUESTION_FONT;
 
-  public DefaultItemBlock(Stage stage, int size, Point location) {
+  private DefaultItemBlock(Stage stage, int size, Point location) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
     this.isHit = false;
@@ -66,7 +70,7 @@ class DefaultItemBlock extends ItemBlock {
 
     Point itemLocation = this.getLocation();
     itemLocation.translate(0, -this.height());
-    Item item = new DefaultItem(getStage(), getStage().chipSize(), itemLocation);
+    Item item = DefaultItem.of(getStage(), getStage().chipSize(), itemLocation);
     getStage().add(item);
     this.isHit = true;
   }
