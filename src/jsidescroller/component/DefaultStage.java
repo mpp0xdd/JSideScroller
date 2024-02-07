@@ -61,8 +61,7 @@ public class DefaultStage extends Stage {
 
         Chip chip =
             switch (data[y][x]) {
-              case '0' -> new ColorChip(
-                  this, chipSize(), location, backgroundColor(), Chip.Type.VOID);
+              case '0' -> new VoidChip(this, chipSize(), location);
               case '1' -> new ColorChip(this, chipSize(), location, Color.GRAY, Chip.Type.BLOCK);
               case '2' -> new DefaultCoin(this, chipSize(), location);
               case '3' -> new DefaultItemBlock(this, chipSize(), location);
