@@ -10,6 +10,12 @@ import jsidescroller.common.Stage;
 
 public class DefaultStage extends Stage {
 
+  private static final char VOID = '0';
+  private static final char BLOCK = '1';
+  private static final char COIN = '2';
+  private static final char ITEM_BLOCK = '3';
+  private static final char ENEMY = '4';
+
   private int rows;
   private int columns;
 
@@ -61,14 +67,14 @@ public class DefaultStage extends Stage {
 
         Chip chip =
             switch (data[y][x]) {
-              case '0' -> Void.of(this, chipSize(), location);
-              case '1' -> ColorBlock.of(this, chipSize(), location, Color.GRAY);
-              case '2' -> {
+              case VOID -> Void.of(this, chipSize(), location);
+              case BLOCK -> ColorBlock.of(this, chipSize(), location, Color.GRAY);
+              case COIN -> {
                 add(DefaultCoin.of(this, chipSize(), location));
                 yield Void.of(this, chipSize(), location);
               }
-              case '3' -> DefaultItemBlock.of(this, chipSize(), location);
-              case '4' -> {
+              case ITEM_BLOCK -> DefaultItemBlock.of(this, chipSize(), location);
+              case ENEMY -> {
                 add(DefaultEnemy.of(this, chipSize(), location));
                 yield Void.of(this, chipSize(), location);
               }
