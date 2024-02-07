@@ -8,22 +8,20 @@ import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Stage;
 
-class ColorChip extends Chip {
+class ColorBlock extends Chip {
 
   private final Point location;
   private final Color color;
-  private final Chip.Type type;
 
-  public ColorChip(Stage stage, int size, Point location, Color color, Chip.Type type) {
+  public ColorBlock(Stage stage, int size, Point location, Color color) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
     this.color = Objects.requireNonNull(color);
-    this.type = Objects.requireNonNull(type);
   }
 
   @Override
   public Chip.Type type() {
-    return type;
+    return Type.BLOCK;
   }
 
   @Override
