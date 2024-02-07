@@ -18,10 +18,14 @@ public abstract class Player extends Chip implements Accelerable, Jumpable, Mova
   }
 
   public void collectCoins() {
-    getStage().coins().stream()
-        .filter(this::intersects)
-        .filter(Coin::isNotTaken)
-        .forEach(Coin::take);
+    List<Coin> coins =
+        getStage().coins().stream().filter(this::intersects).filter(Coin::isNotTaken).toList();
+
+    coins.forEach(
+        coin -> {
+          coin.take();
+          getStage().remove(coin);
+        });
   }
 
   public void collectItems() {
