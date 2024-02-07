@@ -47,6 +47,7 @@ class DefaultPlayer extends Player {
       if (!enemies.isEmpty()) {
         velocity = velocity.editor().y(-jumpSpeed() / 2).edit();
         isOnGround = true;
+        enemies.forEach(getStage()::remove);
       }
     }
   }
