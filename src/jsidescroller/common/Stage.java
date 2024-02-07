@@ -64,16 +64,17 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   private final Map<Stage.Point, Chip> stage;
   private final List<Coin> coins;
   private final List<Item> items;
-  private final Player player;
   private final List<Enemy> enemies;
 
+  private final Player player;
+
   public Stage() {
-    this.stage = newStage();
-    this.coins = this.stage.values().stream().filter(Chip::isCoin).map(Coin.class::cast).toList();
+    this.coins = new ArrayList<>();
     this.items = new ArrayList<>();
+    this.enemies = new ArrayList<>();
+
+    this.stage = newStage();
     this.player = newPlayer();
-    this.enemies =
-        this.stage.values().stream().filter(Chip::isEnemy).map(Enemy.class::cast).toList();
   }
 
   public abstract int rows();
@@ -125,12 +126,28 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return new Dimension(offsetWidth, offsetHeight);
   }
 
+  public void add(Coin coin) {
+    coins.add(coin);
+  }
+
   public void add(Item item) {
     items.add(item);
   }
 
+  public void add(Enemy enemy) {
+    enemies.add(enemy);
+  }
+
+  public void remove(Coin coin) {
+    coins.remove(coin);
+  }
+
   public void remove(Item item) {
     items.remove(item);
+  }
+
+  public void remove(Enemy enemy) {
+    enemies.remove(enemy);
   }
 
   @Override
@@ -166,6 +183,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     Stage.Point end = toStagePoint(cursor).orElseThrow();
 
     List<Chip> layer2 = new ArrayList<>();
+    layer2.addAll(coins);
     layer2.addAll(items);
     layer2.addAll(enemies);
 
@@ -189,20 +207,20 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return player;
   }
 
-  public List<Enemy> enemies() {
-    return enemies;
-  }
-
   protected Map<Stage.Point, Chip> stage() {
     return stage;
   }
 
   protected List<Coin> coins() {
-    return coins;
+    return Collections.unmodifiableList(coins);
   }
 
   protected List<Item> items() {
     return Collections.unmodifiableList(items);
+  }
+
+  public List<Enemy> enemies() {
+    return Collections.unmodifiableList(enemies);
   }
 
   protected boolean isBlockadeChip(Chip chip) {

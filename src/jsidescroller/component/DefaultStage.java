@@ -63,9 +63,15 @@ public class DefaultStage extends Stage {
             switch (data[y][x]) {
               case '0' -> new VoidChip(this, chipSize(), location);
               case '1' -> new ColorChip(this, chipSize(), location, Color.GRAY, Chip.Type.BLOCK);
-              case '2' -> new DefaultCoin(this, chipSize(), location);
+              case '2' -> {
+                add(new DefaultCoin(this, chipSize(), location));
+                yield new VoidChip(this, chipSize(), location);
+              }
               case '3' -> new DefaultItemBlock(this, chipSize(), location);
-              case '4' -> new DefaultEnemy(this, chipSize(), location);
+              case '4' -> {
+                add(new DefaultEnemy(this, chipSize(), location));
+                yield new VoidChip(this, chipSize(), location);
+              }
               default -> throw new IllegalArgumentException("Unexpected value: " + data[y][x]);
             };
 
