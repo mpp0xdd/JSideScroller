@@ -29,6 +29,21 @@ class DefaultEnemy extends Enemy {
   }
 
   @Override
+  public boolean isAlive() {
+    return true;
+  }
+
+  @Override
+  public boolean isDead() {
+    return false;
+  }
+
+  @Override
+  public void die() {
+    throw new RuntimeException("Not yet implemented.");
+  }
+
+  @Override
   public Velocity velocity() {
     return velocity;
   }
