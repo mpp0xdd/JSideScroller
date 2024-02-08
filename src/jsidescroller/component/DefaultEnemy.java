@@ -20,27 +20,32 @@ class DefaultEnemy extends Enemy {
   private final Point location;
   private Velocity velocity;
   private boolean isOnGround;
+  private boolean isAlive;
 
   private DefaultEnemy(Stage stage, int size, Point location) {
     super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
     this.velocity = Velocity.of(2, 0);
     this.isOnGround = false;
+    this.isAlive = true;
   }
 
   @Override
   public boolean isAlive() {
-    return true;
+    return isAlive;
   }
 
   @Override
   public boolean isDead() {
-    return false;
+    return !isAlive;
   }
 
   @Override
   public void die() {
-    throw new RuntimeException("Not yet implemented.");
+    if (isDead()) {
+      throw new IllegalStateException("Already dead.");
+    }
+    this.isAlive = false;
   }
 
   @Override
@@ -50,7 +55,7 @@ class DefaultEnemy extends Enemy {
 
   @Override
   public void move() {
-    if (velocity().isZero()) {
+    if (isDead() || velocity().isZero()) {
       return;
     }
 
@@ -71,6 +76,8 @@ class DefaultEnemy extends Enemy {
 
   @Override
   public void draw(Graphics g) {
+    if (isDead()) return;
+
     Dimension offset = getStage().calculateOffset(getStage().player());
     g.setColor(new Color(200, 76, 12));
     g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
