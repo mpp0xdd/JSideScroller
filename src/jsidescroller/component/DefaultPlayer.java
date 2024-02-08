@@ -23,13 +23,34 @@ class DefaultPlayer extends Player {
   private final Point location = new Point(255, 255);
   private Velocity velocity = Velocity.ZERO;
   private boolean isOnGround = false;
+  private boolean isAlive = true;
 
   private DefaultPlayer(Stage stage) {
     super(stage, 32);
   }
 
   @Override
+  public boolean isAlive() {
+    return isAlive;
+  }
+
+  @Override
+  public boolean isDead() {
+    return !isAlive;
+  }
+
+  @Override
+  public void die() {
+    if (isDead()) {
+      throw new IllegalStateException("Already dead.");
+    }
+    this.isAlive = false;
+  }
+
+  @Override
   public void defeatEnemies() {
+    if (isDead()) return;
+
     if (velocity().isDownward()) {
       List<Enemy> enemies =
           getStage().enemies().stream()
@@ -51,6 +72,8 @@ class DefaultPlayer extends Player {
 
   @Override
   public void draw(Graphics g) {
+    if (isDead()) return;
+
     Dimension offset = getStage().calculateOffset(this);
     g.setColor(Color.RED);
     g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
@@ -83,6 +106,8 @@ class DefaultPlayer extends Player {
 
   @Override
   public void accelerate(Direction direction) {
+    if (isDead()) return;
+
     switch (direction) {
       case LEFT -> velocity = velocity.editor().x(-speed()).edit();
       case RIGHT -> velocity = velocity.editor().x(speed()).edit();
@@ -91,6 +116,8 @@ class DefaultPlayer extends Player {
 
   @Override
   public void stop() {
+    if (isDead()) return;
+
     velocity = velocity.editor().x(0).edit();
   }
 
@@ -101,6 +128,8 @@ class DefaultPlayer extends Player {
 
   @Override
   public void jump() {
+    if (isDead()) return;
+
     if (isJumpable()) {
       velocity = velocity.editor().y(-jumpSpeed()).edit();
       isOnGround = false;
@@ -114,7 +143,7 @@ class DefaultPlayer extends Player {
 
   @Override
   public void move() {
-    if (velocity().isZero()) {
+    if (isDead() || velocity().isZero()) {
       return;
     }
 
