@@ -203,11 +203,11 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return stage;
   }
 
-  protected List<Coin> coins() {
+  public List<Coin> coins() {
     return Collections.unmodifiableList(coins);
   }
 
-  protected List<Item> items() {
+  public List<Item> items() {
     return Collections.unmodifiableList(items);
   }
 

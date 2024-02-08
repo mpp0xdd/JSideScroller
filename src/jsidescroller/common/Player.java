@@ -1,6 +1,5 @@
 package jsidescroller.common;
 
-import java.util.List;
 import jsidescroller.common.interfaces.Accelerable;
 import jsidescroller.common.interfaces.Jumpable;
 import jsidescroller.common.interfaces.Mortal;
@@ -19,33 +18,9 @@ public abstract class Player extends Chip
     return Type.PLAYER;
   }
 
-  public void collectCoins() {
-    List<Coin> coins =
-        getStage().coins().stream() //
-            .filter(this::intersects)
-            .filter(Coin::isNotTaken)
-            .toList();
+  public abstract void collectCoins();
 
-    coins.forEach(
-        coin -> {
-          coin.take();
-          getStage().remove(coin);
-        });
-  }
-
-  public void collectItems() {
-    List<Item> items =
-        getStage().items().stream() //
-            .filter(this::intersects)
-            .filter(Item::isNotTaken)
-            .toList();
-
-    items.forEach(
-        item -> {
-          item.take();
-          getStage().remove(item);
-        });
-  }
+  public abstract void collectItems();
 
   public abstract void defeatEnemies();
 }

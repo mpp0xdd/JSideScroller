@@ -6,8 +6,10 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
 import jsidescroller.common.Chip;
+import jsidescroller.common.Coin;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Enemy;
+import jsidescroller.common.Item;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
@@ -45,6 +47,40 @@ class DefaultPlayer extends Player {
       throw new IllegalStateException("Already dead.");
     }
     this.isAlive = false;
+  }
+
+  @Override
+  public void collectCoins() {
+    if (isDead()) return;
+
+    List<Coin> coins =
+        getStage().coins().stream() //
+            .filter(this::intersects)
+            .filter(Coin::isNotTaken)
+            .toList();
+
+    coins.forEach(
+        coin -> {
+          coin.take();
+          getStage().remove(coin);
+        });
+  }
+
+  @Override
+  public void collectItems() {
+    if (isDead()) return;
+
+    List<Item> items =
+        getStage().items().stream() //
+            .filter(this::intersects)
+            .filter(Item::isNotTaken)
+            .toList();
+
+    items.forEach(
+        item -> {
+          item.take();
+          getStage().remove(item);
+        });
   }
 
   @Override
