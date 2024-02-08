@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.List;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Direction;
@@ -35,13 +34,7 @@ class DefaultPlayer extends Player {
       List<Enemy> enemies =
           getStage().enemies().stream()
               .filter(this::intersects)
-              .filter(
-                  enemy -> {
-                    Rectangle enemyRect = enemy.asRectangle();
-                    int outcode1 = enemyRect.outcode(this.x(), this.y());
-                    int outcode2 = enemyRect.outcode(this.x() + this.width(), this.y());
-                    return outcode1 == Rectangle.OUT_TOP || outcode2 == Rectangle.OUT_TOP;
-                  })
+              .filter(enemy -> enemy.y() > this.y())
               .toList();
 
       if (!enemies.isEmpty()) {
