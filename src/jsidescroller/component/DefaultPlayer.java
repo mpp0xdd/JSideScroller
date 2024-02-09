@@ -144,10 +144,11 @@ class DefaultPlayer extends Player {
   public void accelerate(Direction direction) {
     if (isDead()) return;
 
-    switch (direction) {
-      case LEFT -> velocity = velocity.editor().x(-speed()).edit();
-      case RIGHT -> velocity = velocity.editor().x(speed()).edit();
-    }
+    velocity =
+        switch (direction) {
+          case LEFT -> velocity.editor().x(-speed()).edit();
+          case RIGHT -> velocity.editor().x(speed()).edit();
+        };
   }
 
   @Override
