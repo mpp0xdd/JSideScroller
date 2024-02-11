@@ -21,12 +21,6 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   public final class Point implements Immutable {
 
     public static Point of(Stage stage, int x, int y) {
-      if (x < 0 || x >= stage.columns()) {
-        throw new IllegalArgumentException("x:" + x);
-      }
-      if (y < 0 || y >= stage.rows()) {
-        throw new IllegalArgumentException("y:" + y);
-      }
       return stage.new Point(x, y);
     }
 
@@ -34,6 +28,12 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     private final int y;
 
     private Point(int x, int y) {
+      if (x < 0 || x >= Stage.this.columns()) {
+        throw new IllegalArgumentException("x:" + x);
+      }
+      if (y < 0 || y >= Stage.this.rows()) {
+        throw new IllegalArgumentException("y:" + y);
+      }
       this.x = x;
       this.y = y;
     }
