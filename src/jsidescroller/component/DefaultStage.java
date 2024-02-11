@@ -10,12 +10,6 @@ import jsidescroller.common.Stage;
 
 public class DefaultStage extends Stage {
 
-  private static final char VOID = '0';
-  private static final char BLOCK = '1';
-  private static final char COIN = '2';
-  private static final char ITEM_BLOCK = '3';
-  private static final char ENEMY = '4';
-
   private int rows;
   private int columns;
 
