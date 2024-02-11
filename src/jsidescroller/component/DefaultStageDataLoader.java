@@ -17,7 +17,7 @@ class DefaultStageDataLoader {
     // restrict instantiation
   }
 
-  public static char[][] loadStageData() {
+  public static DefaultStageData[][] loadStageData() {
     final Class<DefaultStageDataLoader> thisClass = DefaultStageDataLoader.class;
     final String name = "stage.dat";
     final Charset charset = StandardCharsets.UTF_8;
@@ -25,17 +25,26 @@ class DefaultStageDataLoader {
     try (InputStream stream = thisClass.getResourceAsStream(name);
         InputStreamReader reader = new InputStreamReader(stream, charset);
         BufferedReader file = new BufferedReader(reader)) {
-      List<char[]> stageData =
+      List<DefaultStageData[]> stageData =
           file.lines()
               .map(String::toCharArray)
+              .map(DefaultStageDataLoader::toDefaultStageDataArray)
               .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-      return checkStageData(stageData.toArray(new char[stageData.size()][]));
+      return checkStageData(stageData.toArray(new DefaultStageData[stageData.size()][]));
     } catch (IOException ioe) {
       throw new UncheckedIOException(ioe);
     }
   }
 
-  private static char[][] checkStageData(char[][] stageData) {
+  private static DefaultStageData[] toDefaultStageDataArray(char[] charArray) {
+    DefaultStageData[] stageDataArray = new DefaultStageData[charArray.length];
+    for (int i = 0; i < stageDataArray.length; i++) {
+      stageDataArray[i] = DefaultStageData.of(charArray[i]);
+    }
+    return stageDataArray;
+  }
+
+  private static DefaultStageData[][] checkStageData(DefaultStageData[][] stageData) {
     for (int i = 1; i < stageData.length; i++) {
       if (stageData[i].length != stageData[0].length) {
         throw new IllegalArgumentException(Arrays.toString(stageData));
