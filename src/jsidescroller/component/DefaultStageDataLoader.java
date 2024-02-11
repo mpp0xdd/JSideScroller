@@ -27,7 +27,6 @@ class DefaultStageDataLoader {
         BufferedReader file = new BufferedReader(reader)) {
       List<DefaultStageData[]> stageData =
           file.lines()
-              .map(String::toCharArray)
               .map(DefaultStageDataLoader::toDefaultStageDataArray)
               .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
       return checkStageData(stageData.toArray(new DefaultStageData[stageData.size()][]));
@@ -36,7 +35,8 @@ class DefaultStageDataLoader {
     }
   }
 
-  private static DefaultStageData[] toDefaultStageDataArray(char[] charArray) {
+  private static DefaultStageData[] toDefaultStageDataArray(String line) {
+    char[] charArray = line.toCharArray();
     DefaultStageData[] stageDataArray = new DefaultStageData[charArray.length];
     for (int i = 0; i < stageDataArray.length; i++) {
       stageDataArray[i] = DefaultStageData.of(charArray[i]);
