@@ -8,6 +8,7 @@ public abstract class Item extends Chip implements Takable {
 
   public Item(Stage stage, int size) {
     super(stage, size);
+    this.isTaken = false;
   }
 
   @Override
