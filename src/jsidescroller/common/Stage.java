@@ -61,20 +61,15 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     }
   }
 
-  private final Map<Stage.Point, Chip> stage;
-  private final List<Coin> coins;
-  private final List<Item> items;
-  private final List<Enemy> enemies;
+  private Map<Stage.Point, Chip> stage;
+  private List<Coin> coins;
+  private List<Item> items;
+  private List<Enemy> enemies;
 
-  private final Player player;
+  private Player player;
 
   public Stage() {
-    this.coins = new ArrayList<>();
-    this.items = new ArrayList<>();
-    this.enemies = new ArrayList<>();
-
-    this.stage = newStage();
-    this.player = newPlayer();
+    this.initialize();
   }
 
   public abstract int rows();
@@ -84,6 +79,15 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   public abstract int chipSize();
 
   public abstract java.awt.Point playerStartingLocation();
+
+  public void initialize() {
+    this.coins = new ArrayList<>();
+    this.items = new ArrayList<>();
+    this.enemies = new ArrayList<>();
+
+    this.stage = newStage();
+    this.player = newPlayer();
+  }
 
   public Optional<Chip> blockadeChip(SideScrollerComponent component) {
     java.awt.Point componentLocation = component.getLocation();
