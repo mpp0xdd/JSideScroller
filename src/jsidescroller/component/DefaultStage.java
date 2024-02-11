@@ -35,6 +35,11 @@ public class DefaultStage extends Stage {
   }
 
   @Override
+  public java.awt.Point playerStartingLocation() {
+    return new java.awt.Point(255, 255);
+  }
+
+  @Override
   public int width() {
     return 640;
   }

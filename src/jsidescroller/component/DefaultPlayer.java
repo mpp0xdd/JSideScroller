@@ -22,13 +22,14 @@ class DefaultPlayer extends Player {
     return new DefaultPlayer(stage);
   }
 
-  private final Point location = new Point(255, 255);
+  private final Point location;
   private Velocity velocity = Velocity.ZERO;
   private boolean isOnGround = false;
   private boolean isAlive = true;
 
   private DefaultPlayer(Stage stage) {
     super(stage, 32);
+    this.location = stage.playerStartingLocation();
   }
 
   @Override

@@ -83,6 +83,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public abstract int chipSize();
 
+  public abstract java.awt.Point playerStartingLocation();
+
   public Optional<Chip> blockadeChip(SideScrollerComponent component) {
     java.awt.Point componentLocation = component.getLocation();
 
