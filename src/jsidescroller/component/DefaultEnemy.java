@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Enemy;
@@ -28,6 +29,15 @@ class DefaultEnemy extends Enemy {
     this.velocity = Velocity.of(2, 0);
     this.isOnGround = false;
     this.isAlive = true;
+  }
+
+  @Override
+  public void attack() {
+    if (isDead()) return;
+
+    if (this.intersects(getStage().player())) {
+      System.err.println("Enemy attack: " + LocalDateTime.now());
+    }
   }
 
   @Override

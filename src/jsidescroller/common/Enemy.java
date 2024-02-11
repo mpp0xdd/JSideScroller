@@ -14,4 +14,6 @@ public abstract class Enemy extends Chip implements Mortal, Movable, Weighable {
   public final Type type() {
     return Type.ENEMY;
   }
+
+  public abstract void attack();
 }
