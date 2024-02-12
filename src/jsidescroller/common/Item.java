@@ -2,18 +2,13 @@ package jsidescroller.common;
 
 import jsidescroller.common.interfaces.Takable;
 
-public abstract class Item extends Chip implements Takable {
+public abstract class Item extends Sprite implements Takable {
 
   private boolean isTaken;
 
-  public Item(Stage stage) {
-    super(stage);
+  public Item(Stage stage, int width, int height) {
+    super(stage, width, height);
     this.isTaken = false;
-  }
-
-  @Override
-  public final Type type() {
-    return Type.ITEM;
   }
 
   @Override

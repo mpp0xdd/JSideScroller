@@ -70,7 +70,7 @@ class DefaultItemBlock extends ItemBlock {
 
     Point itemLocation = this.getLocation();
     itemLocation.translate(0, -this.height());
-    Item item = DefaultItem.of(getStage(), itemLocation);
+    Item item = DefaultItem.of(getStage(), width(), height(), itemLocation);
     getStage().add(item);
     this.isHit = true;
   }
