@@ -146,6 +146,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public abstract int chipSize();
 
+  public abstract Color backgroundColor();
+
   public abstract java.awt.Point playerStartingLocation();
 
   public Optional<Chip> blockadeChip(SideScrollerComponent component) {
@@ -269,8 +271,6 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   protected boolean isBlockadeChip(Chip chip) {
     return chip.isBlock() || chip.isItemBlock();
   }
-
-  protected abstract Color backgroundColor();
 
   protected abstract Map<Stage.Point, Chip> newStage();
 

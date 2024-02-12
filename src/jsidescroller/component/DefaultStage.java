@@ -29,6 +29,11 @@ public class DefaultStage extends Stage {
   }
 
   @Override
+  public Color backgroundColor() {
+    return Color.BLACK;
+  }
+
+  @Override
   public java.awt.Point playerStartingLocation() {
     return new java.awt.Point(255, 255);
   }
@@ -46,11 +51,6 @@ public class DefaultStage extends Stage {
   @Override
   public int gravity() {
     return 1;
-  }
-
-  @Override
-  protected Color backgroundColor() {
-    return Color.BLACK;
   }
 
   @Override
