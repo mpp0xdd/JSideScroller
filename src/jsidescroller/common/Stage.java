@@ -196,12 +196,12 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
     Offset offset = calculateOffset(player());
     java.awt.Point cursor = new java.awt.Point(offset.width(), offset.height());
-    Stage.Point start = toStagePoint(cursor).orElseThrow();
+    Stage.Point first = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);
-    Stage.Point end = toStagePoint(cursor).orElseThrow();
+    Stage.Point last = toStagePoint(cursor).orElseThrow();
 
-    for (int y = start.y(); y <= end.y(); y++) {
-      for (int x = start.x(); x <= end.x(); x++) {
+    for (int y = first.y(); y <= last.y(); y++) {
+      for (int x = first.x(); x <= last.x(); x++) {
         Stage.Point sp = Stage.Point.of(this, x, y);
         stage().get(sp).draw(g);
       }
