@@ -95,6 +95,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
     public java.awt.Point apply(SideScrollerComponent component) {
       java.awt.Point componentLocation = component.getLocation();
+      componentLocation.translate(Stage.this.x(), Stage.this.y());
       componentLocation.translate(-width, -height);
       return componentLocation;
     }
