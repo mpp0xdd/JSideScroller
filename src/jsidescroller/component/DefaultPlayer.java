@@ -115,8 +115,10 @@ class DefaultPlayer extends Player {
     if (isDead()) return;
 
     Offset offset = getStage().calculateOffset(this);
+    Point point = offset.apply(this);
+
     g.setColor(Color.RED);
-    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
+    g.fill3DRect(point.x, point.y, width(), height(), true);
   }
 
   @Override

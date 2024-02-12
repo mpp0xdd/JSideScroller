@@ -89,8 +89,10 @@ class DefaultEnemy extends Enemy {
     if (isDead()) return;
 
     Offset offset = getStage().calculateOffset(getStage().player());
+    Point point = offset.apply(this);
+
     g.setColor(new Color(200, 76, 12));
-    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
+    g.fill3DRect(point.x, point.y, width(), height(), true);
   }
 
   @Override

@@ -26,8 +26,10 @@ class DefaultItem extends Item {
     if (isTaken()) return;
 
     Offset offset = getStage().calculateOffset(getStage().player());
+    Point point = offset.apply(this);
+
     g.setColor(Color.GREEN);
-    g.fillOval(x() - offset.width(), y() - offset.height(), width(), height());
+    g.fillOval(point.x, point.y, width(), height());
   }
 
   @Override

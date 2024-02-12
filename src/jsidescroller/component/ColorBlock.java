@@ -26,8 +26,10 @@ class ColorBlock extends Block {
   @Override
   public void draw(Graphics g) {
     Offset offset = getStage().calculateOffset(getStage().player());
+    Point point = offset.apply(this);
+
     g.setColor(color);
-    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
+    g.fill3DRect(point.x, point.y, width(), height(), true);
   }
 
   @Override

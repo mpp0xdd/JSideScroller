@@ -79,12 +79,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
       this.height = Math.abs(height);
     }
 
-    public int width() {
-      return width;
-    }
-
-    public int height() {
-      return height;
+    public java.awt.Point apply(SideScrollerComponent component) {
+      java.awt.Point componentLocation = component.getLocation();
+      componentLocation.translate(-width, -height);
+      return componentLocation;
     }
 
     @Override
@@ -227,7 +225,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     g.fillRect(x(), y(), width(), height());
 
     Offset offset = calculateOffset(player());
-    java.awt.Point cursor = new java.awt.Point(offset.width(), offset.height());
+    java.awt.Point cursor = new java.awt.Point(offset.width, offset.height);
     Stage.Point first = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);
     Stage.Point last = toStagePoint(cursor).orElseThrow();

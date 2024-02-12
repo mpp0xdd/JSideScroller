@@ -37,15 +37,15 @@ class DefaultItemBlock extends ItemBlock {
   @Override
   public void draw(Graphics g) {
     Offset offset = getStage().calculateOffset(getStage().player());
+    Point point = offset.apply(this);
 
     g.setColor(isHit ? QUESTION_COLOR : BLOCK_COLOR);
-    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
+    g.fill3DRect(point.x, point.y, width(), height(), true);
 
     if (!isHit) {
       g.setColor(QUESTION_COLOR);
       g.setFont(QUESTION_FONT);
-      GameUtilities.drawStringAfterCentering(
-          g, x() - offset.width() + width() / 2, y() - offset.height() + height() / 2, "?");
+      GameUtilities.drawStringAfterCentering(g, point.x + width() / 2, point.y + height() / 2, "?");
     }
   }
 
