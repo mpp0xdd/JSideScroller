@@ -14,8 +14,8 @@ import jsidescroller.common.interfaces.GravitationalField;
 
 class DefaultEnemy extends Enemy {
 
-  public static DefaultEnemy of(Stage stage, Point location) {
-    return new DefaultEnemy(stage, location);
+  public static DefaultEnemy of(Stage stage, int width, int height, Point location) {
+    return new DefaultEnemy(stage, width, height, location);
   }
 
   private final Point location;
@@ -23,8 +23,8 @@ class DefaultEnemy extends Enemy {
   private boolean isOnGround;
   private boolean isAlive;
 
-  private DefaultEnemy(Stage stage, Point location) {
-    super(stage);
+  public DefaultEnemy(Stage stage, int width, int height, Point location) {
+    super(stage, width, height);
     this.location = Objects.requireNonNull(location).getLocation();
     this.velocity = Velocity.of(2, 0);
     this.isOnGround = false;

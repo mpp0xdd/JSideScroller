@@ -9,7 +9,6 @@ public abstract class Chip implements SideScrollerComponent {
     PLAYER,
     BLOCK,
     ITEM_BLOCK,
-    ENEMY,
     VOID,
   }
 
@@ -48,10 +47,6 @@ public abstract class Chip implements SideScrollerComponent {
 
   public final boolean isItemBlock() {
     return type().equals(Type.ITEM_BLOCK);
-  }
-
-  public final boolean isEnemy() {
-    return type().equals(Type.ENEMY);
   }
 
   public final boolean isVoid() {

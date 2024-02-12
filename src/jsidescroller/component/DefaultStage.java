@@ -82,7 +82,7 @@ public class DefaultStage extends Stage {
                 yield DefaultItemBlock.of(this, location);
               }
               case ENEMY -> {
-                add(DefaultEnemy.of(this, location));
+                add(DefaultEnemy.of(this, chipSize(), chipSize(), location));
                 yield Void.of(this, location);
               }
               default -> {

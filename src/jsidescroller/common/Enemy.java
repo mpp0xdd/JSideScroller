@@ -4,15 +4,10 @@ import jsidescroller.common.interfaces.Mortal;
 import jsidescroller.common.interfaces.Movable;
 import jsidescroller.common.interfaces.Weighable;
 
-public abstract class Enemy extends Chip implements Mortal, Movable, Weighable {
+public abstract class Enemy extends Sprite implements Mortal, Movable, Weighable {
 
-  public Enemy(Stage stage) {
-    super(stage);
-  }
-
-  @Override
-  public final Type type() {
-    return Type.ENEMY;
+  public Enemy(Stage stage, int width, int height) {
+    super(stage, width, height);
   }
 
   public abstract void attack();
