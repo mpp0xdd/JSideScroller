@@ -17,58 +17,6 @@ import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
-  public final class Point implements Immutable {
-
-    public static Point of(Stage stage, int x, int y) {
-      return stage.new Point(x, y);
-    }
-
-    private final int x;
-    private final int y;
-
-    private Point(int x, int y) {
-      if (x < 0 || x >= Stage.this.columns()) {
-        throw new IllegalArgumentException("x:" + x);
-      }
-      if (y < 0 || y >= Stage.this.rows()) {
-        throw new IllegalArgumentException("y:" + y);
-      }
-      this.x = x;
-      this.y = y;
-    }
-
-    public int x() {
-      return x;
-    }
-
-    public int y() {
-      return y;
-    }
-
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + getEnclosingInstance().hashCode();
-      result = prime * result + Objects.hash(x, y);
-      return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (this == obj) return true;
-      if (obj == null) return false;
-      if (getClass() != obj.getClass()) return false;
-      Point other = (Point) obj;
-      if (!getEnclosingInstance().equals(other.getEnclosingInstance())) return false;
-      return x == other.x && y == other.y;
-    }
-
-    private Stage getEnclosingInstance() {
-      return Stage.this;
-    }
-  }
-
   public final class Offset implements Immutable {
 
     public static Offset of(Stage stage, SideScrollerComponent component) {
@@ -124,7 +72,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     }
   }
 
-  private final Map<Stage.Point, Chip> stage;
+  private final Map<StagePoint, Chip> stage;
   private final List<Coin> coins;
   private final List<Item> items;
   private final List<Enemy> enemies;
@@ -228,13 +176,13 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   public void draw(Graphics g) {
     Offset offset = Stage.Offset.of(this, player());
     java.awt.Point cursor = new java.awt.Point(offset.width, offset.height);
-    Stage.Point first = toStagePoint(cursor).orElseThrow();
+    StagePoint first = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);
-    Stage.Point last = toStagePoint(cursor).orElseThrow();
+    StagePoint last = toStagePoint(cursor).orElseThrow();
 
     for (int y = first.y(); y <= last.y(); y++) {
       for (int x = first.x(); x <= last.x(); x++) {
-        Stage.Point sp = Stage.Point.of(this, x, y);
+        StagePoint sp = StagePoint.of(this, x, y);
         stage().get(sp).draw(g);
       }
     }
@@ -249,7 +197,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return player;
   }
 
-  protected Map<Stage.Point, Chip> stage() {
+  protected Map<StagePoint, Chip> stage() {
     return stage;
   }
 
@@ -269,15 +217,15 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return chip.isBlock() || chip.isItemBlock();
   }
 
-  protected abstract Map<Stage.Point, Chip> newStage();
+  protected abstract Map<StagePoint, Chip> newStage();
 
   protected abstract Player newPlayer();
 
-  private Optional<Stage.Point> toStagePoint(java.awt.Point location) {
+  private Optional<StagePoint> toStagePoint(java.awt.Point location) {
     try {
       int sx = location.x / chipSize();
       int sy = location.y / chipSize();
-      return Optional.of(Stage.Point.of(this, sx, sy));
+      return Optional.of(StagePoint.of(this, sx, sy));
     } catch (Exception e) {
       return Optional.empty();
     }

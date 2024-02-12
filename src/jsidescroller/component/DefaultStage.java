@@ -7,6 +7,7 @@ import java.util.Map;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
+import jsidescroller.common.StagePoint;
 
 public class DefaultStage extends Stage {
 
@@ -54,12 +55,12 @@ public class DefaultStage extends Stage {
   }
 
   @Override
-  protected Map<Stage.Point, Chip> newStage() {
+  protected Map<StagePoint, Chip> newStage() {
     final DefaultStageData[][] data = DefaultStageDataLoader.loadStageData();
     this.rows = data.length;
     this.columns = data[0].length;
 
-    Map<Stage.Point, Chip> stage = new HashMap<>();
+    Map<StagePoint, Chip> stage = new HashMap<>();
     for (int y = 0; y < rows(); y++) {
       for (int x = 0; x < columns(); x++) {
         java.awt.Point location = new java.awt.Point(x * chipSize(), y * chipSize());
@@ -88,7 +89,7 @@ public class DefaultStage extends Stage {
               }
             };
 
-        stage.put(Stage.Point.of(this, x, y), chip);
+        stage.put(StagePoint.of(this, x, y), chip);
       }
     }
 
