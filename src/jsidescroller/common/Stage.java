@@ -66,8 +66,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     private final int height;
 
     private Offset(int width, int height) {
-      this.width = width;
-      this.height = height;
+      this.width = Math.abs(width);
+      this.height = Math.abs(height);
     }
 
     public int width() {
@@ -136,12 +136,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     int offsetWidth = width() / 2 - component.x();
     offsetWidth = Math.min(offsetWidth, 0);
     offsetWidth = Math.max(offsetWidth, width() - columns() * chipSize());
-    offsetWidth = Math.abs(offsetWidth);
 
     int offsetHeight = height() / 2 - component.y();
     offsetHeight = Math.min(offsetHeight, 0);
     offsetHeight = Math.max(offsetHeight, height() - rows() * chipSize());
-    offsetHeight = Math.abs(offsetHeight);
 
     return new Offset(offsetWidth, offsetHeight);
   }
