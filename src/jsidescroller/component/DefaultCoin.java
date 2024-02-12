@@ -10,14 +10,14 @@ import jsidescroller.common.StageOffset;
 
 class DefaultCoin extends Coin {
 
-  public static DefaultCoin of(Stage stage, Point location) {
-    return new DefaultCoin(stage, location);
+  public static DefaultCoin of(Stage stage, int width, int height, Point location) {
+    return new DefaultCoin(stage, width, height, location);
   }
 
   private final Point location;
 
-  private DefaultCoin(Stage stage, Point location) {
-    super(stage);
+  private DefaultCoin(Stage stage, int width, int height, Point location) {
+    super(stage, width, height);
     this.location = Objects.requireNonNull(location).getLocation();
   }
 

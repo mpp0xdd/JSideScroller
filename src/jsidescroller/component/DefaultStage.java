@@ -75,7 +75,7 @@ public class DefaultStage extends Stage {
                 yield ColorBlock.of(this, location, Color.GRAY);
               }
               case COIN -> {
-                add(DefaultCoin.of(this, location));
+                add(DefaultCoin.of(this, chipSize(), chipSize(), location));
                 yield Void.of(this, location);
               }
               case ITEM_BLOCK -> {
