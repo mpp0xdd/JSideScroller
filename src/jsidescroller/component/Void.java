@@ -5,23 +5,28 @@ import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Stage;
+import jsidescroller.common.Stage.Offset;
 
 class Void extends Chip {
 
-  public static Void of(Stage stage, Point location) {
-    return new Void(stage, location);
+  public static Void of(Stage stage, int size, Point location) {
+    return new Void(stage, size, location);
   }
 
   private final Point location;
 
-  private Void(Stage stage, Point location) {
-    super(stage, 0);
+  private Void(Stage stage, int size, Point location) {
+    super(stage, size);
     this.location = Objects.requireNonNull(location).getLocation();
   }
 
   @Override
   public void draw(Graphics g) {
-    // nop
+    Offset offset = Stage.Offset.of(getStage(), getStage().player());
+    Point point = offset.apply(this);
+
+    g.setColor(getStage().backgroundColor());
+    g.fill3DRect(point.x, point.y, width(), height(), true);
   }
 
   @Override

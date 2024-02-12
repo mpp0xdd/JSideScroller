@@ -226,9 +226,6 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   @Override
   public void draw(Graphics g) {
-    g.setColor(this.backgroundColor());
-    g.fillRect(x(), y(), width(), height());
-
     Offset offset = Stage.Offset.of(this, player());
     java.awt.Point cursor = new java.awt.Point(offset.width, offset.height);
     Stage.Point first = toStagePoint(cursor).orElseThrow();
