@@ -88,7 +88,7 @@ class DefaultEnemy extends Enemy {
   public void draw(Graphics g) {
     if (isDead()) return;
 
-    Offset offset = getStage().calculateOffset(getStage().player());
+    Offset offset = Stage.Offset.of(getStage(), getStage().player());
     Point point = offset.apply(this);
 
     g.setColor(new Color(200, 76, 12));

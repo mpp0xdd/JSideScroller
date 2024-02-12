@@ -71,12 +71,26 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public final class Offset implements Immutable {
 
+    public static Offset of(Stage stage, SideScrollerComponent component) {
+      int offsetWidth = stage.width() / 2 - component.x();
+      offsetWidth = Math.min(offsetWidth, 0);
+      offsetWidth = Math.max(offsetWidth, stage.width() - stage.columns() * stage.chipSize());
+      offsetWidth = Math.abs(offsetWidth);
+
+      int offsetHeight = stage.height() / 2 - component.y();
+      offsetHeight = Math.min(offsetHeight, 0);
+      offsetHeight = Math.max(offsetHeight, stage.height() - stage.rows() * stage.chipSize());
+      offsetHeight = Math.abs(offsetHeight);
+
+      return stage.new Offset(offsetWidth, offsetHeight);
+    }
+
     private final int width;
     private final int height;
 
     private Offset(int width, int height) {
-      this.width = Math.abs(width);
-      this.height = Math.abs(height);
+      this.width = width;
+      this.height = height;
     }
 
     public java.awt.Point apply(SideScrollerComponent component) {
@@ -162,18 +176,6 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return result;
   }
 
-  public Offset calculateOffset(SideScrollerComponent component) {
-    int offsetWidth = width() / 2 - component.x();
-    offsetWidth = Math.min(offsetWidth, 0);
-    offsetWidth = Math.max(offsetWidth, width() - columns() * chipSize());
-
-    int offsetHeight = height() / 2 - component.y();
-    offsetHeight = Math.min(offsetHeight, 0);
-    offsetHeight = Math.max(offsetHeight, height() - rows() * chipSize());
-
-    return new Offset(offsetWidth, offsetHeight);
-  }
-
   public void add(Coin coin) {
     coins.add(coin);
   }
@@ -224,7 +226,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     g.setColor(this.backgroundColor());
     g.fillRect(x(), y(), width(), height());
 
-    Offset offset = calculateOffset(player());
+    Offset offset = Stage.Offset.of(this, player());
     java.awt.Point cursor = new java.awt.Point(offset.width, offset.height);
     Stage.Point first = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);

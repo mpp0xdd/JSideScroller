@@ -25,7 +25,7 @@ class ColorBlock extends Block {
 
   @Override
   public void draw(Graphics g) {
-    Offset offset = getStage().calculateOffset(getStage().player());
+    Offset offset = Stage.Offset.of(getStage(), getStage().player());
     Point point = offset.apply(this);
 
     g.setColor(color);
