@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Item;
 import jsidescroller.common.Stage;
-import jsidescroller.common.Stage.Offset;
+import jsidescroller.common.StageOffset;
 
 class DefaultItem extends Item {
 
@@ -25,7 +25,7 @@ class DefaultItem extends Item {
   public void draw(Graphics g) {
     if (isTaken()) return;
 
-    Offset offset = Stage.Offset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage(), getStage().player());
     Point point = offset.apply(this);
 
     g.setColor(Color.GREEN);

@@ -9,7 +9,7 @@ import jglib.util.GameUtilities;
 import jsidescroller.common.Item;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Stage;
-import jsidescroller.common.Stage.Offset;
+import jsidescroller.common.StageOffset;
 
 class DefaultItemBlock extends ItemBlock {
 
@@ -36,7 +36,7 @@ class DefaultItemBlock extends ItemBlock {
 
   @Override
   public void draw(Graphics g) {
-    Offset offset = Stage.Offset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage(), getStage().player());
     Point point = offset.apply(this);
 
     g.setColor(isHit ? QUESTION_COLOR : BLOCK_COLOR);

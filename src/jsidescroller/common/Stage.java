@@ -6,71 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
-import jsidescroller.common.interfaces.Immutable;
 import jsidescroller.common.interfaces.Locatable;
 import jsidescroller.common.interfaces.Rectangular;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
-
-  public final class Offset implements Immutable {
-
-    public static Offset of(Stage stage, SideScrollerComponent component) {
-      int offsetWidth = stage.width() / 2 - component.x();
-      offsetWidth = Math.min(offsetWidth, 0);
-      offsetWidth = Math.max(offsetWidth, stage.width() - stage.columns() * stage.chipSize());
-      offsetWidth = Math.abs(offsetWidth);
-
-      int offsetHeight = stage.height() / 2 - component.y();
-      offsetHeight = Math.min(offsetHeight, 0);
-      offsetHeight = Math.max(offsetHeight, stage.height() - stage.rows() * stage.chipSize());
-      offsetHeight = Math.abs(offsetHeight);
-
-      return stage.new Offset(offsetWidth, offsetHeight);
-    }
-
-    private final int width;
-    private final int height;
-
-    private Offset(int width, int height) {
-      this.width = width;
-      this.height = height;
-    }
-
-    public java.awt.Point apply(SideScrollerComponent component) {
-      java.awt.Point componentLocation = component.getLocation();
-      componentLocation.translate(Stage.this.x(), Stage.this.y());
-      componentLocation.translate(-width, -height);
-      return componentLocation;
-    }
-
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + getEnclosingInstance().hashCode();
-      result = prime * result + Objects.hash(height, width);
-      return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (this == obj) return true;
-      if (obj == null) return false;
-      if (getClass() != obj.getClass()) return false;
-      Offset other = (Offset) obj;
-      if (!getEnclosingInstance().equals(other.getEnclosingInstance())) return false;
-      return height == other.height && width == other.width;
-    }
-
-    private Stage getEnclosingInstance() {
-      return Stage.this;
-    }
-  }
 
   private final Map<StagePoint, Chip> stage;
   private final List<Coin> coins;
@@ -174,8 +117,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   @Override
   public void draw(Graphics g) {
-    Offset offset = Stage.Offset.of(this, player());
-    java.awt.Point cursor = new java.awt.Point(offset.width, offset.height);
+    StageOffset offset = StageOffset.of(this, player());
+    java.awt.Point cursor = new java.awt.Point(offset.width(), offset.height());
     StagePoint first = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);
     StagePoint last = toStagePoint(cursor).orElseThrow();

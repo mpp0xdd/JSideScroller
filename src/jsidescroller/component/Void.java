@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Stage;
-import jsidescroller.common.Stage.Offset;
+import jsidescroller.common.StageOffset;
 
 class Void extends Chip {
 
@@ -22,7 +22,7 @@ class Void extends Chip {
 
   @Override
   public void draw(Graphics g) {
-    Offset offset = Stage.Offset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage(), getStage().player());
     Point point = offset.apply(this);
 
     g.setColor(getStage().backgroundColor());

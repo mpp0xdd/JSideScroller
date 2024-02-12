@@ -12,7 +12,7 @@ import jsidescroller.common.Item;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
-import jsidescroller.common.Stage.Offset;
+import jsidescroller.common.StageOffset;
 import jsidescroller.common.Velocity;
 import jsidescroller.common.interfaces.GravitationalField;
 
@@ -114,7 +114,7 @@ class DefaultPlayer extends Player {
   public void draw(Graphics g) {
     if (isDead()) return;
 
-    Offset offset = Stage.Offset.of(getStage(), this);
+    StageOffset offset = StageOffset.of(getStage(), this);
     Point point = offset.apply(this);
 
     g.setColor(Color.RED);

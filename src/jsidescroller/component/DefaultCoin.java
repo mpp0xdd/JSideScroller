@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Coin;
 import jsidescroller.common.Stage;
-import jsidescroller.common.Stage.Offset;
+import jsidescroller.common.StageOffset;
 
 class DefaultCoin extends Coin {
 
@@ -25,7 +25,7 @@ class DefaultCoin extends Coin {
   public void draw(Graphics g) {
     if (isTaken()) return;
 
-    Offset offset = Stage.Offset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage(), getStage().player());
     Point point = offset.apply(this);
 
     g.setColor(Color.YELLOW);

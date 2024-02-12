@@ -8,7 +8,7 @@ import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Enemy;
 import jsidescroller.common.Stage;
-import jsidescroller.common.Stage.Offset;
+import jsidescroller.common.StageOffset;
 import jsidescroller.common.Velocity;
 import jsidescroller.common.interfaces.GravitationalField;
 
@@ -88,7 +88,7 @@ class DefaultEnemy extends Enemy {
   public void draw(Graphics g) {
     if (isDead()) return;
 
-    Offset offset = Stage.Offset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage(), getStage().player());
     Point point = offset.apply(this);
 
     g.setColor(new Color(200, 76, 12));
