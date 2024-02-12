@@ -1,6 +1,7 @@
 package jsidescroller.component;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +36,8 @@ public class DefaultStage extends Stage {
   }
 
   @Override
-  public java.awt.Point playerStartingLocation() {
-    return new java.awt.Point(255, 255);
+  public Point playerStartingLocation() {
+    return new Point(255, 255);
   }
 
   @Override
@@ -63,7 +64,7 @@ public class DefaultStage extends Stage {
     Map<StagePoint, Chip> stage = new HashMap<>();
     for (int y = 0; y < rows(); y++) {
       for (int x = 0; x < columns(); x++) {
-        java.awt.Point location = new java.awt.Point(x * chipSize(), y * chipSize());
+        Point location = new Point(x * chipSize(), y * chipSize());
 
         Chip chip =
             switch (data[y][x]) {

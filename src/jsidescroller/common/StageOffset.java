@@ -1,5 +1,6 @@
 package jsidescroller.common;
 
+import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.interfaces.Immutable;
 import jsidescroller.common.interfaces.SideScrollerComponent;
@@ -42,8 +43,8 @@ public final class StageOffset implements Immutable {
     return height;
   }
 
-  public java.awt.Point apply(SideScrollerComponent component) {
-    java.awt.Point componentLocation = component.getLocation();
+  public Point apply(SideScrollerComponent component) {
+    Point componentLocation = component.getLocation();
     componentLocation.translate(stage.x(), stage.y());
     componentLocation.translate(-width, -height);
     return componentLocation;

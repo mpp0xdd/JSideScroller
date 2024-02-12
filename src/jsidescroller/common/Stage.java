@@ -2,6 +2,7 @@ package jsidescroller.common;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,10 +40,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public abstract Color backgroundColor();
 
-  public abstract java.awt.Point playerStartingLocation();
+  public abstract Point playerStartingLocation();
 
   public Optional<Chip> blockadeChip(SideScrollerComponent component) {
-    java.awt.Point componentLocation = component.getLocation();
+    Point componentLocation = component.getLocation();
 
     // upper left corner
     Optional<Chip> result = existsBlockadeChip(componentLocation);
@@ -105,8 +106,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   }
 
   @Override
-  public final java.awt.Point getLocation() {
-    return new java.awt.Point(x(), y());
+  public final Point getLocation() {
+    return new Point(x(), y());
   }
 
   @Override
@@ -118,7 +119,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   @Override
   public void draw(Graphics g) {
     StageOffset offset = StageOffset.of(this, player());
-    java.awt.Point cursor = new java.awt.Point(offset.width(), offset.height());
+    Point cursor = new Point(offset.width(), offset.height());
     StagePoint first = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);
     StagePoint last = toStagePoint(cursor).orElseThrow();
@@ -164,7 +165,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   protected abstract Player newPlayer();
 
-  private Optional<StagePoint> toStagePoint(java.awt.Point location) {
+  private Optional<StagePoint> toStagePoint(Point location) {
     try {
       int sx = location.x / chipSize();
       int sy = location.y / chipSize();
@@ -174,7 +175,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     }
   }
 
-  private Optional<Chip> existsBlockadeChip(java.awt.Point location) {
+  private Optional<Chip> existsBlockadeChip(Point location) {
     return toStagePoint(location).map(stage()::get).filter(this::isBlockadeChip);
   }
 }
