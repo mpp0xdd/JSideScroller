@@ -18,7 +18,7 @@ public abstract class Chip implements SideScrollerComponent {
   }
 
   @Override
-  public Stage getStage() {
+  public final Stage getStage() {
     return stage;
   }
 
