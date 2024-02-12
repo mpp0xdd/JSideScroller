@@ -1,7 +1,6 @@
 package jsidescroller.component;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
@@ -13,6 +12,7 @@ import jsidescroller.common.Item;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
+import jsidescroller.common.Stage.Offset;
 import jsidescroller.common.Velocity;
 import jsidescroller.common.interfaces.GravitationalField;
 
@@ -114,9 +114,9 @@ class DefaultPlayer extends Player {
   public void draw(Graphics g) {
     if (isDead()) return;
 
-    Dimension offset = getStage().calculateOffset(this);
+    Offset offset = getStage().calculateOffset(this);
     g.setColor(Color.RED);
-    g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
+    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
   }
 
   @Override

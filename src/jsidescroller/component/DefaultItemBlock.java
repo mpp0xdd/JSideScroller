@@ -1,7 +1,6 @@
 package jsidescroller.component;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -10,6 +9,7 @@ import jglib.util.GameUtilities;
 import jsidescroller.common.Item;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Stage;
+import jsidescroller.common.Stage.Offset;
 
 class DefaultItemBlock extends ItemBlock {
 
@@ -36,16 +36,16 @@ class DefaultItemBlock extends ItemBlock {
 
   @Override
   public void draw(Graphics g) {
-    Dimension offset = getStage().calculateOffset(getStage().player());
+    Offset offset = getStage().calculateOffset(getStage().player());
 
     g.setColor(isHit ? QUESTION_COLOR : BLOCK_COLOR);
-    g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
+    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
 
     if (!isHit) {
       g.setColor(QUESTION_COLOR);
       g.setFont(QUESTION_FONT);
       GameUtilities.drawStringAfterCentering(
-          g, x() - offset.width + width() / 2, y() - offset.height + height() / 2, "?");
+          g, x() - offset.width() + width() / 2, y() - offset.height() + height() / 2, "?");
     }
   }
 

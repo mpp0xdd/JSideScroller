@@ -1,7 +1,6 @@
 package jsidescroller.common;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,6 +60,25 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     }
   }
 
+  public final class Offset implements Immutable {
+
+    private final int width;
+    private final int height;
+
+    private Offset(int width, int height) {
+      this.width = width;
+      this.height = height;
+    }
+
+    public int width() {
+      return width;
+    }
+
+    public int height() {
+      return height;
+    }
+  }
+
   private final Map<Stage.Point, Chip> stage;
   private final List<Coin> coins;
   private final List<Item> items;
@@ -114,7 +132,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return result;
   }
 
-  public Dimension calculateOffset(SideScrollerComponent component) {
+  public Offset calculateOffset(SideScrollerComponent component) {
     int offsetWidth = width() / 2 - component.x();
     offsetWidth = Math.min(offsetWidth, 0);
     offsetWidth = Math.max(offsetWidth, width() - columns() * chipSize());
@@ -125,7 +143,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     offsetHeight = Math.max(offsetHeight, height() - rows() * chipSize());
     offsetHeight = Math.abs(offsetHeight);
 
-    return new Dimension(offsetWidth, offsetHeight);
+    return new Offset(offsetWidth, offsetHeight);
   }
 
   public void add(Coin coin) {
@@ -178,8 +196,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     g.setColor(this.backgroundColor());
     g.fillRect(x(), y(), width(), height());
 
-    Dimension offset = calculateOffset(player());
-    java.awt.Point cursor = new java.awt.Point(offset.width, offset.height);
+    Offset offset = calculateOffset(player());
+    java.awt.Point cursor = new java.awt.Point(offset.width(), offset.height());
     Stage.Point start = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);
     Stage.Point end = toStagePoint(cursor).orElseThrow();

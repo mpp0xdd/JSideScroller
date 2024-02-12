@@ -1,7 +1,6 @@
 package jsidescroller.component;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.time.LocalDateTime;
@@ -9,6 +8,7 @@ import java.util.Objects;
 import jsidescroller.common.Chip;
 import jsidescroller.common.Enemy;
 import jsidescroller.common.Stage;
+import jsidescroller.common.Stage.Offset;
 import jsidescroller.common.Velocity;
 import jsidescroller.common.interfaces.GravitationalField;
 
@@ -88,9 +88,9 @@ class DefaultEnemy extends Enemy {
   public void draw(Graphics g) {
     if (isDead()) return;
 
-    Dimension offset = getStage().calculateOffset(getStage().player());
+    Offset offset = getStage().calculateOffset(getStage().player());
     g.setColor(new Color(200, 76, 12));
-    g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
+    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
   }
 
   @Override

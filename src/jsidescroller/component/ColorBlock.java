@@ -1,12 +1,12 @@
 package jsidescroller.component;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Objects;
 import jsidescroller.common.Block;
 import jsidescroller.common.Stage;
+import jsidescroller.common.Stage.Offset;
 
 class ColorBlock extends Block {
 
@@ -25,9 +25,9 @@ class ColorBlock extends Block {
 
   @Override
   public void draw(Graphics g) {
-    Dimension offset = getStage().calculateOffset(getStage().player());
+    Offset offset = getStage().calculateOffset(getStage().player());
     g.setColor(color);
-    g.fill3DRect(x() - offset.width, y() - offset.height, width(), height(), true);
+    g.fill3DRect(x() - offset.width(), y() - offset.height(), width(), height(), true);
   }
 
   @Override
