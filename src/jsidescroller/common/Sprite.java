@@ -1,5 +1,6 @@
 package jsidescroller.common;
 
+import java.util.Objects;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Sprite implements SideScrollerComponent {
@@ -9,7 +10,14 @@ public abstract class Sprite implements SideScrollerComponent {
   private final int height;
 
   public Sprite(Stage stage, int width, int height) {
-    this.stage = stage;
+    this.stage = Objects.requireNonNull(stage);
+    if (width < 0) {
+      throw new IllegalArgumentException("width:" + width);
+    }
+    if (height < 0) {
+      throw new IllegalArgumentException("height:" + width);
+    }
+
     this.width = width;
     this.height = height;
   }
