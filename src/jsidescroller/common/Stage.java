@@ -47,7 +47,11 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
     @Override
     public int hashCode() {
-      return Objects.hash(x, y);
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + getEnclosingInstance().hashCode();
+      result = prime * result + Objects.hash(x, y);
+      return result;
     }
 
     @Override
@@ -56,7 +60,12 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
       if (obj == null) return false;
       if (getClass() != obj.getClass()) return false;
       Point other = (Point) obj;
+      if (!getEnclosingInstance().equals(other.getEnclosingInstance())) return false;
       return x == other.x && y == other.y;
+    }
+
+    private Stage getEnclosingInstance() {
+      return Stage.this;
     }
   }
 
@@ -76,6 +85,29 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
     public int height() {
       return height;
+    }
+
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + getEnclosingInstance().hashCode();
+      result = prime * result + Objects.hash(height, width);
+      return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) return true;
+      if (obj == null) return false;
+      if (getClass() != obj.getClass()) return false;
+      Offset other = (Offset) obj;
+      if (!getEnclosingInstance().equals(other.getEnclosingInstance())) return false;
+      return height == other.height && width == other.width;
+    }
+
+    private Stage getEnclosingInstance() {
+      return Stage.this;
     }
   }
 
