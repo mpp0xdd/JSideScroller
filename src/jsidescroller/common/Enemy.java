@@ -6,8 +6,8 @@ import jsidescroller.common.interfaces.Weighable;
 
 public abstract class Enemy extends Chip implements Mortal, Movable, Weighable {
 
-  public Enemy(Stage stage, int size) {
-    super(stage, size);
+  public Enemy(Stage stage) {
+    super(stage);
   }
 
   @Override

@@ -9,8 +9,8 @@ import jsidescroller.common.interfaces.Weighable;
 public abstract class Player extends Chip
     implements Mortal, Accelerable, Jumpable, Movable, Weighable {
 
-  public Player(Stage stage, int size) {
-    super(stage, size);
+  public Player(Stage stage) {
+    super(stage);
   }
 
   @Override

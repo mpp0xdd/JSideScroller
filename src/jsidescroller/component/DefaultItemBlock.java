@@ -13,8 +13,8 @@ import jsidescroller.common.StageOffset;
 
 class DefaultItemBlock extends ItemBlock {
 
-  public static DefaultItemBlock of(Stage stage, int size, Point location) {
-    return new DefaultItemBlock(stage, size, location);
+  public static DefaultItemBlock of(Stage stage, Point location) {
+    return new DefaultItemBlock(stage, location);
   }
 
   private final Point location;
@@ -24,8 +24,8 @@ class DefaultItemBlock extends ItemBlock {
   private final Color QUESTION_COLOR;
   private final Font QUESTION_FONT;
 
-  private DefaultItemBlock(Stage stage, int size, Point location) {
-    super(stage, size);
+  private DefaultItemBlock(Stage stage, Point location) {
+    super(stage);
     this.location = Objects.requireNonNull(location).getLocation();
     this.isHit = false;
 
@@ -70,7 +70,7 @@ class DefaultItemBlock extends ItemBlock {
 
     Point itemLocation = this.getLocation();
     itemLocation.translate(0, -this.height());
-    Item item = DefaultItem.of(getStage(), getStage().chipSize(), itemLocation);
+    Item item = DefaultItem.of(getStage(), itemLocation);
     getStage().add(item);
     this.isHit = true;
   }

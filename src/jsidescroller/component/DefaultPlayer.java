@@ -28,7 +28,7 @@ class DefaultPlayer extends Player {
   private boolean isAlive;
 
   private DefaultPlayer(Stage stage) {
-    super(stage, 32);
+    super(stage);
     this.location = stage.playerStartingLocation();
     this.velocity = Velocity.ZERO;
     this.isOnGround = false;

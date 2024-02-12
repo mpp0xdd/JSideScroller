@@ -69,21 +69,21 @@ public class DefaultStage extends Stage {
         Chip chip =
             switch (data[y][x]) {
               case VOID -> {
-                yield Void.of(this, chipSize(), location);
+                yield Void.of(this, location);
               }
               case BLOCK -> {
-                yield ColorBlock.of(this, chipSize(), location, Color.GRAY);
+                yield ColorBlock.of(this, location, Color.GRAY);
               }
               case COIN -> {
-                add(DefaultCoin.of(this, chipSize(), location));
-                yield Void.of(this, chipSize(), location);
+                add(DefaultCoin.of(this, location));
+                yield Void.of(this, location);
               }
               case ITEM_BLOCK -> {
-                yield DefaultItemBlock.of(this, chipSize(), location);
+                yield DefaultItemBlock.of(this, location);
               }
               case ENEMY -> {
-                add(DefaultEnemy.of(this, chipSize(), location));
-                yield Void.of(this, chipSize(), location);
+                add(DefaultEnemy.of(this, location));
+                yield Void.of(this, location);
               }
               default -> {
                 throw new IllegalArgumentException("Unexpected value: " + data[y][x]);

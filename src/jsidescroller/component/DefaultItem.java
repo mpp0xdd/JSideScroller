@@ -10,14 +10,14 @@ import jsidescroller.common.StageOffset;
 
 class DefaultItem extends Item {
 
-  public static DefaultItem of(Stage stage, int size, Point location) {
-    return new DefaultItem(stage, size, location);
+  public static DefaultItem of(Stage stage, Point location) {
+    return new DefaultItem(stage, location);
   }
 
   private final Point location;
 
-  private DefaultItem(Stage stage, int size, Point location) {
-    super(stage, size);
+  private DefaultItem(Stage stage, Point location) {
+    super(stage);
     this.location = Objects.requireNonNull(location).getLocation();
   }
 

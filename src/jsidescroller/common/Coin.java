@@ -6,8 +6,8 @@ public abstract class Coin extends Chip implements Takable {
 
   private boolean isTaken;
 
-  public Coin(Stage stage, int size) {
-    super(stage, size);
+  public Coin(Stage stage) {
+    super(stage);
     this.isTaken = false;
   }
 

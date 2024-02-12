@@ -6,8 +6,8 @@ public abstract class Item extends Chip implements Takable {
 
   private boolean isTaken;
 
-  public Item(Stage stage, int size) {
-    super(stage, size);
+  public Item(Stage stage) {
+    super(stage);
     this.isTaken = false;
   }
 

@@ -16,14 +16,9 @@ public abstract class Chip implements SideScrollerComponent {
   }
 
   private final Stage stage;
-  private final int size;
 
-  public Chip(Stage stage, int size) {
+  public Chip(Stage stage) {
     this.stage = Objects.requireNonNull(stage);
-    if (size < 0) {
-      throw new IllegalArgumentException("size:" + size);
-    }
-    this.size = size;
   }
 
   @Override
@@ -32,17 +27,17 @@ public abstract class Chip implements SideScrollerComponent {
   }
 
   public final int size() {
-    return size;
+    return stage.chipSize();
   }
 
   @Override
   public final int width() {
-    return size;
+    return stage.chipSize();
   }
 
   @Override
   public final int height() {
-    return size;
+    return stage.chipSize();
   }
 
   public final boolean isPlayer() {

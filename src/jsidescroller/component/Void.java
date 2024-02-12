@@ -9,14 +9,14 @@ import jsidescroller.common.StageOffset;
 
 class Void extends Chip {
 
-  public static Void of(Stage stage, int size, Point location) {
-    return new Void(stage, size, location);
+  public static Void of(Stage stage, Point location) {
+    return new Void(stage, location);
   }
 
   private final Point location;
 
-  private Void(Stage stage, int size, Point location) {
-    super(stage, size);
+  private Void(Stage stage, Point location) {
+    super(stage);
     this.location = Objects.requireNonNull(location).getLocation();
   }
 
