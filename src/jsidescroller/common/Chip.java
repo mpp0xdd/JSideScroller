@@ -6,7 +6,6 @@ import jsidescroller.common.interfaces.SideScrollerComponent;
 public abstract class Chip implements SideScrollerComponent {
 
   public enum Type {
-    PLAYER,
     BLOCK,
     ITEM_BLOCK,
     VOID,
@@ -35,10 +34,6 @@ public abstract class Chip implements SideScrollerComponent {
   @Override
   public final int height() {
     return stage.chipSize();
-  }
-
-  public final boolean isPlayer() {
-    return type().equals(Type.PLAYER);
   }
 
   public final boolean isBlock() {

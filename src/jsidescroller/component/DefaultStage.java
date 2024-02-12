@@ -99,6 +99,6 @@ public class DefaultStage extends Stage {
 
   @Override
   protected Player newPlayer() {
-    return DefaultPlayer.of(this);
+    return DefaultPlayer.of(this, chipSize(), chipSize());
   }
 }

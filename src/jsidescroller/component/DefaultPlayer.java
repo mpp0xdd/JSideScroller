@@ -18,8 +18,8 @@ import jsidescroller.common.interfaces.GravitationalField;
 
 class DefaultPlayer extends Player {
 
-  public static DefaultPlayer of(Stage stage) {
-    return new DefaultPlayer(stage);
+  public static DefaultPlayer of(Stage stage, int width, int height) {
+    return new DefaultPlayer(stage, width, height);
   }
 
   private final Point location;
@@ -27,8 +27,8 @@ class DefaultPlayer extends Player {
   private boolean isOnGround;
   private boolean isAlive;
 
-  private DefaultPlayer(Stage stage) {
-    super(stage);
+  private DefaultPlayer(Stage stage, int width, int height) {
+    super(stage, width, height);
     this.location = stage.playerStartingLocation();
     this.velocity = Velocity.ZERO;
     this.isOnGround = false;
