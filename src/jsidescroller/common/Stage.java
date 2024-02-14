@@ -3,6 +3,7 @@ package jsidescroller.common;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -133,6 +134,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
       }
     }
     drawSprites(g);
+  }
+
+  public Rectangle viewport() {
+    throw new RuntimeException("Not yet implemented.");
   }
 
   public Player player() {
