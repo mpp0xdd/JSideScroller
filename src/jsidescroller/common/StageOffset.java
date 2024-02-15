@@ -1,9 +1,11 @@
 package jsidescroller.common;
 
 import java.awt.Point;
+import java.util.Objects;
+import jsidescroller.common.interfaces.Immutable;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
-public final class StageOffset {
+public final class StageOffset implements Immutable {
 
   public static StageOffset of(Stage stage) {
     int offsetWidth = stage.width() / 2 - stage.player().x();
@@ -16,15 +18,13 @@ public final class StageOffset {
     offsetHeight = Math.max(offsetHeight, stage.height() - stage.rows() * stage.chipSize());
     offsetHeight = Math.abs(offsetHeight);
 
-    return new StageOffset(stage, offsetWidth, offsetHeight);
+    return new StageOffset(offsetWidth, offsetHeight);
   }
 
-  private final Stage stage;
   private final int width;
   private final int height;
 
-  private StageOffset(Stage stage, int width, int height) {
-    this.stage = stage;
+  private StageOffset(int width, int height) {
     this.width = width;
     this.height = height;
   }
@@ -38,9 +38,30 @@ public final class StageOffset {
   }
 
   public Point apply(SideScrollerComponent component) {
+    Stage stage = component.getStage();
     Point componentLocation = component.getLocation();
     componentLocation.translate(stage.x(), stage.y());
     componentLocation.translate(-width, -height);
     return componentLocation;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(height, width);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    StageOffset other = (StageOffset) obj;
+    return height == other.height && width == other.width;
   }
 }
