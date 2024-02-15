@@ -130,7 +130,11 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
         stage().get(sp).draw(g);
       }
     }
-    drawSprites(g, viewport);
+
+    drawSprites(g, viewport, coins);
+    drawSprites(g, viewport, items);
+    drawSprites(g, viewport, enemies);
+    drawSprite(g, viewport, player);
   }
 
   public Player player() {
@@ -175,13 +179,6 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return toStagePoint(location).map(stage()::get).filter(this::isBlockadeChip);
   }
 
-  private void drawSprites(Graphics g, Viewport viewport) {
-    drawSprites(g, viewport, coins);
-    drawSprites(g, viewport, items);
-    drawSprites(g, viewport, enemies);
-    drawSprite(g, viewport, player);
-  }
-
   private void drawSprites(Graphics g, Viewport viewport, List<? extends Sprite> sprites) {
     sprites.stream().filter(viewport::intersects).forEach(s -> s.draw(g));
   }
@@ -197,7 +194,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     private final int x;
     private final int y;
 
-    private Viewport(SideScrollerComponent component) {
+    public Viewport(SideScrollerComponent component) {
       StageOffset offset = StageOffset.of(Stage.this, component);
       this.x = offset.width();
       this.y = offset.height();
