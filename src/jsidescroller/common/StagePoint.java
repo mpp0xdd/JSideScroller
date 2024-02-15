@@ -6,14 +6,6 @@ import jsidescroller.common.interfaces.Immutable;
 public final class StagePoint implements Immutable {
 
   public static StagePoint of(Stage stage, int x, int y) {
-    return new StagePoint(stage, x, y);
-  }
-
-  private final Stage stage;
-  private final int x;
-  private final int y;
-
-  private StagePoint(Stage stage, int x, int y) {
     Objects.requireNonNull(stage);
     if (x < 0 || x >= stage.columns()) {
       throw new IllegalArgumentException("x:" + x);
@@ -22,13 +14,15 @@ public final class StagePoint implements Immutable {
       throw new IllegalArgumentException("y:" + y);
     }
 
-    this.stage = stage;
-    this.x = x;
-    this.y = y;
+    return new StagePoint(x, y);
   }
 
-  public Stage getStage() {
-    return stage;
+  private final int x;
+  private final int y;
+
+  private StagePoint(int x, int y) {
+    this.x = x;
+    this.y = y;
   }
 
   public int x() {
@@ -41,7 +35,7 @@ public final class StagePoint implements Immutable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(stage, x, y);
+    return Objects.hash(x, y);
   }
 
   @Override
@@ -56,6 +50,6 @@ public final class StagePoint implements Immutable {
       return false;
     }
     StagePoint other = (StagePoint) obj;
-    return Objects.equals(stage, other.stage) && x == other.x && y == other.y;
+    return x == other.x && y == other.y;
   }
 }
