@@ -132,7 +132,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
         stage().get(sp).draw(g);
       }
     }
-    drawSprites(g);
+    drawSprites(g, viewport);
   }
 
   public Player player() {
@@ -177,11 +177,11 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     return toStagePoint(location).map(stage()::get).filter(this::isBlockadeChip);
   }
 
-  private void drawSprites(Graphics g) {
-    coins.forEach(c -> c.draw(g));
-    items.forEach(i -> i.draw(g));
-    enemies.forEach(e -> e.draw(g));
-    player().draw(g);
+  private void drawSprites(Graphics g, Viewport viewport) {
+    coins.stream().filter(viewport::intersects).forEach(c -> c.draw(g));
+    items.stream().filter(viewport::intersects).forEach(i -> i.draw(g));
+    enemies.stream().filter(viewport::intersects).forEach(e -> e.draw(g));
+    if (viewport.intersects(player())) player().draw(g);
   }
 
   private final class Viewport implements Rectangular, Locatable {
