@@ -123,12 +123,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   public void draw(Graphics g) {
     Viewport viewport = new Viewport(player());
 
-    viewport
-        .stagePointStream()
-        .forEach(
-            stagePoint -> {
-              stage().get(stagePoint).draw(g);
-            });
+    drawStage(g, viewport);
 
     drawSprites(g, viewport, coins);
     drawSprites(g, viewport, items);
@@ -176,6 +171,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   private Optional<Chip> existsBlockadeChip(Point location) {
     return toStagePoint(location).map(stage()::get).filter(this::isBlockadeChip);
+  }
+
+  private void drawStage(Graphics g, Viewport viewport) {
+    viewport.stagePointStream().map(stage()::get).forEach(chip -> chip.draw(g));
   }
 
   private void drawSprites(Graphics g, Viewport viewport, List<? extends Sprite> sprites) {
