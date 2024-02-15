@@ -16,40 +16,6 @@ import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
-  public final class Viewport implements Rectangular, Locatable {
-
-    private final StageOffset offset;
-
-    private Viewport(SideScrollerComponent component) {
-      this.offset = StageOffset.of(Stage.this, component);
-    }
-
-    @Override
-    public int x() {
-      return offset.width();
-    }
-
-    @Override
-    public int y() {
-      return offset.height();
-    }
-
-    @Override
-    public Point getLocation() {
-      return new Point(x(), y());
-    }
-
-    @Override
-    public int width() {
-      return Stage.this.width();
-    }
-
-    @Override
-    public int height() {
-      return Stage.this.height();
-    }
-  }
-
   private final Map<StagePoint, Chip> stage;
   private final List<Coin> coins;
   private final List<Item> items;
@@ -216,5 +182,39 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     items.forEach(i -> i.draw(g));
     enemies.forEach(e -> e.draw(g));
     player().draw(g);
+  }
+
+  private final class Viewport implements Rectangular, Locatable {
+  
+    private final StageOffset offset;
+  
+    private Viewport(SideScrollerComponent component) {
+      this.offset = StageOffset.of(Stage.this, component);
+    }
+  
+    @Override
+    public int x() {
+      return offset.width();
+    }
+  
+    @Override
+    public int y() {
+      return offset.height();
+    }
+  
+    @Override
+    public Point getLocation() {
+      return new Point(x(), y());
+    }
+  
+    @Override
+    public int width() {
+      return Stage.this.width();
+    }
+  
+    @Override
+    public int height() {
+      return Stage.this.height();
+    }
   }
 }
