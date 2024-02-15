@@ -185,33 +185,36 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   }
 
   private final class Viewport implements Rectangular, Locatable {
-  
-    private final StageOffset offset;
-  
+
+    private final int x;
+    private final int y;
+
     private Viewport(SideScrollerComponent component) {
-      this.offset = StageOffset.of(Stage.this, component);
+      StageOffset offset = StageOffset.of(Stage.this, component);
+      this.x = offset.width();
+      this.y = offset.height();
     }
-  
+
     @Override
     public int x() {
-      return offset.width();
+      return x;
     }
-  
+
     @Override
     public int y() {
-      return offset.height();
+      return y;
     }
-  
+
     @Override
     public Point getLocation() {
       return new Point(x(), y());
     }
-  
+
     @Override
     public int width() {
       return Stage.this.width();
     }
-  
+
     @Override
     public int height() {
       return Stage.this.height();
