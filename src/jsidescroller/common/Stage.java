@@ -157,7 +157,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     Viewport viewport = new Viewport(player());
     Point cursor = viewport.getLocation();
     StagePoint first = toStagePoint(cursor).orElseThrow();
-    cursor.translate(width() - 1, height() - 1);
+    cursor.translate(viewport.width() - 1, viewport.height() - 1);
     StagePoint last = toStagePoint(cursor).orElseThrow();
 
     for (int y = first.y(); y <= last.y(); y++) {
