@@ -25,7 +25,7 @@ class DefaultCoin extends Coin {
   public void draw(Graphics g) {
     if (isTaken()) return;
 
-    StageOffset offset = StageOffset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage());
     Point point = offset.apply(this);
 
     g.setColor(Color.YELLOW);

@@ -114,7 +114,7 @@ class DefaultPlayer extends Player {
   public void draw(Graphics g) {
     if (isDead()) return;
 
-    StageOffset offset = StageOffset.of(getStage(), this);
+    StageOffset offset = StageOffset.of(getStage());
     Point point = offset.apply(this);
 
     g.setColor(Color.RED);

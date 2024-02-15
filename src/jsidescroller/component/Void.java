@@ -22,7 +22,7 @@ class Void extends Chip {
 
   @Override
   public void draw(Graphics g) {
-    StageOffset offset = StageOffset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage());
     Point point = offset.apply(this);
 
     g.setColor(getStage().backgroundColor());

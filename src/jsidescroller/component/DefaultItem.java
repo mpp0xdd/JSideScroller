@@ -25,7 +25,7 @@ class DefaultItem extends Item {
   public void draw(Graphics g) {
     if (isTaken()) return;
 
-    StageOffset offset = StageOffset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage());
     Point point = offset.apply(this);
 
     g.setColor(Color.GREEN);

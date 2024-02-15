@@ -36,7 +36,7 @@ class DefaultItemBlock extends ItemBlock {
 
   @Override
   public void draw(Graphics g) {
-    StageOffset offset = StageOffset.of(getStage(), getStage().player());
+    StageOffset offset = StageOffset.of(getStage());
     Point point = offset.apply(this);
 
     g.setColor(isHit ? QUESTION_COLOR : BLOCK_COLOR);

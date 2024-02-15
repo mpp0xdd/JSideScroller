@@ -121,7 +121,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   @Override
   public void draw(Graphics g) {
-    Viewport viewport = new Viewport(player());
+    Viewport viewport = new Viewport();
 
     drawStage(g, viewport);
 
@@ -192,8 +192,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     private final int x;
     private final int y;
 
-    public Viewport(SideScrollerComponent component) {
-      StageOffset offset = StageOffset.of(Stage.this, component);
+    public Viewport() {
+      StageOffset offset = StageOffset.of(Stage.this);
       this.x = offset.width();
       this.y = offset.height();
     }

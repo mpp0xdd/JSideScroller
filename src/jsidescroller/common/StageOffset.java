@@ -5,13 +5,13 @@ import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public final class StageOffset {
 
-  public static StageOffset of(Stage stage, SideScrollerComponent component) {
-    int offsetWidth = stage.width() / 2 - component.x();
+  public static StageOffset of(Stage stage) {
+    int offsetWidth = stage.width() / 2 - stage.player().x();
     offsetWidth = Math.min(offsetWidth, 0);
     offsetWidth = Math.max(offsetWidth, stage.width() - stage.columns() * stage.chipSize());
     offsetWidth = Math.abs(offsetWidth);
 
-    int offsetHeight = stage.height() / 2 - component.y();
+    int offsetHeight = stage.height() / 2 - stage.player().y();
     offsetHeight = Math.min(offsetHeight, 0);
     offsetHeight = Math.max(offsetHeight, stage.height() - stage.rows() * stage.chipSize());
     offsetHeight = Math.abs(offsetHeight);
