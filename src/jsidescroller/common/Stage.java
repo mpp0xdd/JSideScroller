@@ -3,7 +3,6 @@ package jsidescroller.common;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +15,40 @@ import jsidescroller.common.interfaces.Rectangular;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
+
+  public final class Viewport implements Rectangular, Locatable {
+
+    private final StageOffset offset;
+
+    private Viewport(SideScrollerComponent component) {
+      this.offset = StageOffset.of(Stage.this, component);
+    }
+
+    @Override
+    public int x() {
+      return offset.width();
+    }
+
+    @Override
+    public int y() {
+      return offset.height();
+    }
+
+    @Override
+    public Point getLocation() {
+      return new Point(x(), y());
+    }
+
+    @Override
+    public int width() {
+      return Stage.this.width();
+    }
+
+    @Override
+    public int height() {
+      return Stage.this.height();
+    }
+  }
 
   private final Map<StagePoint, Chip> stage;
   private final List<Coin> coins;
@@ -121,8 +154,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   @Override
   public void draw(Graphics g) {
-    StageOffset offset = StageOffset.of(this, player());
-    Point cursor = new Point(offset.width(), offset.height());
+    Viewport viewport = new Viewport(player());
+    Point cursor = viewport.getLocation();
     StagePoint first = toStagePoint(cursor).orElseThrow();
     cursor.translate(width() - 1, height() - 1);
     StagePoint last = toStagePoint(cursor).orElseThrow();
@@ -134,10 +167,6 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
       }
     }
     drawSprites(g);
-  }
-
-  public Rectangle viewport() {
-    throw new RuntimeException("Not yet implemented.");
   }
 
   public Player player() {
