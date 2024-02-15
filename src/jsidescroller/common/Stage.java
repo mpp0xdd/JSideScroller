@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
 import jsidescroller.common.interfaces.Locatable;
@@ -121,15 +122,13 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   @Override
   public void draw(Graphics g) {
     Viewport viewport = new Viewport(player());
-    StagePoint first = viewport.first();
-    StagePoint last = viewport.last();
 
-    for (int y = first.y(); y <= last.y(); y++) {
-      for (int x = first.x(); x <= last.x(); x++) {
-        StagePoint sp = StagePoint.of(this, x, y);
-        stage().get(sp).draw(g);
-      }
-    }
+    viewport
+        .stagePointStream()
+        .forEach(
+            stagePoint -> {
+              stage().get(stagePoint).draw(g);
+            });
 
     drawSprites(g, viewport, coins);
     drawSprites(g, viewport, items);
@@ -208,6 +207,20 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     public StagePoint last() {
       Point location = new Point(x() + width() - 1, y() + height() - 1);
       return toStagePoint(location).orElseThrow();
+    }
+
+    public Stream<StagePoint> stagePointStream() {
+      Stream.Builder<StagePoint> builder = Stream.builder();
+
+      StagePoint first = first();
+      StagePoint last = last();
+      for (int y = first.y(); y <= last.y(); y++) {
+        for (int x = first.x(); x <= last.x(); x++) {
+          builder.add(StagePoint.of(Stage.this, x, y));
+        }
+      }
+
+      return builder.build();
     }
 
     @Override
