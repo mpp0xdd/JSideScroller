@@ -121,10 +121,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   @Override
   public void draw(Graphics g) {
     Viewport viewport = new Viewport(player());
-    Point cursor = viewport.getLocation();
-    StagePoint first = toStagePoint(cursor).orElseThrow();
-    cursor.translate(viewport.width() - 1, viewport.height() - 1);
-    StagePoint last = toStagePoint(cursor).orElseThrow();
+    StagePoint first = viewport.first();
+    StagePoint last = viewport.last();
 
     for (int y = first.y(); y <= last.y(); y++) {
       for (int x = first.x(); x <= last.x(); x++) {
@@ -178,10 +176,20 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   }
 
   private void drawSprites(Graphics g, Viewport viewport) {
-    coins.stream().filter(viewport::intersects).forEach(c -> c.draw(g));
-    items.stream().filter(viewport::intersects).forEach(i -> i.draw(g));
-    enemies.stream().filter(viewport::intersects).forEach(e -> e.draw(g));
-    if (viewport.intersects(player())) player().draw(g);
+    drawSprites(g, viewport, coins);
+    drawSprites(g, viewport, items);
+    drawSprites(g, viewport, enemies);
+    drawSprite(g, viewport, player);
+  }
+
+  private void drawSprites(Graphics g, Viewport viewport, List<? extends Sprite> sprites) {
+    sprites.stream().filter(viewport::intersects).forEach(s -> s.draw(g));
+  }
+
+  private void drawSprite(Graphics g, Viewport viewport, Sprite sprite) {
+    if (sprite.intersects(viewport)) {
+      sprite.draw(g);
+    }
   }
 
   private final class Viewport implements Rectangular, Locatable {
@@ -193,6 +201,16 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
       StageOffset offset = StageOffset.of(Stage.this, component);
       this.x = offset.width();
       this.y = offset.height();
+    }
+
+    public StagePoint first() {
+      Point location = getLocation();
+      return toStagePoint(location).orElseThrow();
+    }
+
+    public StagePoint last() {
+      Point location = new Point(x() + width() - 1, y() + height() - 1);
+      return toStagePoint(location).orElseThrow();
     }
 
     @Override
