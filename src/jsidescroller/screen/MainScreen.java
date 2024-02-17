@@ -28,6 +28,7 @@ public class MainScreen extends GameScreen implements KeyListener {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
 
+    // Draw the stage.
     Image stageImage = createImage(stage.width(), stage.height());
     stage.draw(stageImage.getGraphics());
     g.drawImage(stageImage, stage.x(), stage.y(), this);
