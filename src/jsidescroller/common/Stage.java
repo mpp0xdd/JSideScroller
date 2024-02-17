@@ -17,6 +17,67 @@ import jsidescroller.common.interfaces.SideScrollerComponent;
 
 public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
 
+  public final class Viewport implements Rectangular, Locatable {
+
+    private final int x;
+    private final int y;
+
+    private Viewport() {
+      StageOffset offset = StageOffset.of(Stage.this);
+      this.x = offset.width();
+      this.y = offset.height();
+    }
+
+    public StagePoint first() {
+      Point location = getLocation();
+      return toStagePoint(location).orElseThrow();
+    }
+
+    public StagePoint last() {
+      Point location = new Point(x() + width() - 1, y() + height() - 1);
+      return toStagePoint(location).orElseThrow();
+    }
+
+    public Stream<StagePoint> stagePointStream() {
+      Stream.Builder<StagePoint> builder = Stream.builder();
+
+      StagePoint first = first();
+      StagePoint last = last();
+      for (int y = first.y(); y <= last.y(); y++) {
+        for (int x = first.x(); x <= last.x(); x++) {
+          builder.add(StagePoint.of(Stage.this, x, y));
+        }
+      }
+
+      return builder.build();
+    }
+
+    @Override
+    public int x() {
+      return x;
+    }
+
+    @Override
+    public int y() {
+      return y;
+    }
+
+    @Override
+    public Point getLocation() {
+      return new Point(x(), y());
+    }
+
+    @Override
+    public int width() {
+      return Stage.this.width();
+    }
+
+    @Override
+    public int height() {
+      return Stage.this.height();
+    }
+  }
+
   private final Map<StagePoint, Chip> stage;
   private final List<Coin> coins;
   private final List<Item> items;
@@ -121,7 +182,7 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   @Override
   public void draw(Graphics g) {
-    Viewport viewport = new Viewport();
+    Viewport viewport = currentViewport();
 
     drawStage(g, viewport);
 
@@ -129,6 +190,10 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     drawSprites(g, viewport, items);
     drawSprites(g, viewport, enemies);
     drawSprite(g, viewport, player);
+  }
+
+  public Viewport currentViewport() {
+    return new Viewport();
   }
 
   public Player player() {
@@ -191,67 +256,6 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   private void drawSprite(Graphics g, Viewport viewport, Sprite sprite) {
     if (sprite.intersects(viewport)) {
       sprite.draw(g);
-    }
-  }
-
-  private final class Viewport implements Rectangular, Locatable {
-
-    private final int x;
-    private final int y;
-
-    public Viewport() {
-      StageOffset offset = StageOffset.of(Stage.this);
-      this.x = offset.width();
-      this.y = offset.height();
-    }
-
-    public StagePoint first() {
-      Point location = getLocation();
-      return toStagePoint(location).orElseThrow();
-    }
-
-    public StagePoint last() {
-      Point location = new Point(x() + width() - 1, y() + height() - 1);
-      return toStagePoint(location).orElseThrow();
-    }
-
-    public Stream<StagePoint> stagePointStream() {
-      Stream.Builder<StagePoint> builder = Stream.builder();
-
-      StagePoint first = first();
-      StagePoint last = last();
-      for (int y = first.y(); y <= last.y(); y++) {
-        for (int x = first.x(); x <= last.x(); x++) {
-          builder.add(StagePoint.of(Stage.this, x, y));
-        }
-      }
-
-      return builder.build();
-    }
-
-    @Override
-    public int x() {
-      return x;
-    }
-
-    @Override
-    public int y() {
-      return y;
-    }
-
-    @Override
-    public Point getLocation() {
-      return new Point(x(), y());
-    }
-
-    @Override
-    public int width() {
-      return Stage.this.width();
-    }
-
-    @Override
-    public int height() {
-      return Stage.this.height();
     }
   }
 }
