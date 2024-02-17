@@ -13,8 +13,9 @@ import jsidescroller.common.StatusBar;
 
 public class MainScreen extends GameScreen implements KeyListener {
 
-  private final Stage stage;
   private final StatusBar statusBar;
+  private final Stage stage;
+
   private Keystroke aKey = Keystroke.NOT_PRESSED;
   private Keystroke dKey = Keystroke.NOT_PRESSED;
   private Keystroke spaceKey = Keystroke.NOT_PRESSED;
