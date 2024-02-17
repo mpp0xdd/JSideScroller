@@ -3,6 +3,7 @@ package jsidescroller.component;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import jglib.util.GameUtilities;
@@ -37,6 +38,8 @@ public class DefaultStatusBar extends StatusBar {
 
   @Override
   public void draw(Graphics g) {
+    Objects.requireNonNull(getStage(), "Stage is not set.");
+
     g.setColor(backgroundColor);
     g.fill3DRect(x(), y(), width(), height(), false);
     g.setColor(foregroundColor);
