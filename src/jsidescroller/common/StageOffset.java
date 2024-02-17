@@ -38,9 +38,7 @@ public final class StageOffset implements Immutable {
   }
 
   public Point apply(SideScrollerComponent component) {
-    Stage stage = component.getStage();
     Point componentLocation = component.getLocation();
-    componentLocation.translate(stage.x(), stage.y());
     componentLocation.translate(-width, -height);
     return componentLocation;
   }

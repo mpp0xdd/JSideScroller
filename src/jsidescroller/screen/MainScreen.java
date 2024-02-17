@@ -1,6 +1,7 @@
 package jsidescroller.screen;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Objects;
@@ -26,7 +27,10 @@ public class MainScreen extends GameScreen implements KeyListener {
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    stage.draw(g);
+
+    Image stageImage = createImage(stage.width(), stage.height());
+    stage.draw(stageImage.getGraphics());
+    g.drawImage(stageImage, stage.x(), stage.y(), this);
   }
 
   @Override
