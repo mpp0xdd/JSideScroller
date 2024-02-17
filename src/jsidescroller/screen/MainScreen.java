@@ -9,17 +9,24 @@ import jglib.component.GameScreen;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Keystroke;
 import jsidescroller.common.Stage;
+import jsidescroller.common.StatusBar;
 
 public class MainScreen extends GameScreen implements KeyListener {
 
   private final Stage stage;
+  private final StatusBar statusBar;
   private Keystroke aKey = Keystroke.NOT_PRESSED;
   private Keystroke dKey = Keystroke.NOT_PRESSED;
   private Keystroke spaceKey = Keystroke.NOT_PRESSED;
 
-  public MainScreen(Stage stage) {
+  public MainScreen(StatusBar statusBar, Stage stage) {
+    this.statusBar = Objects.requireNonNull(statusBar);
     this.stage = Objects.requireNonNull(stage);
-    setScreenSize(stage.width(), stage.height());
+
+    this.statusBar.setStage(this.stage);
+    this.stage.setLocation(0, this.statusBar.height());
+
+    setScreenSize(stage.width(), statusBar.height() + stage.height());
     setFocusable(true);
     addKeyListener(this);
   }
@@ -27,6 +34,9 @@ public class MainScreen extends GameScreen implements KeyListener {
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
+
+    // Draw the status bar.
+    statusBar.draw(g);
 
     // Draw the stage.
     Image stageImage = createImage(stage.width(), stage.height());
