@@ -104,9 +104,16 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   public abstract Point playerStartingLocation();
 
-  // TODO: When component.width() and this.chipSize() are not equal
-  //        (component.height() and this.chipSize() are not equal).
   public Optional<Chip> blockadeChip(SideScrollerComponent component) {
+    if (component.width() > chipSize()) {
+      throw new IllegalArgumentException(
+          "component.width() is greater than this.chipSize()."); // TODO
+    }
+    if (component.height() > chipSize()) {
+      throw new IllegalArgumentException(
+          "component.height() is greater than this.chipSize()."); // TODO
+    }
+
     Point componentLocation = component.getLocation();
 
     // upper left corner
