@@ -13,9 +13,10 @@ import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
 import jsidescroller.common.interfaces.Locatable;
 import jsidescroller.common.interfaces.Rectangular;
+import jsidescroller.common.interfaces.Relocatable;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
-public abstract class Stage implements Drawable, Rectangular, Locatable, GravitationalField {
+public abstract class Stage implements Drawable, Rectangular, Relocatable, GravitationalField {
 
   public final class Viewport implements Rectangular, Locatable {
 
@@ -78,6 +79,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
     }
   }
 
+  private final Point location;
+
   private final Map<StagePoint, Chip> stage;
   private final List<Coin> coins;
   private final List<Item> items;
@@ -86,6 +89,8 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
   private final Player player;
 
   public Stage() {
+    this.location = new Point();
+
     this.coins = new ArrayList<>();
     this.items = new ArrayList<>();
     this.enemies = new ArrayList<>();
@@ -168,17 +173,27 @@ public abstract class Stage implements Drawable, Rectangular, Locatable, Gravita
 
   @Override
   public final int x() {
-    return 0;
+    return location.x;
   }
 
   @Override
   public final int y() {
-    return 0;
+    return location.y;
   }
 
   @Override
   public final Point getLocation() {
-    return new Point(x(), y());
+    return location.getLocation();
+  }
+
+  @Override
+  public void setLocation(Point location) {
+    this.location.setLocation(location);
+  }
+
+  @Override
+  public void setLocation(int x, int y) {
+    this.location.setLocation(x, y);
   }
 
   @Override
