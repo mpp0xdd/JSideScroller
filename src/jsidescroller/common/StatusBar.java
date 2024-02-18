@@ -17,6 +17,9 @@ public abstract class StatusBar implements Drawable, Rectangular, Locatable {
   }
 
   public final void setStage(Stage stage) {
+    if (Objects.nonNull(getStage())) {
+      throw new IllegalStateException("Stage is already set.");
+    }
     this.stage = Objects.requireNonNull(stage);
   }
 
