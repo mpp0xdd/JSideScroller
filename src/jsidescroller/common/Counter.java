@@ -29,7 +29,9 @@ abstract class Counter<T extends Number> {
     postDecrement();
   }
 
-  public abstract void add(T value);
+  public final void add(T value) {
+    getAndAdd(value);
+  }
 
   public abstract T preIncrement();
 
@@ -38,6 +40,10 @@ abstract class Counter<T extends Number> {
   public abstract T preDecrement();
 
   public abstract T postDecrement();
+
+  public abstract T addAndGet(T value);
+
+  public abstract T getAndAdd(T value);
 
   protected abstract T defaultValue();
 
