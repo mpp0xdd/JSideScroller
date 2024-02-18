@@ -42,16 +42,6 @@ abstract class IntCounter extends Counter<Integer> {
     return minimumValue();
   }
 
-  @Override
-  protected Integer minimumValue() {
-    return 0;
-  }
-
-  @Override
-  protected Integer maximumValue() {
-    return Integer.MAX_VALUE;
-  }
-
   private boolean canIncrement() {
     return count + 1 <= maximumValue();
   }
