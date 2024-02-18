@@ -16,14 +16,14 @@ public class DefaultStatusBar extends StatusBar {
   private final Color foregroundColor;
   private final Font font;
 
-  private volatile ElapseTimeCounter elapseTimeCounter;
+  private final ElapseTimeCounter elapseTimeCounter;
 
   public DefaultStatusBar() {
     this.backgroundColor = Color.CYAN;
     this.foregroundColor = Color.BLACK;
     this.font = new Font(Font.SANS_SERIF, Font.BOLD, height() - 10);
 
-    this.elapseTimeCounter = new ElapseTimeCounter();
+    this.elapseTimeCounter = new DefaultElapseTimeCounter();
 
     Timer timer = new Timer();
     timer.schedule(
