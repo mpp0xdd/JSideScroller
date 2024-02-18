@@ -37,13 +37,13 @@ abstract class Counter<T extends Number> {
 
   public abstract T postDecrement();
 
+  public abstract boolean canIncrement();
+
+  public abstract boolean canDecrement();
+
   protected abstract T defaultValue();
 
   protected abstract T minimumValue();
 
   protected abstract T maximumValue();
-
-  protected abstract boolean canIncrement();
-
-  protected abstract boolean canDecrement();
 }
