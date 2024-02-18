@@ -25,13 +25,13 @@ abstract class Counter<T extends Number> {
     postIncrement();
   }
 
-  public abstract T preIncrement();
-
-  public abstract T postIncrement();
-
   public final void decrement() {
     postDecrement();
   }
+
+  public abstract T preIncrement();
+
+  public abstract T postIncrement();
 
   public abstract T preDecrement();
 
