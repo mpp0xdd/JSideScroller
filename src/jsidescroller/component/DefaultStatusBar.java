@@ -23,7 +23,7 @@ public class DefaultStatusBar extends StatusBar {
     this.foregroundColor = Color.BLACK;
     this.font = new Font(Font.SANS_SERIF, Font.BOLD, height() - 10);
 
-    this.elapseTimeCounter = new DefaultElapseTimeCounter();
+    this.elapseTimeCounter = DefaultElapseTimeCounter.createDefaultElapseTimeCounter();
 
     Timer timer = new Timer();
     timer.schedule(
