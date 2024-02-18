@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import jglib.util.GameUtilities;
-import jsidescroller.common.IntCounter;
+import jsidescroller.common.ElapseTimeCounter;
 import jsidescroller.common.StatusBar;
 
 public class DefaultStatusBar extends StatusBar {
@@ -16,14 +16,14 @@ public class DefaultStatusBar extends StatusBar {
   private final Color foregroundColor;
   private final Font font;
 
-  private volatile IntCounter elapseTimeCounter;
+  private volatile ElapseTimeCounter elapseTimeCounter;
 
   public DefaultStatusBar() {
     this.backgroundColor = Color.CYAN;
     this.foregroundColor = Color.BLACK;
     this.font = new Font(Font.SANS_SERIF, Font.BOLD, height() - 10);
 
-    this.elapseTimeCounter = new IntCounter();
+    this.elapseTimeCounter = new ElapseTimeCounter();
 
     Timer timer = new Timer();
     timer.schedule(
