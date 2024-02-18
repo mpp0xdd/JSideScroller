@@ -3,6 +3,17 @@ package jsidescroller.common;
 class IntCounter extends Counter<Integer> {
 
   @Override
+  public void add(Integer value) {
+    Integer newCount = count + value;
+    if (newCount < minimumValue()) {
+      newCount = minimumValue();
+    } else if (newCount > maximumValue()) {
+      newCount = maximumValue();
+    }
+    count = newCount;
+  }
+
+  @Override
   public Integer preIncrement() {
     return canIncrement() ? ++count : count;
   }
