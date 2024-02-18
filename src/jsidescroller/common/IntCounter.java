@@ -23,16 +23,6 @@ class IntCounter extends Counter<Integer> {
   }
 
   @Override
-  public boolean canIncrement() {
-    return count + 1 <= maximumValue();
-  }
-
-  @Override
-  public boolean canDecrement() {
-    return count - 1 >= minimumValue();
-  }
-
-  @Override
   protected Integer defaultValue() {
     return minimumValue();
   }
@@ -45,5 +35,13 @@ class IntCounter extends Counter<Integer> {
   @Override
   protected Integer maximumValue() {
     return Integer.MAX_VALUE;
+  }
+
+  private boolean canIncrement() {
+    return count + 1 <= maximumValue();
+  }
+
+  private boolean canDecrement() {
+    return count - 1 >= minimumValue();
   }
 }
