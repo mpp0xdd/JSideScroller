@@ -4,7 +4,7 @@ import jsidescroller.common.ElapseTimeCounter;
 
 class DefaultElapseTimeCounter extends ElapseTimeCounter {
 
-  public static DefaultElapseTimeCounter createDefaultElapseTimeCounter() {
+  public static DefaultElapseTimeCounter create() {
     return new DefaultElapseTimeCounter();
   }
 

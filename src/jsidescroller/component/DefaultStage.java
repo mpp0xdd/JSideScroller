@@ -105,6 +105,6 @@ public class DefaultStage extends Stage {
 
   @Override
   protected ElapseTimeCounter newElapseTimeCounter() {
-    return DefaultElapseTimeCounter.createDefaultElapseTimeCounter();
+    return DefaultElapseTimeCounter.create();
   }
 }
