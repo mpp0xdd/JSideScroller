@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jsidescroller.common.Chip;
+import jsidescroller.common.ElapseTimeCounter;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.common.StagePoint;
@@ -100,5 +101,10 @@ public class DefaultStage extends Stage {
   @Override
   protected Player newPlayer() {
     return DefaultPlayer.of(this, chipSize(), chipSize());
+  }
+
+  @Override
+  protected ElapseTimeCounter newElapseTimeCounter() {
+    return DefaultElapseTimeCounter.createDefaultElapseTimeCounter();
   }
 }

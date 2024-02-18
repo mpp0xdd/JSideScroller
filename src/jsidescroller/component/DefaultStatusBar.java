@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import jglib.util.GameUtilities;
-import jsidescroller.common.ElapseTimeCounter;
 import jsidescroller.common.StatusBar;
 
 public class DefaultStatusBar extends StatusBar {
@@ -16,21 +15,17 @@ public class DefaultStatusBar extends StatusBar {
   private final Color foregroundColor;
   private final Font font;
 
-  private final ElapseTimeCounter elapseTimeCounter;
-
   public DefaultStatusBar() {
     this.backgroundColor = Color.CYAN;
     this.foregroundColor = Color.BLACK;
     this.font = new Font(Font.SANS_SERIF, Font.BOLD, height() - 10);
-
-    this.elapseTimeCounter = DefaultElapseTimeCounter.createDefaultElapseTimeCounter();
 
     Timer timer = new Timer();
     timer.schedule(
         new TimerTask() {
           @Override
           public void run() {
-            elapseTimeCounter.increment();
+            getStage().elapseTimeCounter().increment();
           }
         },
         1000L,
@@ -47,7 +42,7 @@ public class DefaultStatusBar extends StatusBar {
     g.draw3DRect(x(), y(), width() - 1, height() - 1, false);
 
     g.setFont(font);
-    GameUtilities.drawString(g, x() + 10, y(), String.valueOf(elapseTimeCounter));
+    GameUtilities.drawString(g, x() + 10, y(), String.valueOf(getStage().elapseTimeCounter()));
   }
 
   @Override

@@ -88,6 +88,8 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
 
   private final Player player;
 
+  private final ElapseTimeCounter elapseTimeCounter;
+
   public Stage() {
     this.location = new Point();
 
@@ -97,6 +99,8 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
 
     this.stage = newStage();
     this.player = newPlayer();
+
+    this.elapseTimeCounter = newElapseTimeCounter();
   }
 
   public abstract int rows();
@@ -222,6 +226,10 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
     return player;
   }
 
+  public ElapseTimeCounter elapseTimeCounter() {
+    return elapseTimeCounter;
+  }
+
   protected Map<StagePoint, Chip> stage() {
     return stage;
   }
@@ -245,6 +253,8 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
   protected abstract Map<StagePoint, Chip> newStage();
 
   protected abstract Player newPlayer();
+
+  protected abstract ElapseTimeCounter newElapseTimeCounter();
 
   private Optional<StagePoint> toStagePoint(Point location) {
     try {
