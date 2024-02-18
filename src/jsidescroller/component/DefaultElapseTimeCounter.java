@@ -1,6 +1,6 @@
 package jsidescroller.component;
 
-import jsidescroller.common.ElapseTimeCounter;
+import jsidescroller.common.counters.ElapseTimeCounter;
 
 class DefaultElapseTimeCounter extends ElapseTimeCounter {
 

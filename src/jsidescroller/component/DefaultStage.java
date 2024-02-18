@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jsidescroller.common.Chip;
-import jsidescroller.common.ElapseTimeCounter;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.common.StagePoint;
+import jsidescroller.common.counters.ElapseTimeCounter;
 
 public class DefaultStage extends Stage {
 

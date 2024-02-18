@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+import jsidescroller.common.counters.ElapseTimeCounter;
 import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
 import jsidescroller.common.interfaces.Locatable;

@@ -1,4 +1,4 @@
-package jsidescroller.common;
+package jsidescroller.common.counters;
 
 abstract class Counter<T extends Number> {
 
