@@ -1,6 +1,6 @@
 package jsidescroller.common;
 
-public class IntCounter extends Counter<Integer> {
+class IntCounter extends Counter<Integer> {
 
   @Override
   public Integer preIncrement() {
