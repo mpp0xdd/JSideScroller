@@ -9,6 +9,7 @@ import jsidescroller.common.Chip;
 import jsidescroller.common.Player;
 import jsidescroller.common.Stage;
 import jsidescroller.common.StagePoint;
+import jsidescroller.common.counters.CoinCounter;
 import jsidescroller.common.counters.ElapseTimeCounter;
 
 public class DefaultStage extends Stage {
@@ -106,5 +107,10 @@ public class DefaultStage extends Stage {
   @Override
   protected ElapseTimeCounter newElapseTimeCounter() {
     return DefaultElapseTimeCounter.create();
+  }
+
+  @Override
+  protected CoinCounter newCoinCounter() {
+    return DefaultCoinCounter.create();
   }
 }

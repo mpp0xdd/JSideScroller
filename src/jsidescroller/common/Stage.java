@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+import jsidescroller.common.counters.CoinCounter;
 import jsidescroller.common.counters.ElapseTimeCounter;
 import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
@@ -90,6 +91,7 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
   private final Player player;
 
   private final ElapseTimeCounter elapseTimeCounter;
+  private final CoinCounter coinCounter;
 
   public Stage() {
     this.location = new Point();
@@ -102,6 +104,7 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
     this.player = newPlayer();
 
     this.elapseTimeCounter = newElapseTimeCounter();
+    this.coinCounter = newCoinCounter();
   }
 
   public abstract int rows();
@@ -231,6 +234,10 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
     return elapseTimeCounter;
   }
 
+  public CoinCounter coinCounter() {
+    return coinCounter;
+  }
+
   protected Map<StagePoint, Chip> stage() {
     return stage;
   }
@@ -256,6 +263,8 @@ public abstract class Stage implements Drawable, Rectangular, Relocatable, Gravi
   protected abstract Player newPlayer();
 
   protected abstract ElapseTimeCounter newElapseTimeCounter();
+
+  protected abstract CoinCounter newCoinCounter();
 
   private Optional<StagePoint> toStagePoint(Point location) {
     try {

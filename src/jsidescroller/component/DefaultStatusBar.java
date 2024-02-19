@@ -43,6 +43,7 @@ public class DefaultStatusBar extends StatusBar {
 
     g.setFont(font);
     GameUtilities.drawString(g, x() + 10, y(), String.valueOf(getStage().elapseTimeCounter()));
+    GameUtilities.drawString(g, x() + width() / 2, y(), String.valueOf(getStage().coinCounter()));
   }
 
   @Override

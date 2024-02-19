@@ -68,6 +68,8 @@ class DefaultPlayer extends Player {
           coin.take();
           getStage().remove(coin);
         });
+
+    getStage().coinCounter().add(coins.size());
   }
 
   @Override
