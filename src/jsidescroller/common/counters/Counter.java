@@ -22,24 +22,24 @@ abstract class Counter<T extends Number> {
   }
 
   public final void increment() {
-    postIncrement();
+    getAndIncrement();
   }
 
   public final void decrement() {
-    postDecrement();
+    getAndDecrement();
   }
 
   public final void add(T value) {
     getAndAdd(value);
   }
 
-  public abstract T preIncrement();
+  public abstract T incrementAndGet();
 
-  public abstract T postIncrement();
+  public abstract T getAndIncrement();
 
-  public abstract T preDecrement();
+  public abstract T decrementAndGet();
 
-  public abstract T postDecrement();
+  public abstract T getAndDecrement();
 
   public abstract T addAndGet(T value);
 

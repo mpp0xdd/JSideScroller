@@ -3,22 +3,22 @@ package jsidescroller.common.counters;
 abstract class IntCounter extends Counter<Integer> {
 
   @Override
-  public Integer preIncrement() {
+  public Integer incrementAndGet() {
     return canIncrement() ? ++count : count;
   }
 
   @Override
-  public Integer postIncrement() {
+  public Integer getAndIncrement() {
     return canIncrement() ? count++ : count;
   }
 
   @Override
-  public Integer preDecrement() {
+  public Integer decrementAndGet() {
     return canDecrement() ? --count : count;
   }
 
   @Override
-  public Integer postDecrement() {
+  public Integer getAndDecrement() {
     return canDecrement() ? count-- : count;
   }
 
