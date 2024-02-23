@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+import jglib.component.SubGameScreen;
 import jsidescroller.common.counters.CoinCounter;
 import jsidescroller.common.counters.ElapseTimeCounter;
 import jsidescroller.common.interfaces.Drawable;
@@ -18,7 +19,8 @@ import jsidescroller.common.interfaces.Rectangular;
 import jsidescroller.common.interfaces.Relocatable;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
-public abstract class Stage implements Drawable, Rectangular, Relocatable, GravitationalField {
+public abstract class Stage
+    implements SubGameScreen, Drawable, Rectangular, Relocatable, GravitationalField {
 
   public final class Viewport implements Rectangular, Locatable {
 
