@@ -1,6 +1,6 @@
 package jsidescroller.common.counters;
 
-abstract class Counter<T extends Number> {
+abstract class Counter<T extends Number, U extends Number> {
 
   protected T count;
 
@@ -29,21 +29,21 @@ abstract class Counter<T extends Number> {
     getAndDecrement();
   }
 
-  public void add(T value) {
+  public void add(U value) {
     getAndAdd(value);
   }
 
-  public abstract T incrementAndGet();
+  public abstract U incrementAndGet();
 
-  public abstract T getAndIncrement();
+  public abstract U getAndIncrement();
 
-  public abstract T decrementAndGet();
+  public abstract U decrementAndGet();
 
-  public abstract T getAndDecrement();
+  public abstract U getAndDecrement();
 
-  public abstract T addAndGet(T value);
+  public abstract U addAndGet(U value);
 
-  public abstract T getAndAdd(T value);
+  public abstract U getAndAdd(U value);
 
   protected abstract T defaultValue();
 
