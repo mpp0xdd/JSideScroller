@@ -5,7 +5,7 @@ abstract class Counter<T extends Number, U extends Number> {
   protected T count;
 
   public Counter() {
-    this.count = defaultValue();
+    this.count = newInstance();
   }
 
   @Override
@@ -14,7 +14,7 @@ abstract class Counter<T extends Number, U extends Number> {
   }
 
   public void reset() {
-    this.count = defaultValue();
+    this.count = newInstance();
   }
 
   public void increment() {
@@ -43,7 +43,7 @@ abstract class Counter<T extends Number, U extends Number> {
 
   public abstract U getAndAdd(U value);
 
-  protected abstract T defaultValue();
+  protected abstract T newInstance();
 
   protected abstract U minimumValue();
 

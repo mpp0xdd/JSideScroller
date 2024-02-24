@@ -43,7 +43,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  protected Integer defaultValue() {
+  protected Integer newInstance() {
     return minimumValue();
   }
 

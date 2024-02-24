@@ -40,7 +40,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  protected AtomicInteger defaultValue() {
+  protected AtomicInteger newInstance() {
     return new AtomicInteger();
   }
 
