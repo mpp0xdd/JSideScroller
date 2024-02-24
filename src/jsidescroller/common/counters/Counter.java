@@ -13,23 +13,23 @@ abstract class Counter<T extends Number> {
     return count.toString();
   }
 
-  public final void reset() {
+  public void reset() {
     this.count = defaultValue();
   }
 
-  public final T getCount() {
+  public T getCount() {
     return count;
   }
 
-  public final void increment() {
+  public void increment() {
     getAndIncrement();
   }
 
-  public final void decrement() {
+  public void decrement() {
     getAndDecrement();
   }
 
-  public final void add(T value) {
+  public void add(T value) {
     getAndAdd(value);
   }
 
