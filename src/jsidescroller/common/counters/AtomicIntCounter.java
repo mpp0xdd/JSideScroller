@@ -5,6 +5,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
 
   @Override
+  public void reset() {
+    count.getAndSet(minimumValue());
+  }
+
+  @Override
   public Integer getCount() {
     return count.get();
   }
