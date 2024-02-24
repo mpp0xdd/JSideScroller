@@ -17,10 +17,6 @@ abstract class Counter<T extends Number, U extends Number> {
     this.count = defaultValue();
   }
 
-  public T getCount() {
-    return count;
-  }
-
   public void increment() {
     getAndIncrement();
   }
@@ -32,6 +28,8 @@ abstract class Counter<T extends Number, U extends Number> {
   public void add(U value) {
     getAndAdd(value);
   }
+
+  public abstract U getCount();
 
   public abstract U incrementAndGet();
 

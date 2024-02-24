@@ -3,6 +3,11 @@ package jsidescroller.common.counters;
 abstract class IntCounter extends Counter<Integer, Integer> {
 
   @Override
+  public Integer getCount() {
+    return count;
+  }
+
+  @Override
   public Integer incrementAndGet() {
     return canIncrement() ? ++count : count;
   }
