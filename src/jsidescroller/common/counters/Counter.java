@@ -45,7 +45,7 @@ abstract class Counter<T extends Number, U extends Number> {
 
   protected abstract T defaultValue();
 
-  protected abstract T minimumValue();
+  protected abstract U minimumValue();
 
-  protected abstract T maximumValue();
+  protected abstract U maximumValue();
 }
