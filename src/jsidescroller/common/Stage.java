@@ -120,13 +120,12 @@ public abstract class Stage
   public abstract Point playerStartingLocation();
 
   public Optional<Chip> blockadeChip(SideScrollerComponent component) {
+    // TODO: Implement collision detection with components larger than the chip size.
     if (component.width() > chipSize()) {
-      throw new IllegalArgumentException(
-          "component.width() is greater than this.chipSize()."); // TODO
+      throw new IllegalArgumentException("component.width() > this.chipSize()");
     }
     if (component.height() > chipSize()) {
-      throw new IllegalArgumentException(
-          "component.height() is greater than this.chipSize()."); // TODO
+      throw new IllegalArgumentException("component.height() > this.chipSize()");
     }
 
     Point componentLocation = component.getLocation();
