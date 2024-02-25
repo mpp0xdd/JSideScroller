@@ -45,6 +45,11 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
+  public boolean isCounterStop() {
+    return count.get() == maximumValue();
+  }
+
+  @Override
   protected AtomicInteger newInstance() {
     return new AtomicInteger();
   }

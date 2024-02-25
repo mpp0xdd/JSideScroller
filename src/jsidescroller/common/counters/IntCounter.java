@@ -43,6 +43,11 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
+  public boolean isCounterStop() {
+    return count.intValue() == maximumValue();
+  }
+
+  @Override
   protected Integer newInstance() {
     return minimumValue();
   }

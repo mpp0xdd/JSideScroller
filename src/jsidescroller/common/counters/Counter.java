@@ -43,6 +43,8 @@ abstract class Counter<T extends Number, U extends Number> {
 
   public abstract U getAndAdd(U value);
 
+  public abstract boolean isCounterStop();
+
   protected abstract T newInstance();
 
   protected abstract U minimumValue();
