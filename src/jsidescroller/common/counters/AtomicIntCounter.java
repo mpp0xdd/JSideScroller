@@ -45,6 +45,16 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
+  public Integer addExactAndGet(Integer value) {
+    throw new RuntimeException("Not yet implemented."); // TODO
+  }
+
+  @Override
+  public Integer getAndAddExact(Integer value) {
+    throw new RuntimeException("Not yet implemented."); // TODO
+  }
+
+  @Override
   public boolean isCounterStop() {
     return count.get() == maximumValue();
   }

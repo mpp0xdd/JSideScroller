@@ -29,6 +29,10 @@ abstract class Counter<T extends Number, U extends Number> {
     getAndAdd(value);
   }
 
+  public void addExact(U value) {
+    getAndAddExact(value);
+  }
+
   public abstract U getCount();
 
   public abstract U incrementAndGet();
@@ -42,6 +46,10 @@ abstract class Counter<T extends Number, U extends Number> {
   public abstract U addAndGet(U value);
 
   public abstract U getAndAdd(U value);
+
+  public abstract U addExactAndGet(U value);
+
+  public abstract U getAndAddExact(U value);
 
   public abstract boolean isCounterStop();
 
