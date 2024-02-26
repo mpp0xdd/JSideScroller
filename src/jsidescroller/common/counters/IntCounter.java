@@ -3,6 +3,15 @@ package jsidescroller.common.counters;
 abstract class IntCounter extends Counter<Integer, Integer> {
 
   @Override
+  public void addExact(Integer value) throws IntCounterException {
+    try {
+      super.addExact(value);
+    } catch (CounterException e) {
+      throw (IntCounterException) e;
+    }
+  }
+
+  @Override
   public Integer getCount() {
     return count;
   }
@@ -43,13 +52,18 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public Integer addExactAndGet(Integer value) {
-    throw new RuntimeException("Not yet implemented."); // TODO
+  public Integer addExactAndGet(Integer value) throws IntCounterException {
+    count = _addExact(value);
+    return count;
   }
 
   @Override
-  public Integer getAndAddExact(Integer value) {
-    throw new RuntimeException("Not yet implemented."); // TODO
+  public Integer getAndAddExact(Integer value) throws IntCounterException {
+    try {
+      return count;
+    } finally {
+      count = _addExact(value);
+    }
   }
 
   @Override
@@ -61,6 +75,9 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   protected Integer newInstance() {
     return minimumValue();
   }
+
+  @Override
+  protected abstract IntCounterException newCounterException(Integer operand);
 
   private boolean canIncrement() {
     return count + 1 <= maximumValue();
@@ -76,6 +93,14 @@ abstract class IntCounter extends Counter<Integer, Integer> {
       newCount = minimumValue();
     } else if (newCount > maximumValue()) {
       newCount = maximumValue();
+    }
+    return newCount;
+  }
+
+  private Integer _addExact(Integer value) throws IntCounterException {
+    Integer newCount = count + value;
+    if (newCount < minimumValue() || newCount > maximumValue()) {
+      throw newCounterException(value);
     }
     return newCount;
   }
