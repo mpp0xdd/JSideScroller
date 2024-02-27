@@ -51,6 +51,8 @@ abstract class Counter<T extends Number, U extends Number> {
 
   public abstract U getAndAddExact(U value) throws CounterException;
 
+  // TODO: wrapAround
+
   public abstract boolean isCounterStop();
 
   protected abstract T newInstance();
