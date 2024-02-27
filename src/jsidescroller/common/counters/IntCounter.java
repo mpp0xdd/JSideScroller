@@ -77,6 +77,11 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
+  protected Integer capacity() {
+    return maximumValue() - minimumValue() + 1;
+  }
+
+  @Override
   protected abstract IntCounterException newCounterException(Integer operand);
 
   private boolean canIncrement() {

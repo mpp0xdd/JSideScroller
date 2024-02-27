@@ -82,6 +82,11 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
+  protected Integer capacity() {
+    return maximumValue() - minimumValue() + 1;
+  }
+
+  @Override
   protected abstract AtomicIntCounterException newCounterException(Integer operand);
 
   private int increment(final int count) {
