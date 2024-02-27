@@ -45,13 +45,21 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer addExactAndGet(Integer value) {
-    throw new RuntimeException("Not yet implemented."); // TODO
+  public Integer addExactAndGet(Integer value) throws AtomicIntCounterException {
+    try {
+      return count.accumulateAndGet(value, this::addExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(value);
+    }
   }
 
   @Override
-  public Integer getAndAddExact(Integer value) {
-    throw new RuntimeException("Not yet implemented."); // TODO
+  public Integer getAndAddExact(Integer value) throws AtomicIntCounterException {
+    try {
+      return count.getAndAccumulate(value, this::addExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(value);
+    }
   }
 
   @Override
@@ -63,6 +71,9 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   protected AtomicInteger newInstance() {
     return new AtomicInteger();
   }
+
+  @Override
+  protected abstract AtomicIntCounterException newCounterException(Integer operand);
 
   private int increment(final int count) {
     final int incrementedCount = count + 1;
@@ -80,6 +91,14 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
       newCount = minimumValue();
     } else if (newCount > maximumValue()) {
       newCount = maximumValue();
+    }
+    return newCount;
+  }
+
+  private int addExact(final int count, final int value) throws ArithmeticException {
+    int newCount = count + value;
+    if (newCount < minimumValue() || newCount > maximumValue()) {
+      throw new ArithmeticException();
     }
     return newCount;
   }
