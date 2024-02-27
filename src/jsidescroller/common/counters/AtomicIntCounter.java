@@ -108,6 +108,36 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
+  public Integer wrapAround(Integer value) {
+    final WrapAroundCounter wrapAroundCounter = new WrapAroundCounter();
+
+    count.getAndAccumulate(
+        value,
+        (_count, _value) -> {
+          wrapAroundCounter.reset();
+          int newCount = _count + _value;
+          while (true) {
+            if (newCount < minimumValue()) {
+              newCount = maximumValue() - (minimumValue() - newCount);
+              wrapAroundCounter.increment();
+              continue;
+            }
+
+            if (newCount > maximumValue()) {
+              newCount = minimumValue() + (newCount - maximumValue());
+              wrapAroundCounter.increment();
+              continue;
+            }
+
+            break;
+          }
+          return newCount;
+        });
+
+    return wrapAroundCounter.getCount();
+  }
+
+  @Override
   public boolean isCounterStop() {
     return count.get() == maximumValue();
   }
@@ -167,5 +197,62 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
       throw new ArithmeticException();
     }
     return newCount;
+  }
+
+  private final class WrapAroundCounterException extends IntCounterException {
+
+    public WrapAroundCounterException(WrapAroundCounter counter, Integer operand) {
+      super(counter, operand);
+    }
+
+    @Override
+    public WrapAroundCounter getCounter() {
+      return (WrapAroundCounter) super.getCounter();
+    }
+  }
+
+  private final class WrapAroundCounter extends IntCounter {
+
+    @Override
+    public void addExact(Integer value) throws WrapAroundCounterException {
+      try {
+        super.addExact(value);
+      } catch (IntCounterException e) {
+        throw (WrapAroundCounterException) e;
+      }
+    }
+
+    @Override
+    public Integer addExactAndGet(Integer value) throws WrapAroundCounterException {
+      try {
+        return super.addExactAndGet(value);
+      } catch (IntCounterException e) {
+        throw (WrapAroundCounterException) e;
+      }
+    }
+
+    @Override
+    public Integer getAndAddExact(Integer value) throws WrapAroundCounterException {
+      try {
+        return super.getAndAddExact(value);
+      } catch (IntCounterException e) {
+        throw (WrapAroundCounterException) e;
+      }
+    }
+
+    @Override
+    protected WrapAroundCounterException newCounterException(Integer operand) {
+      return new WrapAroundCounterException(this, operand);
+    }
+
+    @Override
+    protected Integer minimumValue() {
+      return 0;
+    }
+
+    @Override
+    protected Integer maximumValue() {
+      return Integer.MAX_VALUE;
+    }
   }
 }

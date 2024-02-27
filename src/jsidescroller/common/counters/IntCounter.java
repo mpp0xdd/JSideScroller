@@ -99,6 +99,30 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
+  public Integer wrapAround(Integer value) {
+    int newCount = count + value;
+    int wrapArounds = 0;
+    while (true) {
+      if (newCount < minimumValue()) {
+        wrapArounds += 1;
+        newCount = maximumValue() - (minimumValue() - newCount);
+        continue;
+      }
+
+      if (newCount > maximumValue()) {
+        wrapArounds += 1;
+        newCount = minimumValue() + (newCount - maximumValue());
+        continue;
+      }
+
+      break;
+    }
+
+    count = newCount;
+    return wrapArounds;
+  }
+
+  @Override
   public boolean isCounterStop() {
     return count.intValue() == maximumValue();
   }
