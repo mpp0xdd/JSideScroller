@@ -21,8 +21,16 @@ abstract class Counter<T extends Number, U extends Number> {
     getAndIncrement();
   }
 
+  public void incrementExact() throws CounterException {
+    getAndIncrementExact();
+  }
+
   public void decrement() {
     getAndDecrement();
+  }
+
+  public void decrementExact() throws CounterException {
+    getAndDecrementExact();
   }
 
   public void add(U value) {
@@ -39,9 +47,17 @@ abstract class Counter<T extends Number, U extends Number> {
 
   public abstract U getAndIncrement();
 
+  public abstract U incrementExactAndGet() throws CounterException;
+
+  public abstract U getAndIncrementExact() throws CounterException;
+
   public abstract U decrementAndGet();
 
   public abstract U getAndDecrement();
+
+  public abstract U decrementExactAndGet() throws CounterException;
+
+  public abstract U getAndDecrementExact() throws CounterException;
 
   public abstract U addAndGet(U value);
 

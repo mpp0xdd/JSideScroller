@@ -34,6 +34,24 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
+  public Integer incrementExactAndGet() throws AtomicIntCounterException {
+    try {
+      return count.updateAndGet(this::incrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
+  }
+
+  @Override
+  public Integer getAndIncrementExact() throws AtomicIntCounterException {
+    try {
+      return count.getAndUpdate(this::incrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
+  }
+
+  @Override
   public Integer decrementAndGet() {
     return count.updateAndGet(this::decrement);
   }
@@ -41,6 +59,24 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   @Override
   public Integer getAndDecrement() {
     return count.getAndUpdate(this::decrement);
+  }
+
+  @Override
+  public Integer decrementExactAndGet() throws AtomicIntCounterException {
+    try {
+      return count.updateAndGet(this::decrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
+  }
+
+  @Override
+  public Integer getAndDecrementExact() throws AtomicIntCounterException {
+    try {
+      return count.getAndUpdate(this::decrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
   }
 
   @Override
@@ -94,9 +130,25 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
     return incrementedCount <= maximumValue() ? incrementedCount : count;
   }
 
+  private int incrementExact(final int count) throws ArithmeticException {
+    final int incrementedCount = count + 1;
+    if (incrementedCount <= maximumValue()) {
+      return incrementedCount;
+    }
+    throw new ArithmeticException();
+  }
+
   private int decrement(final int count) {
     final int decrementedCount = count - 1;
     return decrementedCount >= minimumValue() ? decrementedCount : count;
+  }
+
+  private int decrementExact(final int count) {
+    final int decrementedCount = count - 1;
+    if (decrementedCount >= minimumValue()) {
+      return decrementedCount;
+    }
+    throw new ArithmeticException();
   }
 
   private int add(final int count, final int value) {

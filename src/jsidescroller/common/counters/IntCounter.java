@@ -27,6 +27,22 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
+  public Integer incrementExactAndGet() throws IntCounterException {
+    if (canIncrement()) {
+      return ++count;
+    }
+    throw newCounterException(count);
+  }
+
+  @Override
+  public Integer getAndIncrementExact() throws IntCounterException {
+    if (canIncrement()) {
+      return count++;
+    }
+    throw newCounterException(count);
+  }
+
+  @Override
   public Integer decrementAndGet() {
     return canDecrement() ? --count : count;
   }
@@ -34,6 +50,22 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   @Override
   public Integer getAndDecrement() {
     return canDecrement() ? count-- : count;
+  }
+
+  @Override
+  public Integer decrementExactAndGet() throws IntCounterException {
+    if (canDecrement()) {
+      return --count;
+    }
+    throw newCounterException(count);
+  }
+
+  @Override
+  public Integer getAndDecrementExact() throws IntCounterException {
+    if (canDecrement()) {
+      return count--;
+    }
+    throw newCounterException(count);
   }
 
   @Override
