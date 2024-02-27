@@ -5,6 +5,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
 
   @Override
+  public void addExact(Integer value) throws AtomicIntCounterException {
+    try {
+      super.addExact(value);
+    } catch (CounterException e) {
+      throw (AtomicIntCounterException) e;
+    }
+  }
+
+  @Override
   public void reset() {
     count.getAndSet(minimumValue());
   }
