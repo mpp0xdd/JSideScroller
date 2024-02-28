@@ -129,9 +129,8 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
               continue;
             }
 
-            break;
+            return newCount;
           }
-          return newCount;
         });
 
     return wrapAroundCounter.getCount();
