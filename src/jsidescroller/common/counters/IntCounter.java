@@ -101,16 +101,16 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   @Override
   public Integer wrapAround(Integer value) {
     int newCount = count + value;
-    int wrapArounds = 0;
+    WrapAroundCounter wrapAroundCounter = new WrapAroundCounter();
     while (true) {
       if (newCount < minimumValue()) {
-        wrapArounds += 1;
+        wrapAroundCounter.increment();
         newCount = maximumValue() - (minimumValue() - newCount);
         continue;
       }
 
       if (newCount > maximumValue()) {
-        wrapArounds += 1;
+        wrapAroundCounter.increment();
         newCount = minimumValue() + (newCount - maximumValue());
         continue;
       }
@@ -119,7 +119,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
     }
 
     count = newCount;
-    return wrapArounds;
+    return wrapAroundCounter.getCount();
   }
 
   @Override
