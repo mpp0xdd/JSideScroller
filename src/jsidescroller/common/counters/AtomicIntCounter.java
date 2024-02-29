@@ -5,15 +5,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
 
   @Override
-  public void addExact(Integer value) throws AtomicIntCounterException {
-    try {
-      super.addExact(value);
-    } catch (CounterException e) {
-      throw (AtomicIntCounterException) e;
-    }
-  }
-
-  @Override
   public void reset() {
     count.getAndSet(minimumValue());
   }
@@ -34,7 +25,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer incrementExactAndGet() throws AtomicIntCounterException {
+  public Integer incrementExactAndGet() throws CounterException {
     try {
       return count.updateAndGet(this::incrementExact);
     } catch (ArithmeticException e) {
@@ -43,7 +34,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer getAndIncrementExact() throws AtomicIntCounterException {
+  public Integer getAndIncrementExact() throws CounterException {
     try {
       return count.getAndUpdate(this::incrementExact);
     } catch (ArithmeticException e) {
@@ -62,7 +53,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer decrementExactAndGet() throws AtomicIntCounterException {
+  public Integer decrementExactAndGet() throws CounterException {
     try {
       return count.updateAndGet(this::decrementExact);
     } catch (ArithmeticException e) {
@@ -71,7 +62,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer getAndDecrementExact() throws AtomicIntCounterException {
+  public Integer getAndDecrementExact() throws CounterException {
     try {
       return count.getAndUpdate(this::decrementExact);
     } catch (ArithmeticException e) {
@@ -90,7 +81,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer addExactAndGet(Integer value) throws AtomicIntCounterException {
+  public Integer addExactAndGet(Integer value) throws CounterException {
     try {
       return count.accumulateAndGet(value, this::addExact);
     } catch (ArithmeticException e) {
@@ -99,7 +90,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer getAndAddExact(Integer value) throws AtomicIntCounterException {
+  public Integer getAndAddExact(Integer value) throws CounterException {
     try {
       return count.getAndAccumulate(value, this::addExact);
     } catch (ArithmeticException e) {
@@ -150,9 +141,6 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   protected Integer capacity() {
     return maximumValue() - minimumValue();
   }
-
-  @Override
-  protected abstract AtomicIntCounterException newCounterException(Integer operand);
 
   private int increment(final int count) {
     final int incrementedCount = count + 1;

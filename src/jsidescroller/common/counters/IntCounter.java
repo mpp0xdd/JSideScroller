@@ -3,15 +3,6 @@ package jsidescroller.common.counters;
 abstract class IntCounter extends Counter<Integer, Integer> {
 
   @Override
-  public void addExact(Integer value) throws IntCounterException {
-    try {
-      super.addExact(value);
-    } catch (CounterException e) {
-      throw (IntCounterException) e;
-    }
-  }
-
-  @Override
   public Integer getCount() {
     return count;
   }
@@ -27,7 +18,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public Integer incrementExactAndGet() throws IntCounterException {
+  public Integer incrementExactAndGet() throws CounterException {
     if (canIncrement()) {
       return ++count;
     }
@@ -35,7 +26,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public Integer getAndIncrementExact() throws IntCounterException {
+  public Integer getAndIncrementExact() throws CounterException {
     if (canIncrement()) {
       return count++;
     }
@@ -53,7 +44,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public Integer decrementExactAndGet() throws IntCounterException {
+  public Integer decrementExactAndGet() throws CounterException {
     if (canDecrement()) {
       return --count;
     }
@@ -61,7 +52,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public Integer getAndDecrementExact() throws IntCounterException {
+  public Integer getAndDecrementExact() throws CounterException {
     if (canDecrement()) {
       return count--;
     }
@@ -84,13 +75,13 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public Integer addExactAndGet(Integer value) throws IntCounterException {
+  public Integer addExactAndGet(Integer value) throws CounterException {
     count = _addExact(value);
     return count;
   }
 
   @Override
-  public Integer getAndAddExact(Integer value) throws IntCounterException {
+  public Integer getAndAddExact(Integer value) throws CounterException {
     try {
       return count;
     } finally {
@@ -137,9 +128,6 @@ abstract class IntCounter extends Counter<Integer, Integer> {
     return maximumValue() - minimumValue();
   }
 
-  @Override
-  protected abstract IntCounterException newCounterException(Integer operand);
-
   private boolean canIncrement() {
     return count + 1 <= maximumValue();
   }
@@ -158,7 +146,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
     return newCount;
   }
 
-  private Integer _addExact(Integer value) throws IntCounterException {
+  private Integer _addExact(Integer value) throws CounterException {
     Integer newCount = count + value;
     if (newCount < minimumValue() || newCount > maximumValue()) {
       throw newCounterException(value);
