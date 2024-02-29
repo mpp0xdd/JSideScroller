@@ -79,7 +79,5 @@ abstract class Counter<T extends Number, U extends Number> {
 
   protected abstract U capacity();
 
-  protected CounterException newCounterException(U operand) {
-    return new CounterException(this, operand);
-  }
+  protected abstract CounterException newCounterException(U operand);
 }
