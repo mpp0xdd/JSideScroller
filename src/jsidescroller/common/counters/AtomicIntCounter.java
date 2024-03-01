@@ -5,6 +5,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
 
   @Override
+  public void incrementExact() throws AtomicIntCounterException {
+    try {
+      super.incrementExact();
+    } catch (CounterException e) {
+      throw (AtomicIntCounterException) e;
+    }
+  }
+
+  @Override
+  public void decrementExact() throws AtomicIntCounterException {
+    try {
+      super.decrementExact();
+    } catch (CounterException e) {
+      throw (AtomicIntCounterException) e;
+    }
+  }
+
+  @Override
   public void addExact(Integer value) throws AtomicIntCounterException {
     try {
       super.addExact(value);

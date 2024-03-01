@@ -3,6 +3,24 @@ package jsidescroller.common.counters;
 abstract class IntCounter extends Counter<Integer, Integer> {
 
   @Override
+  public void incrementExact() throws IntCounterException {
+    try {
+      super.incrementExact();
+    } catch (CounterException e) {
+      throw (IntCounterException) e;
+    }
+  }
+
+  @Override
+  public void decrementExact() throws IntCounterException {
+    try {
+      super.decrementExact();
+    } catch (CounterException e) {
+      throw (IntCounterException) e;
+    }
+  }
+
+  @Override
   public void addExact(Integer value) throws IntCounterException {
     try {
       super.addExact(value);
