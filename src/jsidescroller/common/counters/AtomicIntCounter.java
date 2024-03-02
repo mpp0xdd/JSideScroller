@@ -5,40 +5,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
 
   @Override
-  public void incrementExact() throws AtomicIntCounterException {
-    try {
-      super.incrementExact();
-    } catch (CounterException e) {
-      throw (AtomicIntCounterException) e;
-    }
+  public Integer getCount() {
+    return count.get();
   }
 
   @Override
-  public void decrementExact() throws AtomicIntCounterException {
-    try {
-      super.decrementExact();
-    } catch (CounterException e) {
-      throw (AtomicIntCounterException) e;
-    }
-  }
-
-  @Override
-  public void addExact(Integer value) throws AtomicIntCounterException {
-    try {
-      super.addExact(value);
-    } catch (CounterException e) {
-      throw (AtomicIntCounterException) e;
-    }
+  public boolean isCounterStop() {
+    return count.get() == maximumValue();
   }
 
   @Override
   public void reset() {
     count.getAndSet(minimumValue());
-  }
-
-  @Override
-  public Integer getCount() {
-    return count.get();
   }
 
   @Override
@@ -52,24 +30,6 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer incrementExactAndGet() throws AtomicIntCounterException {
-    try {
-      return count.updateAndGet(this::incrementExact);
-    } catch (ArithmeticException e) {
-      throw newCounterException(getCount());
-    }
-  }
-
-  @Override
-  public Integer getAndIncrementExact() throws AtomicIntCounterException {
-    try {
-      return count.getAndUpdate(this::incrementExact);
-    } catch (ArithmeticException e) {
-      throw newCounterException(getCount());
-    }
-  }
-
-  @Override
   public Integer decrementAndGet() {
     return count.updateAndGet(this::decrement);
   }
@@ -80,24 +40,6 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public Integer decrementExactAndGet() throws AtomicIntCounterException {
-    try {
-      return count.updateAndGet(this::decrementExact);
-    } catch (ArithmeticException e) {
-      throw newCounterException(getCount());
-    }
-  }
-
-  @Override
-  public Integer getAndDecrementExact() throws AtomicIntCounterException {
-    try {
-      return count.getAndUpdate(this::decrementExact);
-    } catch (ArithmeticException e) {
-      throw newCounterException(getCount());
-    }
-  }
-
-  @Override
   public Integer addAndGet(Integer value) {
     return count.accumulateAndGet(value, this::add);
   }
@@ -105,24 +47,6 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   @Override
   public Integer getAndAdd(Integer value) {
     return count.getAndAccumulate(value, this::add);
-  }
-
-  @Override
-  public Integer addExactAndGet(Integer value) throws AtomicIntCounterException {
-    try {
-      return count.accumulateAndGet(value, this::addExact);
-    } catch (ArithmeticException e) {
-      throw newCounterException(value);
-    }
-  }
-
-  @Override
-  public Integer getAndAddExact(Integer value) throws AtomicIntCounterException {
-    try {
-      return count.getAndAccumulate(value, this::addExact);
-    } catch (ArithmeticException e) {
-      throw newCounterException(value);
-    }
   }
 
   @Override
@@ -155,8 +79,84 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  public boolean isCounterStop() {
-    return count.get() == maximumValue();
+  public void incrementExact() throws AtomicIntCounterException {
+    try {
+      super.incrementExact();
+    } catch (CounterException e) {
+      throw (AtomicIntCounterException) e;
+    }
+  }
+
+  @Override
+  public Integer incrementExactAndGet() throws AtomicIntCounterException {
+    try {
+      return count.updateAndGet(this::incrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
+  }
+
+  @Override
+  public Integer getAndIncrementExact() throws AtomicIntCounterException {
+    try {
+      return count.getAndUpdate(this::incrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
+  }
+
+  @Override
+  public void decrementExact() throws AtomicIntCounterException {
+    try {
+      super.decrementExact();
+    } catch (CounterException e) {
+      throw (AtomicIntCounterException) e;
+    }
+  }
+
+  @Override
+  public Integer decrementExactAndGet() throws AtomicIntCounterException {
+    try {
+      return count.updateAndGet(this::decrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
+  }
+
+  @Override
+  public Integer getAndDecrementExact() throws AtomicIntCounterException {
+    try {
+      return count.getAndUpdate(this::decrementExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(getCount());
+    }
+  }
+
+  @Override
+  public void addExact(Integer value) throws AtomicIntCounterException {
+    try {
+      super.addExact(value);
+    } catch (CounterException e) {
+      throw (AtomicIntCounterException) e;
+    }
+  }
+
+  @Override
+  public Integer addExactAndGet(Integer value) throws AtomicIntCounterException {
+    try {
+      return count.accumulateAndGet(value, this::addExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(value);
+    }
+  }
+
+  @Override
+  public Integer getAndAddExact(Integer value) throws AtomicIntCounterException {
+    try {
+      return count.getAndAccumulate(value, this::addExact);
+    } catch (ArithmeticException e) {
+      throw newCounterException(value);
+    }
   }
 
   @Override

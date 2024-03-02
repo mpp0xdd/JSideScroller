@@ -12,15 +12,6 @@ public abstract class ElapseTimeCounter extends IntCounter {
   }
 
   @Override
-  public void decrementExact() throws ElapseTimeCounterException {
-    try {
-      super.decrementExact();
-    } catch (IntCounterException e) {
-      throw (ElapseTimeCounterException) e;
-    }
-  }
-
-  @Override
   public Integer incrementExactAndGet() throws ElapseTimeCounterException {
     try {
       return super.incrementExactAndGet();
@@ -33,6 +24,15 @@ public abstract class ElapseTimeCounter extends IntCounter {
   public Integer getAndIncrementExact() throws ElapseTimeCounterException {
     try {
       return super.getAndIncrementExact();
+    } catch (IntCounterException e) {
+      throw (ElapseTimeCounterException) e;
+    }
+  }
+
+  @Override
+  public void decrementExact() throws ElapseTimeCounterException {
+    try {
+      super.decrementExact();
     } catch (IntCounterException e) {
       throw (ElapseTimeCounterException) e;
     }

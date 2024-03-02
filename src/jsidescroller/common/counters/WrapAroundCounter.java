@@ -12,15 +12,6 @@ class WrapAroundCounter extends IntCounter {
   }
 
   @Override
-  public void decrementExact() throws WrapAroundCounterException {
-    try {
-      super.decrementExact();
-    } catch (IntCounterException e) {
-      throw (WrapAroundCounterException) e;
-    }
-  }
-
-  @Override
   public Integer incrementExactAndGet() throws WrapAroundCounterException {
     try {
       return super.incrementExactAndGet();
@@ -33,6 +24,15 @@ class WrapAroundCounter extends IntCounter {
   public Integer getAndIncrementExact() throws WrapAroundCounterException {
     try {
       return super.getAndIncrementExact();
+    } catch (IntCounterException e) {
+      throw (WrapAroundCounterException) e;
+    }
+  }
+
+  @Override
+  public void decrementExact() throws WrapAroundCounterException {
+    try {
+      super.decrementExact();
     } catch (IntCounterException e) {
       throw (WrapAroundCounterException) e;
     }

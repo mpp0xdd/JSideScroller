@@ -3,35 +3,13 @@ package jsidescroller.common.counters;
 abstract class IntCounter extends Counter<Integer, Integer> {
 
   @Override
-  public void incrementExact() throws IntCounterException {
-    try {
-      super.incrementExact();
-    } catch (CounterException e) {
-      throw (IntCounterException) e;
-    }
-  }
-
-  @Override
-  public void decrementExact() throws IntCounterException {
-    try {
-      super.decrementExact();
-    } catch (CounterException e) {
-      throw (IntCounterException) e;
-    }
-  }
-
-  @Override
-  public void addExact(Integer value) throws IntCounterException {
-    try {
-      super.addExact(value);
-    } catch (CounterException e) {
-      throw (IntCounterException) e;
-    }
-  }
-
-  @Override
   public Integer getCount() {
     return count;
+  }
+
+  @Override
+  public boolean isCounterStop() {
+    return count.intValue() == maximumValue();
   }
 
   @Override
@@ -45,22 +23,6 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public Integer incrementExactAndGet() throws IntCounterException {
-    if (canIncrement()) {
-      return ++count;
-    }
-    throw newCounterException(count);
-  }
-
-  @Override
-  public Integer getAndIncrementExact() throws IntCounterException {
-    if (canIncrement()) {
-      return count++;
-    }
-    throw newCounterException(count);
-  }
-
-  @Override
   public Integer decrementAndGet() {
     return canDecrement() ? --count : count;
   }
@@ -68,22 +30,6 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   @Override
   public Integer getAndDecrement() {
     return canDecrement() ? count-- : count;
-  }
-
-  @Override
-  public Integer decrementExactAndGet() throws IntCounterException {
-    if (canDecrement()) {
-      return --count;
-    }
-    throw newCounterException(count);
-  }
-
-  @Override
-  public Integer getAndDecrementExact() throws IntCounterException {
-    if (canDecrement()) {
-      return count--;
-    }
-    throw newCounterException(count);
   }
 
   @Override
@@ -98,21 +44,6 @@ abstract class IntCounter extends Counter<Integer, Integer> {
       return count;
     } finally {
       count = _add(value);
-    }
-  }
-
-  @Override
-  public Integer addExactAndGet(Integer value) throws IntCounterException {
-    count = _addExact(value);
-    return count;
-  }
-
-  @Override
-  public Integer getAndAddExact(Integer value) throws IntCounterException {
-    try {
-      return count;
-    } finally {
-      count = _addExact(value);
     }
   }
 
@@ -141,8 +72,77 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  public boolean isCounterStop() {
-    return count.intValue() == maximumValue();
+  public void incrementExact() throws IntCounterException {
+    try {
+      super.incrementExact();
+    } catch (CounterException e) {
+      throw (IntCounterException) e;
+    }
+  }
+
+  @Override
+  public Integer incrementExactAndGet() throws IntCounterException {
+    if (canIncrement()) {
+      return ++count;
+    }
+    throw newCounterException(count);
+  }
+
+  @Override
+  public Integer getAndIncrementExact() throws IntCounterException {
+    if (canIncrement()) {
+      return count++;
+    }
+    throw newCounterException(count);
+  }
+
+  @Override
+  public void decrementExact() throws IntCounterException {
+    try {
+      super.decrementExact();
+    } catch (CounterException e) {
+      throw (IntCounterException) e;
+    }
+  }
+
+  @Override
+  public Integer decrementExactAndGet() throws IntCounterException {
+    if (canDecrement()) {
+      return --count;
+    }
+    throw newCounterException(count);
+  }
+
+  @Override
+  public Integer getAndDecrementExact() throws IntCounterException {
+    if (canDecrement()) {
+      return count--;
+    }
+    throw newCounterException(count);
+  }
+
+  @Override
+  public void addExact(Integer value) throws IntCounterException {
+    try {
+      super.addExact(value);
+    } catch (CounterException e) {
+      throw (IntCounterException) e;
+    }
+  }
+
+  @Override
+  public Integer addExactAndGet(Integer value) throws IntCounterException {
+    count = _addExact(value);
+    return count;
+  }
+
+  @Override
+  public Integer getAndAddExact(Integer value) throws IntCounterException {
+    try {
+      return count;
+    } finally {
+      count = _addExact(value);
+    }
   }
 
   @Override

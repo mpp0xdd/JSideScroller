@@ -12,15 +12,6 @@ public abstract class CoinCounter extends IntCounter {
   }
 
   @Override
-  public void decrementExact() throws CoinCounterException {
-    try {
-      super.decrementExact();
-    } catch (IntCounterException e) {
-      throw (CoinCounterException) e;
-    }
-  }
-
-  @Override
   public Integer incrementExactAndGet() throws CoinCounterException {
     try {
       return super.incrementExactAndGet();
@@ -33,6 +24,15 @@ public abstract class CoinCounter extends IntCounter {
   public Integer getAndIncrementExact() throws CoinCounterException {
     try {
       return super.getAndIncrementExact();
+    } catch (IntCounterException e) {
+      throw (CoinCounterException) e;
+    }
+  }
+
+  @Override
+  public void decrementExact() throws CoinCounterException {
+    try {
+      super.decrementExact();
     } catch (IntCounterException e) {
       throw (CoinCounterException) e;
     }
