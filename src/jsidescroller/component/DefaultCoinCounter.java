@@ -2,7 +2,7 @@ package jsidescroller.component;
 
 import jsidescroller.common.counters.CoinCounter;
 
-public class DefaultCoinCounter extends CoinCounter {
+class DefaultCoinCounter extends CoinCounter {
 
   public static DefaultCoinCounter create() {
     return new DefaultCoinCounter();
