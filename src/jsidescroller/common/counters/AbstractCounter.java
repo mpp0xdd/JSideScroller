@@ -1,10 +1,10 @@
 package jsidescroller.common.counters;
 
-abstract class Counter<T extends Number, U extends Number> {
+abstract class AbstractCounter<T extends Number, U extends Number> {
 
   protected T count;
 
-  public Counter() {
+  public AbstractCounter() {
     this.count = newInstance();
   }
 

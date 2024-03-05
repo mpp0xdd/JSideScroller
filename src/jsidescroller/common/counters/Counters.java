@@ -7,21 +7,21 @@ public final class Counters {
   }
 
   @SuppressWarnings("unchecked")
-  public static <T extends Number, U extends Number> Counter<T, U> unmodifiableCounter(
-      Counter<? extends T, ? extends U> counter) {
+  public static <T extends Number, U extends Number> AbstractCounter<T, U> unmodifiableCounter(
+      AbstractCounter<? extends T, ? extends U> counter) {
     if (counter.getClass() == UnmodifiableCounter.class) {
-      return (Counter<T, U>) counter;
+      return (AbstractCounter<T, U>) counter;
     }
 
     return new UnmodifiableCounter<>(counter);
   }
 
   private static class UnmodifiableCounter<T extends Number, U extends Number>
-      extends Counter<T, U> {
+      extends AbstractCounter<T, U> {
 
-    private final Counter<? extends T, ? extends U> counter;
+    private final AbstractCounter<? extends T, ? extends U> counter;
 
-    public UnmodifiableCounter(Counter<? extends T, ? extends U> counter) {
+    public UnmodifiableCounter(AbstractCounter<? extends T, ? extends U> counter) {
       this.counter = counter;
     }
 
