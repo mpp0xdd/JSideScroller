@@ -4,7 +4,7 @@ import java.util.Objects;
 
 abstract class CounterException extends Exception {
 
-  private final AbstractCounter<?, ?> counter;
+  private final Counter<?, ?> counter;
   private final Number operand;
 
   public CounterException(AbstractCounter<?, ?> counter, Number operand) {
@@ -12,7 +12,7 @@ abstract class CounterException extends Exception {
     this.operand = Objects.requireNonNull(operand);
   }
 
-  public AbstractCounter<?, ?> getCounter() {
+  public Counter<?, ?> getCounter() {
     return counter;
   }
 

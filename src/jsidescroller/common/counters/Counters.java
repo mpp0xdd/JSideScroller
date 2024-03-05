@@ -7,21 +7,21 @@ public final class Counters {
   }
 
   @SuppressWarnings("unchecked")
-  public static <T extends Number, U extends Number> AbstractCounter<T, U> unmodifiableCounter(
-      AbstractCounter<? extends T, ? extends U> counter) {
+  public static <T extends Number, U extends Number> Counter<T, U> unmodifiableCounter(
+      Counter<? extends T, ? extends U> counter) {
     if (counter.getClass() == UnmodifiableCounter.class) {
-      return (AbstractCounter<T, U>) counter;
+      return (Counter<T, U>) counter;
     }
 
     return new UnmodifiableCounter<>(counter);
   }
 
   private static class UnmodifiableCounter<T extends Number, U extends Number>
-      extends AbstractCounter<T, U> {
+      implements Counter<T, U> {
 
-    private final AbstractCounter<? extends T, ? extends U> counter;
+    private final Counter<? extends T, ? extends U> counter;
 
-    public UnmodifiableCounter(AbstractCounter<? extends T, ? extends U> counter) {
+    public UnmodifiableCounter(Counter<? extends T, ? extends U> counter) {
       this.counter = counter;
     }
 
@@ -153,16 +153,6 @@ public final class Counters {
     @Override
     public String toString() {
       return counter.toString();
-    }
-
-    @Override
-    protected T newInstance() {
-      return null;
-    }
-
-    @Override
-    protected CounterException newCounterException(U operand) {
-      return null;
     }
   }
 }
