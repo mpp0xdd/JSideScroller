@@ -136,16 +136,6 @@ public final class Counters {
     }
 
     @Override
-    public String toString() {
-      return counter.toString();
-    }
-
-    @Override
-    protected T newInstance() {
-      return null;
-    }
-
-    @Override
     public U minimumValue() {
       return counter.minimumValue();
     }
@@ -158,6 +148,16 @@ public final class Counters {
     @Override
     public U capacity() {
       return counter.capacity();
+    }
+
+    @Override
+    public String toString() {
+      return counter.toString();
+    }
+
+    @Override
+    protected T newInstance() {
+      return null;
     }
 
     @Override

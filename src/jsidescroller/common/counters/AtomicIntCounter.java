@@ -160,13 +160,13 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  protected AtomicInteger newInstance() {
-    return new AtomicInteger();
+  public Integer capacity() {
+    return maximumValue() - minimumValue();
   }
 
   @Override
-  public Integer capacity() {
-    return maximumValue() - minimumValue();
+  protected AtomicInteger newInstance() {
+    return new AtomicInteger();
   }
 
   @Override

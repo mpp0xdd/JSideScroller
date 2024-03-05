@@ -66,18 +66,18 @@ abstract class Counter<T extends Number, U extends Number> {
 
   public abstract U getAndAddExact(U value) throws CounterException;
 
+  public abstract U minimumValue();
+
+  public abstract U maximumValue();
+
+  public abstract U capacity();
+
   @Override
   public String toString() {
     return count.toString();
   }
 
   protected abstract T newInstance();
-
-  public abstract U minimumValue();
-
-  public abstract U maximumValue();
-
-  public abstract U capacity();
 
   protected abstract CounterException newCounterException(U operand);
 }
