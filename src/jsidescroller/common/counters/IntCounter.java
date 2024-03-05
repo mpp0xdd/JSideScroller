@@ -151,7 +151,7 @@ abstract class IntCounter extends Counter<Integer, Integer> {
   }
 
   @Override
-  protected Integer capacity() {
+  public Integer capacity() {
     return maximumValue() - minimumValue();
   }
 

@@ -146,17 +146,17 @@ public final class Counters {
     }
 
     @Override
-    protected U minimumValue() {
+    public U minimumValue() {
       return counter.minimumValue();
     }
 
     @Override
-    protected U maximumValue() {
+    public U maximumValue() {
       return counter.maximumValue();
     }
 
     @Override
-    protected U capacity() {
+    public U capacity() {
       return counter.capacity();
     }
 

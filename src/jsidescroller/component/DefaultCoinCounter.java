@@ -11,12 +11,12 @@ class DefaultCoinCounter extends CoinCounter {
   private DefaultCoinCounter() {}
 
   @Override
-  protected Integer minimumValue() {
+  public Integer minimumValue() {
     return 0;
   }
 
   @Override
-  protected Integer maximumValue() {
+  public Integer maximumValue() {
     return 60;
   }
 }

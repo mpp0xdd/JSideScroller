@@ -73,11 +73,11 @@ abstract class Counter<T extends Number, U extends Number> {
 
   protected abstract T newInstance();
 
-  protected abstract U minimumValue();
+  public abstract U minimumValue();
 
-  protected abstract U maximumValue();
+  public abstract U maximumValue();
 
-  protected abstract U capacity();
+  public abstract U capacity();
 
   protected abstract CounterException newCounterException(U operand);
 }

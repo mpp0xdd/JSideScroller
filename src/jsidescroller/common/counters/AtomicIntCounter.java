@@ -165,7 +165,7 @@ abstract class AtomicIntCounter extends Counter<AtomicInteger, Integer> {
   }
 
   @Override
-  protected Integer capacity() {
+  public Integer capacity() {
     return maximumValue() - minimumValue();
   }
 
