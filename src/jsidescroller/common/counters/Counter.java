@@ -1,8 +1,8 @@
 package jsidescroller.common.counters;
 
-public interface Counter<T extends Number, U extends Number> {
+public interface Counter<T extends Number> {
 
-  U getCount();
+  T getCount();
 
   boolean isCounterStop();
 
@@ -10,47 +10,47 @@ public interface Counter<T extends Number, U extends Number> {
 
   void increment();
 
-  U incrementAndGet();
+  T incrementAndGet();
 
-  U getAndIncrement();
+  T getAndIncrement();
 
   void decrement();
 
-  U decrementAndGet();
+  T decrementAndGet();
 
-  U getAndDecrement();
+  T getAndDecrement();
 
-  void add(U value);
+  void add(T value);
 
-  U addAndGet(U value);
+  T addAndGet(T value);
 
-  U getAndAdd(U value);
+  T getAndAdd(T value);
 
-  Number wrapAround(U value);
+  Number wrapAround(T value);
 
   void incrementExact() throws CounterException;
 
-  U incrementExactAndGet() throws CounterException;
+  T incrementExactAndGet() throws CounterException;
 
-  U getAndIncrementExact() throws CounterException;
+  T getAndIncrementExact() throws CounterException;
 
   void decrementExact() throws CounterException;
 
-  U decrementExactAndGet() throws CounterException;
+  T decrementExactAndGet() throws CounterException;
 
-  U getAndDecrementExact() throws CounterException;
+  T getAndDecrementExact() throws CounterException;
 
-  void addExact(U value) throws CounterException;
+  void addExact(T value) throws CounterException;
 
-  U addExactAndGet(U value) throws CounterException;
+  T addExactAndGet(T value) throws CounterException;
 
-  U getAndAddExact(U value) throws CounterException;
+  T getAndAddExact(T value) throws CounterException;
 
-  U minimumValue();
+  T minimumValue();
 
-  U maximumValue();
+  T maximumValue();
 
-  U capacity();
+  T capacity();
 
   @Override
   String toString();

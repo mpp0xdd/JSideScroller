@@ -7,26 +7,24 @@ public final class Counters {
   }
 
   @SuppressWarnings("unchecked")
-  public static <T extends Number, U extends Number> Counter<T, U> unmodifiableCounter(
-      Counter<? extends T, ? extends U> counter) {
+  public static <T extends Number> Counter<T> unmodifiableCounter(Counter<? extends T> counter) {
     if (counter.getClass() == UnmodifiableCounter.class) {
-      return (Counter<T, U>) counter;
+      return (Counter<T>) counter;
     }
 
     return new UnmodifiableCounter<>(counter);
   }
 
-  private static class UnmodifiableCounter<T extends Number, U extends Number>
-      implements Counter<T, U> {
+  private static class UnmodifiableCounter<T extends Number> implements Counter<T> {
 
-    private final Counter<? extends T, ? extends U> counter;
+    private final Counter<? extends T> counter;
 
-    public UnmodifiableCounter(Counter<? extends T, ? extends U> counter) {
+    public UnmodifiableCounter(Counter<? extends T> counter) {
       this.counter = counter;
     }
 
     @Override
-    public U getCount() {
+    public T getCount() {
       return counter.getCount();
     }
 
@@ -46,12 +44,12 @@ public final class Counters {
     }
 
     @Override
-    public U incrementAndGet() {
+    public T incrementAndGet() {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U getAndIncrement() {
+    public T getAndIncrement() {
       throw new UnsupportedOperationException();
     }
 
@@ -61,32 +59,32 @@ public final class Counters {
     }
 
     @Override
-    public U decrementAndGet() {
+    public T decrementAndGet() {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U getAndDecrement() {
+    public T getAndDecrement() {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public void add(U value) {
+    public void add(T value) {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U addAndGet(U value) {
+    public T addAndGet(T value) {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U getAndAdd(U value) {
+    public T getAndAdd(T value) {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public Number wrapAround(U value) {
+    public Number wrapAround(T value) {
       throw new UnsupportedOperationException();
     }
 
@@ -96,12 +94,12 @@ public final class Counters {
     }
 
     @Override
-    public U incrementExactAndGet() throws CounterException {
+    public T incrementExactAndGet() throws CounterException {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U getAndIncrementExact() throws CounterException {
+    public T getAndIncrementExact() throws CounterException {
       throw new UnsupportedOperationException();
     }
 
@@ -111,42 +109,42 @@ public final class Counters {
     }
 
     @Override
-    public U decrementExactAndGet() throws CounterException {
+    public T decrementExactAndGet() throws CounterException {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U getAndDecrementExact() throws CounterException {
+    public T getAndDecrementExact() throws CounterException {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public void addExact(U value) throws CounterException {
+    public void addExact(T value) throws CounterException {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U addExactAndGet(U value) throws CounterException {
+    public T addExactAndGet(T value) throws CounterException {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U getAndAddExact(U value) throws CounterException {
+    public T getAndAddExact(T value) throws CounterException {
       throw new UnsupportedOperationException();
     }
 
     @Override
-    public U minimumValue() {
+    public T minimumValue() {
       return counter.minimumValue();
     }
 
     @Override
-    public U maximumValue() {
+    public T maximumValue() {
       return counter.maximumValue();
     }
 
     @Override
-    public U capacity() {
+    public T capacity() {
       return counter.capacity();
     }
 

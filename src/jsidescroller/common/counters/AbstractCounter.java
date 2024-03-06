@@ -1,6 +1,6 @@
 package jsidescroller.common.counters;
 
-abstract class AbstractCounter<T extends Number, U extends Number> implements Counter<T, U> {
+abstract class AbstractCounter<T extends Number, U extends Number> implements Counter<U> {
 
   protected T count;
 
