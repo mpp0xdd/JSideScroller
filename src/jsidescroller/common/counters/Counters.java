@@ -15,7 +15,111 @@ public final class Counters {
     return new UnmodifiableCounter<>(counter);
   }
 
-  private static class UnmodifiableCounter<T extends Number> implements Counter<T> {
+  private interface UnmodifiableCounterMixin<T extends Number> extends Counter<T> {
+
+    @Override
+    default void reset() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default void increment() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T incrementAndGet() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T getAndIncrement() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default void decrement() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T decrementAndGet() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T getAndDecrement() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default void add(T value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T addAndGet(T value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T getAndAdd(T value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default Number wrapAround(T value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default void incrementExact() throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T incrementExactAndGet() throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T getAndIncrementExact() throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default void decrementExact() throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T decrementExactAndGet() throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T getAndDecrementExact() throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default void addExact(T value) throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T addExactAndGet(T value) throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default T getAndAddExact(T value) throws CounterException {
+      throw new UnsupportedOperationException();
+    }
+  }
+
+  private static class UnmodifiableCounter<T extends Number>
+      implements Counter<T>, UnmodifiableCounterMixin<T> {
 
     private final Counter<? extends T> counter;
 
@@ -31,106 +135,6 @@ public final class Counters {
     @Override
     public boolean isCounterStop() {
       return counter.isCounterStop();
-    }
-
-    @Override
-    public void reset() {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void increment() {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T incrementAndGet() {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T getAndIncrement() {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void decrement() {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T decrementAndGet() {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T getAndDecrement() {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void add(T value) {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T addAndGet(T value) {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T getAndAdd(T value) {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Number wrapAround(T value) {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void incrementExact() throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T incrementExactAndGet() throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T getAndIncrementExact() throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void decrementExact() throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T decrementExactAndGet() throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T getAndDecrementExact() throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void addExact(T value) throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T addExactAndGet(T value) throws CounterException {
-      throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public T getAndAddExact(T value) throws CounterException {
-      throw new UnsupportedOperationException();
     }
 
     @Override
