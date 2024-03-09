@@ -1,3 +1,3 @@
 package jsidescroller.common.counters;
 
-public interface ElapseTimeCounter extends Counter<Integer> {}
+public interface ElapseTimeCounter extends IntCounter {}
