@@ -1,9 +1,9 @@
 package jsidescroller.component;
 
 import jsidescroller.common.counters.CoinCounter;
-import jsidescroller.common.counters.IntCounter;
+import jsidescroller.common.counters.AbstractIntCounter;
 
-class DefaultCoinCounter extends IntCounter implements CoinCounter {
+class DefaultCoinCounter extends AbstractIntCounter implements CoinCounter {
 
   public static DefaultCoinCounter create() {
     return new DefaultCoinCounter();

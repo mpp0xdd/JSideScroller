@@ -1,6 +1,6 @@
 package jsidescroller.common.counters;
 
-public abstract class IntCounter extends AbstractCounter<Integer, Integer> {
+public abstract class AbstractIntCounter extends AbstractCounter<Integer, Integer> {
 
   @Override
   public Integer getCount() {
