@@ -122,6 +122,10 @@ public final class Counters {
     }
   }
 
+  private interface UnmodifiableCoinCounterMixin extends CoinCounter {}
+
+  private interface UnmodifiableElapseTimeCounterMixin extends ElapseTimeCounter {}
+
   private abstract static class UnmodifiableCounter<T extends Number>
       implements UnmodifiableCounterMixin<T> {
 
@@ -163,7 +167,7 @@ public final class Counters {
   }
 
   private static class UnmodifiableIntCounter extends UnmodifiableCounter<Integer>
-      implements CoinCounter, ElapseTimeCounter {
+      implements UnmodifiableCoinCounterMixin, UnmodifiableElapseTimeCounterMixin {
 
     public UnmodifiableIntCounter(IntCounter counter) {
       super(counter);
