@@ -7,12 +7,16 @@ public final class Counters {
   }
 
   @SuppressWarnings("unchecked")
-  public static <T extends Number> Counter<T> unmodifiableCounter(Counter<? extends T> counter) {
-    if (counter.getClass() == UnmodifiableCounter.class) {
-      return (Counter<T>) counter;
+  public static <T extends Counter<?>> T unmodifiableCounter(T counter) {
+    if (counter instanceof UnmodifiableCounter) {
+      return counter;
     }
 
-    return new UnmodifiableCounter<>(counter);
+    if (counter instanceof IntCounter intCounter) {
+      return (T) new UnmodifiableIntCounter(intCounter);
+    }
+
+    throw new RuntimeException("Failed to instantiate unmodifiable counter: " + counter);
   }
 
   private interface UnmodifiableCounterMixin<T extends Number> extends Counter<T> {
@@ -118,12 +122,12 @@ public final class Counters {
     }
   }
 
-  private static class UnmodifiableCounter<T extends Number>
-      implements Counter<T>, UnmodifiableCounterMixin<T> {
+  private abstract static class UnmodifiableCounter<T extends Number>
+      implements UnmodifiableCounterMixin<T> {
 
-    private final Counter<? extends T> counter;
+    private final Counter<T> counter;
 
-    public UnmodifiableCounter(Counter<? extends T> counter) {
+    public UnmodifiableCounter(Counter<T> counter) {
       this.counter = counter;
     }
 
@@ -155,6 +159,14 @@ public final class Counters {
     @Override
     public String toString() {
       return counter.toString();
+    }
+  }
+
+  private static class UnmodifiableIntCounter extends UnmodifiableCounter<Integer>
+      implements CoinCounter, ElapseTimeCounter {
+
+    public UnmodifiableIntCounter(IntCounter counter) {
+      super(counter);
     }
   }
 }
