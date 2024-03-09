@@ -1,15 +1,15 @@
 package jsidescroller.common.counters;
 
-abstract class AbstractCounter<T extends Number, U extends Number> implements Counter<U> {
+abstract class AbstractCounter<T extends Number, U extends Number> implements Counter<T> {
 
-  protected T count;
+  protected U count;
 
   public AbstractCounter() {
     this.count = newInstance();
   }
 
   @Override
-  public abstract U getCount();
+  public abstract T getCount();
 
   @Override
   public abstract boolean isCounterStop();
@@ -25,10 +25,10 @@ abstract class AbstractCounter<T extends Number, U extends Number> implements Co
   }
 
   @Override
-  public abstract U incrementAndGet();
+  public abstract T incrementAndGet();
 
   @Override
-  public abstract U getAndIncrement();
+  public abstract T getAndIncrement();
 
   @Override
   public void decrement() {
@@ -36,24 +36,24 @@ abstract class AbstractCounter<T extends Number, U extends Number> implements Co
   }
 
   @Override
-  public abstract U decrementAndGet();
+  public abstract T decrementAndGet();
 
   @Override
-  public abstract U getAndDecrement();
+  public abstract T getAndDecrement();
 
   @Override
-  public void add(U value) {
+  public void add(T value) {
     getAndAdd(value);
   }
 
   @Override
-  public abstract U addAndGet(U value);
+  public abstract T addAndGet(T value);
 
   @Override
-  public abstract U getAndAdd(U value);
+  public abstract T getAndAdd(T value);
 
   @Override
-  public abstract Number wrapAround(U value);
+  public abstract Number wrapAround(T value);
 
   @Override
   public void incrementExact() throws CounterException {
@@ -61,10 +61,10 @@ abstract class AbstractCounter<T extends Number, U extends Number> implements Co
   }
 
   @Override
-  public abstract U incrementExactAndGet() throws CounterException;
+  public abstract T incrementExactAndGet() throws CounterException;
 
   @Override
-  public abstract U getAndIncrementExact() throws CounterException;
+  public abstract T getAndIncrementExact() throws CounterException;
 
   @Override
   public void decrementExact() throws CounterException {
@@ -72,39 +72,39 @@ abstract class AbstractCounter<T extends Number, U extends Number> implements Co
   }
 
   @Override
-  public abstract U decrementExactAndGet() throws CounterException;
+  public abstract T decrementExactAndGet() throws CounterException;
 
   @Override
-  public abstract U getAndDecrementExact() throws CounterException;
+  public abstract T getAndDecrementExact() throws CounterException;
 
   @Override
-  public void addExact(U value) throws CounterException {
+  public void addExact(T value) throws CounterException {
     getAndAddExact(value);
   }
 
   @Override
-  public abstract U addExactAndGet(U value) throws CounterException;
+  public abstract T addExactAndGet(T value) throws CounterException;
 
   @Override
-  public abstract U getAndAddExact(U value) throws CounterException;
+  public abstract T getAndAddExact(T value) throws CounterException;
 
   @Override
-  public abstract U minimumValue();
+  public abstract T minimumValue();
 
   @Override
-  public abstract U maximumValue();
+  public abstract T maximumValue();
 
   @Override
-  public abstract U capacity();
+  public abstract T capacity();
 
   @Override
   public String toString() {
     return count.toString();
   }
 
-  protected CounterException newCounterException(U operand) {
+  protected CounterException newCounterException(T operand) {
     return new CounterException(this, operand);
   }
 
-  protected abstract T newInstance();
+  protected abstract U newInstance();
 }

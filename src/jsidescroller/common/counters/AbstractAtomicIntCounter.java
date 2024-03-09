@@ -2,7 +2,7 @@ package jsidescroller.common.counters;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class AbstractAtomicIntCounter extends AbstractCounter<AtomicInteger, Integer> {
+public abstract class AbstractAtomicIntCounter extends AbstractCounter<Integer, AtomicInteger> {
 
   @Override
   public Integer getCount() {
