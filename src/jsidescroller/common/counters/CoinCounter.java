@@ -1,3 +1,3 @@
 package jsidescroller.common.counters;
 
-public abstract class CoinCounter extends IntCounter {}
+public interface CoinCounter extends Counter<Integer> {}
