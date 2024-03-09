@@ -2,7 +2,7 @@ package jsidescroller.common.counters;
 
 import java.util.Objects;
 
-abstract class CounterException extends Exception {
+public class CounterException extends Exception {
 
   private final Counter<?> counter;
   private final Number operand;

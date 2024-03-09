@@ -102,7 +102,9 @@ abstract class AbstractCounter<T extends Number, U extends Number> implements Co
     return count.toString();
   }
 
-  protected abstract T newInstance();
+  protected CounterException newCounterException(U operand) {
+    return new CounterException(this, operand);
+  }
 
-  protected abstract CounterException newCounterException(U operand);
+  protected abstract T newInstance();
 }
