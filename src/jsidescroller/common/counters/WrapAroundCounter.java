@@ -1,6 +1,6 @@
 package jsidescroller.common.counters;
 
-class WrapAroundCounter extends AbstractIntCounter {
+class WrapAroundCounter extends AbstractIntCounter implements IntCounter {
 
   @Override
   public Integer minimumValue() {
