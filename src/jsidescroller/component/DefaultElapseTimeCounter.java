@@ -1,7 +1,9 @@
 package jsidescroller.component;
 
-import jsidescroller.common.counters.ElapseTimeCounter;
+import java.util.Timer;
+import java.util.TimerTask;
 import jsidescroller.common.counters.AbstractIntCounter;
+import jsidescroller.common.counters.ElapseTimeCounter;
 
 class DefaultElapseTimeCounter extends AbstractIntCounter implements ElapseTimeCounter {
 
@@ -9,7 +11,11 @@ class DefaultElapseTimeCounter extends AbstractIntCounter implements ElapseTimeC
     return new DefaultElapseTimeCounter();
   }
 
-  private DefaultElapseTimeCounter() {}
+  private final Timer timer;
+
+  private DefaultElapseTimeCounter() {
+    this.timer = new Timer();
+  }
 
   @Override
   public Integer minimumValue() {
@@ -19,5 +25,18 @@ class DefaultElapseTimeCounter extends AbstractIntCounter implements ElapseTimeC
   @Override
   public Integer maximumValue() {
     return 300;
+  }
+
+  @Override
+  public void start() {
+    timer.schedule(
+        new TimerTask() {
+          @Override
+          public void run() {
+            increment();
+          }
+        },
+        1000L,
+        1000L);
   }
 }

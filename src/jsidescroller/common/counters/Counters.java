@@ -124,7 +124,13 @@ public final class Counters {
 
   private interface UnmodifiableCoinCounterMixin extends CoinCounter {}
 
-  private interface UnmodifiableElapseTimeCounterMixin extends ElapseTimeCounter {}
+  private interface UnmodifiableElapseTimeCounterMixin extends ElapseTimeCounter {
+
+    @Override
+    default void start() {
+      throw new UnsupportedOperationException();
+    }
+  }
 
   private abstract static class UnmodifiableCounter<T extends Number>
       implements UnmodifiableCounterMixin<T> {

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 import jglib.util.GameUtilities;
 import jsidescroller.common.StatusBar;
 
@@ -19,18 +17,6 @@ public class DefaultStatusBar extends StatusBar {
     this.backgroundColor = Color.CYAN;
     this.foregroundColor = Color.BLACK;
     this.font = new Font(Font.SANS_SERIF, Font.BOLD, height() - 10);
-
-    // TODO: Remove incremental processing of elapsed time counter from status bar.
-    Timer timer = new Timer();
-    timer.schedule(
-        new TimerTask() {
-          @Override
-          public void run() {
-            getStage().elapseTimeCounter().increment();
-          }
-        },
-        1000L,
-        1000L);
   }
 
   @Override

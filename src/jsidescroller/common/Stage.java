@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import jglib.component.SubGameScreen;
 import jsidescroller.common.counters.CoinCounter;
+import jsidescroller.common.counters.Counters;
 import jsidescroller.common.counters.ElapseTimeCounter;
 import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
@@ -107,6 +108,8 @@ public abstract class Stage
 
     this.elapseTimeCounter = newElapseTimeCounter();
     this.coinCounter = newCoinCounter();
+
+    this.elapseTimeCounter.start();
   }
 
   public abstract int rows();
@@ -232,7 +235,7 @@ public abstract class Stage
   }
 
   public ElapseTimeCounter elapseTimeCounter() {
-    return elapseTimeCounter;
+    return Counters.unmodifiableCounter(elapseTimeCounter);
   }
 
   public CoinCounter coinCounter() {
