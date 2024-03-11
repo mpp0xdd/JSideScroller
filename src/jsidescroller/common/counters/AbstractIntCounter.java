@@ -9,7 +9,7 @@ public abstract class AbstractIntCounter extends AbstractCounter<Integer, Intege
 
   @Override
   public boolean isCounterStop() {
-    return count.intValue() == maximumValue();
+    return count.intValue() == minimumValue() || count.intValue() == maximumValue();
   }
 
   @Override

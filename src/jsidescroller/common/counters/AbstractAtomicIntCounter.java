@@ -11,7 +11,7 @@ public abstract class AbstractAtomicIntCounter extends AbstractCounter<Integer, 
 
   @Override
   public boolean isCounterStop() {
-    return count.get() == maximumValue();
+    return count.get() == minimumValue() || count.get() == maximumValue();
   }
 
   @Override
