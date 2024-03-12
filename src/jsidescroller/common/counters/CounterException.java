@@ -1,6 +1,7 @@
 package jsidescroller.common.counters;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class CounterException extends Exception {
 
@@ -9,14 +10,14 @@ public class CounterException extends Exception {
 
   public CounterException(Counter<?> counter, Number operand) {
     this.counter = Objects.requireNonNull(counter);
-    this.operand = Objects.requireNonNull(operand);
+    this.operand = operand;
   }
 
   public Counter<?> getCounter() {
     return counter;
   }
 
-  public Number getOperand() {
-    return operand;
+  public Optional<Number> getOperand() {
+    return Optional.ofNullable(operand);
   }
 }
