@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Objects;
-import jglib.util.GameUtilities;
+import jglib.util.StringDrawer;
 import jsidescroller.common.Item;
 import jsidescroller.common.ItemBlock;
 import jsidescroller.common.Stage;
@@ -45,7 +45,7 @@ class DefaultItemBlock extends ItemBlock {
     if (!isHit) {
       g.setColor(QUESTION_COLOR);
       g.setFont(QUESTION_FONT);
-      GameUtilities.drawStringAfterCentering(g, point.x + width() / 2, point.y + height() / 2, "?");
+      StringDrawer.CENTER.draw(g, point.x + width() / 2, point.y + height() / 2, "?");
     }
   }
 

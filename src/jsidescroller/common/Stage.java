@@ -245,29 +245,29 @@ public abstract class Stage
   }
 
   public final class Viewport implements Rectangular, Locatable {
-  
+
     private final int x;
     private final int y;
-  
+
     private Viewport() {
       StageOffset offset = StageOffset.of(Stage.this);
       this.x = offset.width();
       this.y = offset.height();
     }
-  
+
     public StagePoint first() {
       Point location = getLocation();
       return toStagePoint(location).orElseThrow();
     }
-  
+
     public StagePoint last() {
       Point location = new Point(x() + width() - 1, y() + height() - 1);
       return toStagePoint(location).orElseThrow();
     }
-  
+
     public Stream<StagePoint> stagePointStream() {
       Stream.Builder<StagePoint> builder = Stream.builder();
-  
+
       StagePoint first = first();
       StagePoint last = last();
       for (int y = first.y(); y <= last.y(); y++) {
@@ -275,30 +275,30 @@ public abstract class Stage
           builder.add(StagePoint.of(Stage.this, x, y));
         }
       }
-  
+
       return builder.build();
     }
-  
+
     @Override
     public int x() {
       return x;
     }
-  
+
     @Override
     public int y() {
       return y;
     }
-  
+
     @Override
     public Point getLocation() {
       return new Point(x(), y());
     }
-  
+
     @Override
     public int width() {
       return Stage.this.width();
     }
-  
+
     @Override
     public int height() {
       return Stage.this.height();

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Objects;
-import jglib.util.GameUtilities;
+import jglib.util.StringDrawer;
 import jsidescroller.common.StatusBar;
 
 public class DefaultStatusBar extends StatusBar {
@@ -29,8 +29,8 @@ public class DefaultStatusBar extends StatusBar {
     g.draw3DRect(x(), y(), width() - 1, height() - 1, false);
 
     g.setFont(font);
-    GameUtilities.drawString(g, x() + 10, y(), String.valueOf(getStage().elapseTimeCounter()));
-    GameUtilities.drawString(g, x() + width() / 2, y(), String.valueOf(getStage().coinCounter()));
+    StringDrawer.LEFT.draw(g, x() + 10, y(), String.valueOf(getStage().elapseTimeCounter()));
+    StringDrawer.LEFT.draw(g, x() + width() / 2, y(), String.valueOf(getStage().coinCounter()));
   }
 
   @Override
