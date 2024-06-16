@@ -1,15 +1,15 @@
 package jsidescroller.component;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jglib.util.LoadException;
+import jglib.util.UncheckedLoadException;
 
 class DefaultStageDataLoader {
 
@@ -30,8 +30,8 @@ class DefaultStageDataLoader {
               .map(DefaultStageDataLoader::toDefaultStageDataArray)
               .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
       return checkStageData(stageData.toArray(new DefaultStageData[stageData.size()][]));
-    } catch (IOException ioe) {
-      throw new UncheckedIOException(ioe);
+    } catch (Exception e) {
+      throw new UncheckedLoadException(new LoadException(name, e));
     }
   }
 
