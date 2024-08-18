@@ -65,8 +65,6 @@ public class MainScreen extends GameScreen implements KeyListener {
             });
 
     stage.provideGravity();
-
-    repaint();
   }
 
   @Override
