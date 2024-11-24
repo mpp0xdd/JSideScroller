@@ -13,15 +13,13 @@ import jglib.component.SubGameScreen;
 import jsidescroller.common.counters.CoinCounter;
 import jsidescroller.common.counters.Counters;
 import jsidescroller.common.counters.ElapseTimeCounter;
-import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.GravitationalField;
 import jsidescroller.common.interfaces.Locatable;
 import jsidescroller.common.interfaces.Rectangular;
 import jsidescroller.common.interfaces.Relocatable;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
-public abstract class Stage
-    implements SubGameScreen, Drawable, Rectangular, Relocatable, GravitationalField {
+public abstract class Stage implements SubGameScreen, Relocatable, GravitationalField {
 
   private final Point location;
 

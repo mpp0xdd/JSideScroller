@@ -3,11 +3,9 @@ package jsidescroller.common;
 import java.awt.Point;
 import java.util.Objects;
 import jglib.component.SubGameScreen;
-import jsidescroller.common.interfaces.Drawable;
 import jsidescroller.common.interfaces.Locatable;
-import jsidescroller.common.interfaces.Rectangular;
 
-public abstract class StatusBar implements SubGameScreen, Drawable, Rectangular, Locatable {
+public abstract class StatusBar implements SubGameScreen, Locatable {
 
   private Stage stage;
 
