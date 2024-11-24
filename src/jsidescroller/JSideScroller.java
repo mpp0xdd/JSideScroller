@@ -1,7 +1,7 @@
 package jsidescroller;
 
-import jglib.base.Game;
 import jglib.component.GameWindow;
+import jglib.core.Game;
 import jsidescroller.component.DefaultStage;
 import jsidescroller.component.DefaultStatusBar;
 import jsidescroller.screen.MainScreen;
