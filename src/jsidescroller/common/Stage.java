@@ -10,12 +10,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 import jglib.component.SubGameScreen;
+import jglib.util.spec.Rectangular;
 import jsidescroller.common.counters.CoinCounter;
 import jsidescroller.common.counters.Counters;
 import jsidescroller.common.counters.ElapseTimeCounter;
 import jsidescroller.common.interfaces.GravitationalField;
 import jsidescroller.common.interfaces.Locatable;
-import jsidescroller.common.interfaces.Rectangular;
 import jsidescroller.common.interfaces.Relocatable;
 import jsidescroller.common.interfaces.SideScrollerComponent;
 
