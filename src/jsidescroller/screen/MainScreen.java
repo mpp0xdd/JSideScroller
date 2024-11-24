@@ -5,8 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Objects;
 import jglib.component.GameScreen;
+import jglib.util.model.Keystroke;
 import jsidescroller.common.Direction;
-import jsidescroller.common.Keystroke;
 import jsidescroller.common.Stage;
 import jsidescroller.common.StatusBar;
 
