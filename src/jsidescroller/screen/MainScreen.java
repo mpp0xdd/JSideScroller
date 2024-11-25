@@ -15,9 +15,9 @@ public class MainScreen extends GameScreen implements KeyListener {
   private final StatusBar statusBar;
   private final Stage stage;
 
-  private Keystroke aKey = Keystroke.NOT_PRESSED;
-  private Keystroke dKey = Keystroke.NOT_PRESSED;
-  private Keystroke spaceKey = Keystroke.NOT_PRESSED;
+  private Keystroke aKey = Keystroke.RELEASED;
+  private Keystroke dKey = Keystroke.RELEASED;
+  private Keystroke spaceKey = Keystroke.RELEASED;
 
   public MainScreen(StatusBar statusBar, Stage stage) {
     this.statusBar = Objects.requireNonNull(statusBar);
@@ -84,9 +84,9 @@ public class MainScreen extends GameScreen implements KeyListener {
   @Override
   public void keyReleased(KeyEvent e) {
     switch (e.getKeyCode()) {
-      case KeyEvent.VK_A -> aKey = Keystroke.NOT_PRESSED;
-      case KeyEvent.VK_D -> dKey = Keystroke.NOT_PRESSED;
-      case KeyEvent.VK_SPACE -> spaceKey = Keystroke.NOT_PRESSED;
+      case KeyEvent.VK_A -> aKey = Keystroke.RELEASED;
+      case KeyEvent.VK_D -> dKey = Keystroke.RELEASED;
+      case KeyEvent.VK_SPACE -> spaceKey = Keystroke.RELEASED;
     }
   }
 }
