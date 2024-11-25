@@ -2,22 +2,36 @@ package jsidescroller.screen;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Objects;
 import jglib.component.GameScreen;
-import jglib.util.model.Keystroke;
+import jglib.util.model.Key;
+import jglib.util.model.Keyboard;
 import jsidescroller.common.Direction;
 import jsidescroller.common.Stage;
 import jsidescroller.common.StatusBar;
 
-public class MainScreen extends GameScreen implements KeyListener {
+public class MainScreen extends GameScreen {
+
+  private enum OperationKey implements Key {
+    A(KeyEvent.VK_A),
+    D(KeyEvent.VK_D),
+    SPACE(KeyEvent.VK_SPACE);
+
+    private final int code;
+
+    private OperationKey(int code) {
+      this.code = code;
+    }
+
+    @Override
+    public int code() {
+      return code;
+    }
+  }
 
   private final StatusBar statusBar;
   private final Stage stage;
-
-  private Keystroke aKey = Keystroke.RELEASED;
-  private Keystroke dKey = Keystroke.RELEASED;
-  private Keystroke spaceKey = Keystroke.RELEASED;
+  private final Keyboard<OperationKey> keyboard;
 
   public MainScreen(StatusBar statusBar, Stage stage) {
     this.statusBar = Objects.requireNonNull(statusBar);
@@ -26,9 +40,11 @@ public class MainScreen extends GameScreen implements KeyListener {
     this.statusBar.setStage(this.stage);
     this.stage.setLocation(0, this.statusBar.height());
 
+    this.keyboard = Keyboard.create(OperationKey.values());
+
     setScreenSize(stage.width(), statusBar.height() + stage.height());
     setFocusable(true);
-    addKeyListener(this);
+    addKeyListener(keyboard);
   }
 
   @Override
@@ -39,15 +55,15 @@ public class MainScreen extends GameScreen implements KeyListener {
 
   @Override
   protected void runGameLoop() {
-    if (aKey.isPressed()) {
+    if (keyboard.isPressed(OperationKey.A)) {
       stage.player().accelerate(Direction.LEFT);
-    } else if (dKey.isPressed()) {
+    } else if (keyboard.isPressed(OperationKey.D)) {
       stage.player().accelerate(Direction.RIGHT);
     } else {
       stage.player().stop();
     }
 
-    if (spaceKey.isPressed()) {
+    if (keyboard.isPressed(OperationKey.SPACE)) {
       stage.player().jump();
     }
 
@@ -65,28 +81,5 @@ public class MainScreen extends GameScreen implements KeyListener {
             });
 
     stage.provideGravity();
-  }
-
-  @Override
-  public void keyTyped(KeyEvent e) {
-    // nop
-  }
-
-  @Override
-  public void keyPressed(KeyEvent e) {
-    switch (e.getKeyCode()) {
-      case KeyEvent.VK_A -> aKey = Keystroke.PRESSED;
-      case KeyEvent.VK_D -> dKey = Keystroke.PRESSED;
-      case KeyEvent.VK_SPACE -> spaceKey = Keystroke.PRESSED;
-    }
-  }
-
-  @Override
-  public void keyReleased(KeyEvent e) {
-    switch (e.getKeyCode()) {
-      case KeyEvent.VK_A -> aKey = Keystroke.RELEASED;
-      case KeyEvent.VK_D -> dKey = Keystroke.RELEASED;
-      case KeyEvent.VK_SPACE -> spaceKey = Keystroke.RELEASED;
-    }
   }
 }
