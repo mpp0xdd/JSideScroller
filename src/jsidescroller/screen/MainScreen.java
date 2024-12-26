@@ -44,7 +44,7 @@ public class MainScreen extends GameScreen {
 
     setScreenSize(stage.width(), statusBar.height() + stage.height());
     setFocusable(true);
-    addKeyListener(keyboard);
+    addKeyListener(keyboard.asKeyListener());
   }
 
   @Override
