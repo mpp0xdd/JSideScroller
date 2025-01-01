@@ -2,7 +2,7 @@ package jsidescroller.common;
 
 import java.awt.Point;
 import java.util.Objects;
-import jglib.component.SubGameScreen;
+import jglib.screen.SubGameScreen;
 import jsidescroller.common.interfaces.Locatable;
 
 public abstract class StatusBar implements SubGameScreen, Locatable {

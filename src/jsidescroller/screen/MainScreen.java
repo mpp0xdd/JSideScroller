@@ -3,7 +3,7 @@ package jsidescroller.screen;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.Objects;
-import jglib.component.GameScreen;
+import jglib.screen.GameScreen;
 import jglib.util.model.Key;
 import jglib.util.model.Keyboard;
 import jsidescroller.common.Direction;

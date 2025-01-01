@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
-import jglib.component.SubGameScreen;
+import jglib.screen.SubGameScreen;
 import jglib.util.spec.Rectangular;
 import jsidescroller.common.counters.CoinCounter;
 import jsidescroller.common.counters.Counters;
